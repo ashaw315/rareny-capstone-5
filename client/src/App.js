@@ -13,6 +13,10 @@ function App() {
   const [logInForm, setLogInForm] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   useEffect(() => {
     fetch('/me')
     .then((r) => {
@@ -26,7 +30,7 @@ function App() {
 
   return (
     <div>
-      <NavBar user={user} setUser={setUser} logInForm={logInForm} setLogInForm={setLogInForm} errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>
+      <NavBar user={user} setUser={setUser} logInForm={logInForm} setLogInForm={setLogInForm} errorMessage={errorMessage} setErrorMessage={setErrorMessage} handleOpen={handleOpen} handleClose={handleClose}/>
         <Routes>
           <Route path='/' element={<Home user={user} setUser={setUser} logInForm={logInForm} setLogInForm={setLogInForm}/>}/>
         </Routes>

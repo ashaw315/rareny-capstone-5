@@ -2,27 +2,12 @@ import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom'
 // import Login from "../../pages/Login";
 import './NavBar.css'
-import Modal from '@mui/material/Modal';
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
 
 
 function NavBar({user, setUser, setLogInForm, setErrorMessage}) {
     const navigate = useNavigate();
     const [dropDown, setDropDown] = useState(false);
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
 
     function handleLogout() {
         fetch("/logout", { method: "DELETE" }).then((r) => {
@@ -74,12 +59,8 @@ function NavBar({user, setUser, setLogInForm, setErrorMessage}) {
                     <button className='navbarlink' onClick={handleRevertHome}>Home</button>
                     {/* <p className='navbardivider'>|</p> */}
                     <Link className='navbarlink' to='/about'>About</Link>
-                    <Link className='navbarlink' to='/themes'>Themes</Link>
+                    <Link className='navbarlink' to='/themes'>Contact</Link>
                     {/* <img className='navbarlogo' onClick={handleRevertHome} alt='.Day logo' src={dotdaylogo}></img> */}
-                    <button className='navbarlink' onClick={handleLogInForm}>Log In</button>
-
-                    {/* <p className='navbardivider'>|</p> */}
-                    <Link className='navbarlink' to='/signup'>Sign Up</Link>
                 </ul>
             )}
         </div>

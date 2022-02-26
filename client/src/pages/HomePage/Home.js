@@ -11,9 +11,10 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 800,
+    height: 700,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
+    border: '5px solid #000',
     boxShadow: 24,
     p: 4,
   };
@@ -100,41 +101,45 @@ function Home({ user, setUser, logInForm, setLogInForm }){
                                 onClose={handleClose}
                                 aria-labelledby="modal-modal-title"
                                 aria-describedby="modal-modal-description"
+                        
                             >
-                                <Box sx={style}>
+                                <Box  className="box" sx={style}>
                                 <Typography id="modal-modal-title" variant="h6" component="h2">
                                 Welcome back
                                 </Typography>
                                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                <form onSubmit={handleSubmit}>
+                                <form className="form" onSubmit={handleSubmit}>
                                     <span>
                                         <p className='loginp'>Please log in.</p>
                                      </span>
-                                    <p className='logintitle'>USERNAME</p>
+                                    <p className='logintitle'>Username</p>
                                     <div className='logininputdiv'>
                                         <input className='logininput'
                                         type='text'
-                                        placeholder='Enter Pen Name_'
                                         autoComplete='off'
                                         value={username}
                                         onChange={(e) => setUsername(e.target.value)}
                                         />
                                     </div>
-                                    <p className='logintitle'>PASSWORD</p>
-                                    <div className='logininputdiv'>
+                                    <p className='logintitle'>Password</p>
+                                    <div className='logininputdiv1'>
                                         <input className='logininput'
                                             type='password'
-                                            placeholder='Enter Password_'
                                             autoComplete='off'
                                             value={password}
                                             onChange={(e) => setPassword(e.target.value)}
                                         />
                                     </div>
-                            <Button className='loginbutton' sx={{ color: "black" }}>LOGIN</Button>
+                                    <div className="loginbuttonmodal">
+                                        <Button className='loginbuttonmodal' type="submit" sx={{ color: "black", border: "2px black solid"}}>LOGIN</Button>
+                                    </div>
+                                    <div className="loginbuttonmodal"> 
+                                    {errors.map((e)=><p key={e}>{e}</p>)}
+                                    </div>
+                                <p className="signuplink">Don't have an account?</p>
                             <Link className='loginlink' to='/signup'>
-                                <Button className='loginbutton' sx={{ color: "black" }}>SIGN UP</Button>
+                                <Button className='signupbutton' sx={{ color: "black", width: "50%", border: "2px black solid" }}>SIGN UP</Button>
                             </Link>
-                            {errors.map((e)=><p key={e}>{e}</p>)}
                         </form>
                                 </Typography>
                                 </Box>
@@ -149,7 +154,7 @@ function Home({ user, setUser, logInForm, setLogInForm }){
                         {/* <div className='homepagefooter'> */}
                             <ul className='footerul'>
                                 <div className='footerp'>Rare NY is a conceptual project by adamshaw.</div>
-                                <div className='footerp1'>Resources for Artists everywhere looks to offer artists a space to communicate and share resources.</div>
+                                <div className='footerp1'>Resources for Artists Everywhere looks to offer artists a space to communicate and share resources.</div>
                                 <div className='footerp2'>Email us.</div>
                             </ul>
                         {/* </div> */}

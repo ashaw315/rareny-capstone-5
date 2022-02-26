@@ -14,6 +14,89 @@
   
   /* Not logged in HP */
   
+#modal-modal-title {
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-weight: 600;
+  font-size: 30px;
+}
+
+.loginp {
+  color: #000;
+  text-align: center;
+  padding-bottom: 30px;
+  font-size: 15px;
+}
+
+.logintitle {
+  color: #000;
+  font-size: 15px;
+  font-weight: 600;
+  padding-top: 10px;
+  text-align: center;
+  padding-right: 290px;
+} 
+
+.logininputdiv {
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.logininputdiv1 {
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.logininput {
+  padding: 10px;
+  font-size: 15px;
+  width: 50%;
+  text-align: left;
+  color: #000;
+  border: 1px solid #000;
+} 
+
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    /* width: 500px; */
+    text-align: left;
+    margin: 0 auto;
+  }
+  
+  .form p {
+    justify-content: left;
+    margin-bottom: 0rem;
+  }
+  
+  .form button[type="submit"] {
+    width: 50%;
+    cursor: pointer;
+  }
+
+  input,
+textarea,
+select {
+   border-radius: 6px;
+  border: 1px solid transparent;
+  border-color: #dbdbdb;
+  -webkit-appearance: none;
+  max-width: 100%;
+  width: 100%;
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 4px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border: 2px solid rgb(105, 105, 105);
+}
+  
   .homepagediv {
     /* text-align: center; */
     left: 0;
@@ -21,9 +104,23 @@
     bottom: 0;
     top: 0;
   }
+  .loginbuttonmodal {
+    text-align: center;
+    padding-top: 10px;
+  }
 
+.signuplink {
+  padding-top: 30px;
+  font-size: 20px;
+  text-align: center;
+  display: inline-block;
+}
   .loginlink {
+    padding-top: 20px;
     text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    border: 1px;
   }
   
   .homepagedivsignedout {
@@ -35,7 +132,7 @@
   
   .homepagesignedoutleft {
     position: relative;
-    padding-top: 200px;
+    padding-top: 100px;
     z-index: 90;
     text-align: center;
     /* padding-left: 80px;
