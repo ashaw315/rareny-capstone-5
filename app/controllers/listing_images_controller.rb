@@ -1,0 +1,2 @@
+class ListingImagesController < ApplicationController
+end

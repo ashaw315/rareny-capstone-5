@@ -1,0 +1,2 @@
+class SubforumsController < ApplicationController
+end

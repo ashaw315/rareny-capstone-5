@@ -1,0 +1,2 @@
+class ResidenciesController < ApplicationController
+end
