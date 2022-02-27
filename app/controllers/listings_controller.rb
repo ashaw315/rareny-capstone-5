@@ -17,6 +17,8 @@ class ListingsController < ApplicationController
             sq_footage: params[:sq_footage],
             email: params[:email],
             description: params[:description],
+            neighborhood: params[:neighborhood],
+            nyc_borough: params[:nyc_borough],
             image1: image1['url'],
             image2: image2['url'],
             image3: image3['url'],
