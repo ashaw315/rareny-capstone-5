@@ -1,11 +1,25 @@
 class UsersController < ApplicationController
 
-    skip_before_action :authorize, only: [:create]
+    rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
+
+    skip_before_action :authorize, only: [:create, :index]
 
     def create
-        user = User.create!(user_params)
+        profile_picture = Cloudinary::Uploader.upload(params[:profile_picture])
+        user = User.create!(
+            username: params[:username],
+            password: params[:password],
+            password_confirmation: params[:password_confirmation],
+            website: params[:website],
+            discipline: params[:discipline],
+            bio: params[:bio],
+            profile_picture: profile_picture['url'])
         session[:user_id] = user.id
-        render json: user, status: :created
+        if user
+            render json: user, status: :created
+        else
+            render json: {errors: user.errors.full_messages}, status: :unprocessable_entity
+        end
     end
     
     def index
@@ -28,10 +42,10 @@ class UsersController < ApplicationController
     end
 
 
-    private
+    # private
 
-    def user_params
-        params.permit(:username, :password, :password_confirmation, :website, :discipline, :bio)
-    end
+    # def user_params
+    #     params.permit(:username, :password, :password_confirmation, :website, :discipline, :bio)
+    # end
 
 end

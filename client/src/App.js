@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import ImageUploadForm from './ImageUploadForm';
+import ImageUploadForm from './ImageUploadForm';
 import NavBar from './components/NavBar/NavBar';
 import Home from './pages/HomePage/Home'; 
 import SignUp from './pages/SignUp'
@@ -33,7 +33,9 @@ function App() {
       <NavBar user={user} setUser={setUser} logInForm={logInForm} setLogInForm={setLogInForm} errorMessage={errorMessage} setErrorMessage={setErrorMessage} handleOpen={handleOpen} handleClose={handleClose}/>
         <Routes>
           <Route path='/' element={<Home user={user} setUser={setUser} logInForm={logInForm} setLogInForm={setLogInForm}/>}/>
+          <Route path='/signup' element={ <SignUp setUser={setUser} /> }/>
         </Routes>
+        <ImageUploadForm />
     </div>
   )
 }

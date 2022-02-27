@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :listing_images
   resources :listings
   resources :profile_pictures
-  # resources :users, only: [:index, :show, :create]
+  resources :users, only: [:index]
   resources :posts, only: [:index, :create]
 
   post "/signup", to: "users#create"
