@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :addresses
   resources :artist_resources
   resources :listing_images
-  resources :listings
+  resources :listings, only: [:index, :create, :show, :destroy]
   resources :profile_pictures
   resources :users, only: [:index]
   resources :posts, only: [:index, :create]

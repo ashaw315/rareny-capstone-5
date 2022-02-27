@@ -51,8 +51,8 @@ const handleSubmit = e => {
             <form onSubmit={handleSubmit}>
                 <label>Image Upload</label>
                 <input type="text" name="title" onChange={handleTitleChange}/>
-                <input type="file" name="image1" required onChange={handleOneChange}/>
-                <input type="file" name="image1" required onChange={handleTwoChange}/>
+                <input type="file" name="image1"  required onChange={handleOneChange}/>
+                <input type="file" name="image1"  required onChange={handleTwoChange}/>
 
                 <input type="submit" />
                 {errors.map((e)=><p key={e}>{e}</p>)}

@@ -34,10 +34,11 @@ function NavBar({user, setUser, setLogInForm, setErrorMessage}) {
                 <ul className='navbarul'>
                     <Link to='/' className='navbarlink'>Home</Link>
                     <p className='navbardivider'>|</p>
-                    <Link className='navbarlink' to='/profile'>Profile</Link>
-                    <Link className='navbarlink' to='/entries'>Entries</Link>
-                    <Link className='navbarlink' to='/themes'>Themes</Link>
-                    {/* <img className='navbarlogologgedin' alt='.Day logo' src={dotdaylogo}></img> */}
+                    <Link className='navbarlink' to='/resources'>Resources.</Link>
+                    <Link className='navbarlink' to='/listings'>Listings.</Link>
+                    <Link className='navbarlink' to='/residencies'>Residencies.</Link>
+                    <Link className='navbarlink' to='/forum'>Forum.</Link>
+                    <Link className='navbarlink' to='/artists'>Artists.</Link>
                     <span className='navbardropdownspan'>
                         {/* <img className='navbardotdaydot' src={dotdaydot}/> */}
                         <button className='navbarnamelink'>Hello, {user.username}.</button>
@@ -46,11 +47,14 @@ function NavBar({user, setUser, setLogInForm, setErrorMessage}) {
                                 <Link className='dropdownlink' to={`/account`}>Account</Link>
                             </div>
                             <div className='dropdowndiv'>
+                                <Link className='dropdownlink' to={`/profile`}>Profile</Link>
+                            </div>
+                            <div className='dropdowndiv'>
                                 <button className='dropdownlink' onClick={handleLogout}>Log Out</button>
                             </div>
-                            <div className='dropdownclosediv'>
+                            {/* <div className='dropdownclosediv'>
                                 <button className='dropdownlink' onClick={() => setDropDown(!dropDown)}>Close</button>
-                            </div>
+                            </div> */}
                         </div>
                     </span>
                 </ul>

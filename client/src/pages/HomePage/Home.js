@@ -59,27 +59,29 @@ function Home({ user, setUser, logInForm, setLogInForm }){
                 <div className='homepagecontainerloggedin'>
                     <div className='homepageloggedinleft'>
                         <h2 className='homepageh2loggedin'>Welcome back, {user.username}.</h2>
-                        <p className='homepageploggedin'>Publish daily journal entries and add dots to your calendar.</p>
-                        <h3 className='homepageh3loggedin'>Ready to start a new entry?</h3>
+                        <p className='homepageploggedin'>Enjoy your vist.</p>
+                        <h3 className='homepageh3loggedin'>Not sure where to begin?</h3>
                         <div className='homepageoptionsdivloggedin'>
                             <Link className='homepagelinkloggedin' to='/newentry'>Write down your thoughts {'>'}</Link>
                         </div>
                         <div className='homepageoptionsdivloggedin'>
-                            <Link className='homepagelinkloggedin' to='/account'>Update your account details {'>'}</Link>
+                            <Link className='homepagelinkloggedin' to='/account'>Update your account. {'>'}</Link>
                         </div>
                         <div className='homepageoptionsdivloggedin'>
-                            <Link className='homepagelinkloggedin' to='/profile'>View your profile {'>'}</Link>
+                            <Link className='homepagelinkloggedin' to='/profile'>View your profile. {'>'}</Link>
                         </div>
                     </div>
                 </div>
-                <div className='homepagefooter'>
-                    <h3 className='footerheader'>About .DAY</h3>
-                    <ul className='footerul'>
-                        <div className='footerp'>.DAY is a project concept created by @madisonsorah, who recently kicked off her career as a front-end developer.</div>
-                        <div className='footerp'>Created with a clean interface and minimalist design, .DAY is your digital solution to journaling on a daily basis.</div>
-                        <div className='footerp2'>Feature updates will continuously be made to .DAY to improve your journaling experience.</div>
-                    </ul>
-                </div>
+               <div className='homepagefooter'>
+                            <h3 className='footerheader'>About</h3>
+                            <h3  className='footerheader1'>Contact</h3>
+                        </div>
+                        {/* <div className='homepagefooter'> */}
+                            <ul className='footerul'>
+                                <div className='footerp'>Rare NY is a conceptual project by adamshaw.</div>
+                                <div className='footerp1'>Resources for Artists Everywhere looks to offer artists a space to communicate and share resources.</div>
+                                <div className='footerp2'>Email us.</div>
+                            </ul>
             </div>
         )
     } 
@@ -158,7 +160,7 @@ function Home({ user, setUser, logInForm, setLogInForm }){
                                 <div className='footerp2'>Email us.</div>
                             </ul>
                         {/* </div> */}
-                </div>
+            </div>
             )
         }
     }

@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {useNavigate} from 'react-router-dom';
 
 function SignUpForm({ setUser }) {
 const [username, setUsername] = useState('')
@@ -8,6 +9,7 @@ const [website, setWebsite] = useState('')
 const [discipline, setDiscipline] = useState('')
 const [bio, setBio] = useState('')
 const [profilePicture, setProfilePicture] = useState('')
+const navigate = useNavigate();
 
 const [errors, setErrors] = useState([])
 
@@ -55,17 +57,16 @@ function handleSubmit(e) {
         method: "POST",
         body: userData,
     })
-        .then((r) => {
-            if (r.ok) {
-                r.json().then((user) => {
-                    setUser(user);
-                });
-            } else {
-                r.json().then((err) => setErrors(err.errors));
-            }
-        })
-        console.log(errors)
-};
+    .then((r) => {
+        if (r.ok) {
+          r.json().then((user) => setUser(user))
+          .then(navigate('/'))
+        } else {
+            r.json().then((err) => setErrors(err.errors));
+        }
+      })
+  };
+
 
     return(
         <div>
@@ -81,7 +82,7 @@ function handleSubmit(e) {
                  onChange={handleUsernameChange} 
                  />
 
-                <label>Password: </label>
+                <label>Password</label>
                 <input
                 id="password"
                 name="password"
@@ -131,6 +132,7 @@ function handleSubmit(e) {
                 type="file" 
                 name="image1" 
                 onChange={handleProfilePicChange}
+                required
                 />
 
                 <input type="submit"/>
