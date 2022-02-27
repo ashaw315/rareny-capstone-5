@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const boroughs = ['Manhattan', 'Brooklyn', 'Bronx', 'Queens', 'Staten Island']
+
 
 function ListingsForm({ listings, setListings, user }){
 const [title, setTitle] = useState('')
+const [neighborhood, setNeighborhood] = useState('')
+const [nycBorough, setNycBorough] = useState('')
 const [price, setPrice] = useState(0)
 const [sqFootage, setSqFootage] = useState(0)
 const [email, setEmail] = useState('')
@@ -42,9 +46,17 @@ const handleImage5Change = e => {
     setImage5(e.target.files[0]);
   };
 
-  const handleTitleChange = e => {
+const handleTitleChange = e => {
     setTitle(e.target.value);
-  };  
+  }; 
+
+const handleNeighborhoodChange = e => {
+    setNeighborhood(e.target.value);
+  }; 
+
+const handleBoroughChange = e => {
+    setNycBorough(e.target.value);
+  }; 
 
 const handlePriceChange = e => {
     setPrice(e.target.value);
@@ -76,6 +88,8 @@ function handleSubmit(e) {
     listingData.append('sq_footage', sqFootage)
     listingData.append('email', email)
     listingData.append('description', description)
+    listingData.append('neighborhood', neighborhood)
+    listingData.append('nyc_borough', nycBorough)
 
     fetch('/listings', {
         method: "POST",
@@ -141,7 +155,24 @@ function handleSubmit(e) {
              onChange={handleTitleChange} 
              />
 
-            <label>Price</label>
+            <label>Neighborhood</label>
+            <input
+             id="neighborhood"
+             name="neighborhood"
+             value={neighborhood}
+             autoComplete="off"
+             type="text"
+             onChange={handleNeighborhoodChange} 
+             />
+
+            <label>Borough</label>
+            <select name="nyc_borough" value={nycBorough} onChange={handleBoroughChange}>
+                <option>Select Listing</option>
+                    {boroughs.map(b => 
+                        <option value = {b}>{b}</option> )}
+            </select>
+
+            <label>Rent (by Month)</label>
             <input
             id="price"
             name="price"
