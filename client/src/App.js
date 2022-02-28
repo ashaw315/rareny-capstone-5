@@ -9,6 +9,7 @@ import SignUp from './pages/SignUp'
 import Listings from './pages/Listings';
 import Profile from './pages/Profile';
 import ListingsForm from './components/ListingsForm';
+import ListingsDetail from './pages/ListingsDetail';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -49,6 +50,7 @@ function App() {
           <Route path='/' element={<Home user={user} setUser={setUser} logInForm={logInForm} setLogInForm={setLogInForm}/>}/>
           <Route path='/signup' element={ <SignUp setUser={setUser} /> }/>
           <Route path='/listings' element={<Listings listings={listings} setListings={setListings} user={user}/>}/>
+          <Route path='/listings/:id' element={<ListingsDetail listings={listings} setListings={setListings} user={user}/>}/>
           <Route path='/listingform' element={<ListingsForm listings={listings} setListings={setListings} user={user}/>}/>
         </Routes>
         <ImageUploadForm />
