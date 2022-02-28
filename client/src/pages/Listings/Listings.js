@@ -8,10 +8,10 @@ import Slider from '@mui/material/Slider';
 
 
 
-function Listings({ listings, setListings, user, handleListingsSearch, setSortBy, filterListings, sortBy }){
+function Listings({ listings, setListings, user, handleListingsSearch, setSortBy, filterListings, sortBy, setPriceValue, priceValue, setSqFootValue, sqFootValue }){
 
 
-const [value, setValue] = useState([0, 2000])
+// const [value, setValue] = useState([0, 2000])
 
 const all_listings = filterListings.map((listing) => {
     return (
@@ -28,12 +28,16 @@ function valuetext(value) {
     return {value};
   }
 
-const handleRangeChange = (event, newValue) => {
-    setValue(newValue);
-  };
-//   const rangeFilter = listings.filter((list) => { (list.price >= value[0] && list.price <= value[1])
-//   || !value.length
-// }) 
+function handlePriceRangeChange(e) {
+    setPriceValue(e.target.value)
+}
+
+function handleSqFootRangeChange(e) {
+    setSqFootValue(e.target.value)
+}
+
+
+console.log(priceValue)
 
     return (
         <div>
@@ -49,17 +53,31 @@ const handleRangeChange = (event, newValue) => {
                 <option value={"Price High"} >Price High</option>
                 <option value={"Price Low"} >Price Low</option>
             </select>
-            {/* <Box sx={{ width: 500 }}>
+            <h4>Price</h4>
+            <Box sx={{ width: 500 }}>
             <Slider
-                getAriaLabel={() => 'Temperature range'}
-                value={value}
-                onChange={handleRangeChange}
+                getAriaLabel={() => 'Price Range'}
+                value={priceValue}
+                onChange={handlePriceRangeChange}
                 valueLabelDisplay="auto"
                 getAriaValueText={valuetext}
                 min={0}
-                max={2000}
+                max={3000}
             />
-            </Box> */}
+            </Box>
+
+            <h4>Sq Footage</h4>
+            <Box sx={{ width: 500 }}>
+            <Slider
+                getAriaLabel={() => 'Sq Footage Range'}
+                value={sqFootValue}
+                onChange={handleSqFootRangeChange}
+                valueLabelDisplay="auto"
+                getAriaValueText={valuetext}
+                min={0}
+                max={3000}
+            />
+            </Box>
            
            <ul className="card-row">{all_listings}</ul>
             <Link className='listinglink' to='/listingform'>

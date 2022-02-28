@@ -6,9 +6,9 @@ class ListingSerializer < ActiveModel::Serializer
     object.created_at.strftime('%A, %B %e, %Y')
   end
 
-  def price
-      "$#{'%.2f' % object.price}"
-  end
+  # def price
+  #     "$#{'%.2f' % object.price}"
+  # end
 
   
 end
