@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const boroughs = ['Manhattan', 'Brooklyn', 'Bronx', 'Queens', 'Staten Island']
@@ -20,6 +20,73 @@ const [image5, setImage5] = useState('')
 const navigate = useNavigate();
 
 const [errors, setErrors] = useState([])
+
+const [preview, setPreview] = useState(null)
+const [preview2, setPreview2] = useState(null)
+const [preview3, setPreview3] = useState(null)
+const [preview4, setPreview4] = useState(null)
+const [preview5, setPreview5] = useState(null)
+
+//Preview for 1st Listing Image
+useEffect(() => {
+  if (!image1) {
+      setPreview(undefined)
+      return
+  }
+  const objectUrl = URL.createObjectURL(image1)
+  setPreview(objectUrl)
+  // free memory when ever this component is unmounted
+  return () => URL.revokeObjectURL(objectUrl)
+}, [image1])
+
+//Preview for 2nd Listing Image
+useEffect(() => {
+  if (!image2) {
+      setPreview2(undefined)
+      return
+  }
+  const objectUrl = URL.createObjectURL(image2)
+  setPreview2(objectUrl)
+  // free memory when ever this component is unmounted
+  return () => URL.revokeObjectURL(objectUrl)
+}, [image2])
+
+//Preview for 3rd Listing Image
+useEffect(() => {
+  if (!image3) {
+      setPreview3(undefined)
+      return
+  }
+  const objectUrl = URL.createObjectURL(image3)
+  setPreview3(objectUrl)
+  // free memory when ever this component is unmounted
+  return () => URL.revokeObjectURL(objectUrl)
+}, [image3])
+
+//Preview for 4th Listing Image
+useEffect(() => {
+  if (!image4) {
+      setPreview4(undefined)
+      return
+  }
+  const objectUrl = URL.createObjectURL(image4)
+  setPreview4(objectUrl)
+  // free memory when ever this component is unmounted
+  return () => URL.revokeObjectURL(objectUrl)
+}, [image4])
+
+//Preview for 5th Listing Image
+useEffect(() => {
+  if (!image5) {
+      setPreview5(undefined)
+      return
+  }
+  const objectUrl = URL.createObjectURL(image5)
+  setPreview5(objectUrl)
+  // free memory when ever this component is unmounted
+  return () => URL.revokeObjectURL(objectUrl)
+}, [image5])
+
 
 const handleImage1Change = e => {
     e.persist();
@@ -109,41 +176,51 @@ function handleSubmit(e) {
         <div>
         <p>This is Listings Form</p>
         <form onSubmit={handleSubmit}>
-
+          <div>
             <input 
             type="file" 
             name="image1" 
             onChange={handleImage1Change}
             required
             />
-
+            {image1 &&  <img src={preview} /> }
+          </div>
+          <div>
             <input 
             type="file" 
             name="image2" 
             onChange={handleImage2Change}
             required
             />
-
+            {image2 &&  <img src={preview2} /> }
+          </div>
+          <div>
             <input 
             type="file" 
             name="image3" 
             onChange={handleImage3Change}
             required
             />
-
+            {image3 &&  <img src={preview3} /> }
+          </div>
+          <div>
             <input 
             type="file" 
             name="image4" 
             onChange={handleImage4Change}
             required
             />
-
+            {image4 &&  <img src={preview4} /> }
+          </div>
+          <div>
             <input 
             type="file" 
             name="image5" 
             onChange={handleImage5Change}
             required
             />
+            {image5 &&  <img src={preview5} /> }
+          </div>
             
             <label>Title</label>
             <input
