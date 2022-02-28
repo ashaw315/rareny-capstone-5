@@ -16,6 +16,9 @@ function App() {
   const [logInForm, setLogInForm] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [listings, setListings] = useState([])
+  const [search, setSearch] = useState('')
+  const [sortBy, setSortBy] = useState("Sort By");
+  const [value, setValue] = useState([0, 3000])
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -39,7 +42,32 @@ function App() {
     })
   }, []);
 
-  
+  const filterListings = listings
+    .filter((list) => {
+      if(search === "") {
+        return true;
+      } return list.title.toLowerCase().includes(search.toLowerCase()) 
+    })
+    .sort((list1, list2) => {
+      if (sortBy === "Sort By") {
+        return null;
+      } else if (sortBy === "Price High") {
+        return list2.price.localeCompare(list1.price);
+      } else if (sortBy === "Price Low") {
+        return list1.price - list2.price
+      } else if (sortBy === "Title") {
+        return list1.title.localeCompare(list2.title);
+      }
+    })
+    // .filter((list) => { 
+    //   return (list.price >= value[0] && list.price <= value[1])
+    // }) 
+
+    console.log(filterListings)
+
+    function handleListingsSearch (searchListings) {
+      setSearch(searchListings);
+  }
 
   console.log(user)
 
@@ -49,7 +77,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home user={user} setUser={setUser} logInForm={logInForm} setLogInForm={setLogInForm}/>}/>
           <Route path='/signup' element={ <SignUp setUser={setUser} /> }/>
-          <Route path='/listings' element={<Listings listings={listings} setListings={setListings} user={user}/>}/>
+          <Route path='/listings' element={<Listings listings={listings} setListings={setListings} user={user} handleListingsSearch={handleListingsSearch} setSortBy={setSortBy} sortBy={sortBy} filterListings={filterListings} />}/>
           <Route path='/listings/:id' element={<ListingsDetail listings={listings} setListings={setListings} user={user}/>}/>
           <Route path='/listingform' element={<ListingsForm listings={listings} setListings={setListings} user={user}/>}/>
         </Routes>

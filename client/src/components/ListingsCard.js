@@ -38,6 +38,11 @@ function ListingsCard({ listing }){
                         <strong>Location</strong> {listing.neighborhood}, {listing.nyc_borough}
                     </Typography>
                 </CardContent>
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        {listing.price} / Month
+                    </Typography>
+                </CardContent>
             <CardActions>
             {/* <Link className='listinglink' to={`/listings/${listing.id}`}>
                 <Button size="small" sx={{ color: "black", border: "2px black solid"}}>See Details</Button>
