@@ -6,10 +6,10 @@ import ImageUploadForm from './ImageUploadForm';
 import NavBar from './components/NavBar/NavBar';
 import Home from './pages/HomePage/Home'; 
 import SignUp from './pages/SignUp'
-import Listings from './pages/Listings';
+import Listings from './pages/Listings/Listings';
 import Profile from './pages/Profile';
 import ListingsForm from './components/ListingsForm';
-import ListingsDetail from './pages/ListingsDetail';
+import ListingsDetail from './pages/Listings/ListingsDetail';
 
 function App() {
   const [user, setUser] = useState(null);

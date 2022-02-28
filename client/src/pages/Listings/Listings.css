@@ -1,0 +1,22 @@
+.card-row {
+    display: grid;
+    grid-template-columns: 500px 500px;
+    gap: 3rem;
+    justify-content: center;
+  }
+
+
+.listinglink {
+    text-decoration: none;
+    color: black;
+}
+
+.listinglink:hover {
+    text-decoration: underline;
+    color: rgb(0, 0, 0);
+}
+
+.main-slide {
+    width: 50%;
+}
+

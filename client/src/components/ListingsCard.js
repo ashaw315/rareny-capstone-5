@@ -8,10 +8,12 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 
 function ListingsCard({ listing }){
     return (
-       <div>
+       <div className="card-column">
            This is the ListingsCard
-           <Card sx={{ maxWidth: 445, border: "3px black solid" }}>
+           <Card sx={{ maxWidth: 445, border: "3px black solid"}}>
+            <Link className='listinglink' to={`/listings/${listing.id}`}>
             <CardActionArea>
+                
                 <CardMedia
                 component="img"
                 height="400"
@@ -27,6 +29,7 @@ function ListingsCard({ listing }){
                     </Typography>
                 </CardContent>
             </CardActionArea>
+            </Link>
                 <CardContent>
                     <Typography variant="body2" color="text.primary">
                         <strong>Sq. Footage</strong> {listing.sq_footage} sq ft<sup>2</sup>
@@ -36,9 +39,9 @@ function ListingsCard({ listing }){
                     </Typography>
                 </CardContent>
             <CardActions>
-            <Link className='listinglink' to={`/listings/${listing.id}`}>
+            {/* <Link className='listinglink' to={`/listings/${listing.id}`}>
                 <Button size="small" sx={{ color: "black", border: "2px black solid"}}>See Details</Button>
-            </Link>
+            </Link> */}
             </CardActions>
         </Card>
        </div>
