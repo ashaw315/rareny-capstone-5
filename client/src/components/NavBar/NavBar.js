@@ -15,6 +15,7 @@ function NavBar({user, setUser, setLogInForm, setErrorMessage}) {
             setUser(null);
           }
         });
+        navigate('/');
       }
 
     function handleLogInForm() {
@@ -37,7 +38,7 @@ function NavBar({user, setUser, setLogInForm, setErrorMessage}) {
                     <Link className='navbarlink' to='/resources'>Resources.</Link>
                     <Link className='navbarlink' to='/listings'>Listings.</Link>
                     <Link className='navbarlink' to='/residencies'>Residencies.</Link>
-                    <Link className='navbarlink' to='/forum'>Forum.</Link>
+                    <Link className='navbarlink' to='/forums'>Forum.</Link>
                     <Link className='navbarlink' to='/artists'>Artists.</Link>
                     <span className='navbardropdownspan'>
                         {/* <img className='navbardotdaydot' src={dotdaydot}/> */}

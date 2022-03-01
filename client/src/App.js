@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useParams } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ImageUploadForm from './ImageUploadForm';
@@ -10,8 +10,14 @@ import Listings from './pages/Listings/Listings';
 import Profile from './pages/Profile';
 import ListingsForm from './components/ListingsForm';
 import ListingsDetail from './pages/Listings/ListingsDetail';
+import Forum from './pages/Forum'
+import Resources from './pages/Resources';
+import Subforums from './pages/Subforums';
+import SubforumDetail from './pages/SubforumDetail';
+import SubforumForm from './components/SubforumForm';
 
 function App() {
+  const {id} = useParams();
   const [user, setUser] = useState(null);
   const [logInForm, setLogInForm] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -20,6 +26,7 @@ function App() {
   const [sortBy, setSortBy] = useState("Sort By");
   const [priceValue, setPriceValue] = useState([0, 3000])
   const [sqFootValue, setSqFootValue] = useState([0, 3000])
+  const [currentForum, setCurrentForum] = useState(null)
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -43,6 +50,12 @@ function App() {
     })
   }, []);
 
+  useEffect(() => {
+    fetch(`/forums/${id}`)
+    .then((r) => r.json())
+    .then((forumData) => setCurrentForum(forumData))
+ }, [id]);
+
 const filterListings = listings
     .filter((list) => {
       if(search === "") {
@@ -53,7 +66,7 @@ const filterListings = listings
       if (sortBy === "Sort By") {
         return null;
       } else if (sortBy === "Price High") {
-        return list2.price.localeCompare(list1.price);
+        return list2.price - list1.price
       } else if (sortBy === "Price Low") {
         return list1.price - list2.price
       } else if (sortBy === "Title") {
@@ -84,6 +97,11 @@ const filterListings = listings
           <Route path='/listings' element={<Listings listings={listings} setListings={setListings} user={user} handleListingsSearch={handleListingsSearch} setSortBy={setSortBy} sortBy={sortBy} filterListings={filterListings} setPriceValue={setPriceValue} priceValue={priceValue} sqFootValue={sqFootValue} setSqFootValue={setSqFootValue} />}/>
           <Route path='/listings/:id' element={<ListingsDetail listings={listings} setListings={setListings} user={user}/>}/>
           <Route path='/listingform' element={<ListingsForm listings={listings} setListings={setListings} user={user}/>}/>
+          <Route path='/forums' element={<Forum user={user} setCurrentForum={setCurrentForum}/> }/>
+          <Route path='/forums/:id' element={<Subforums user={user} currentForum={currentForum}/> }/>
+          <Route path='/subforums/:id' element={<SubforumDetail user={user} /> }/>
+          <Route path='/new_subforum' element={<SubforumForm user={user} currentForum={currentForum}/>}/>
+          <Route path='/resources' element={<Resources />}/>
         </Routes>
         <ImageUploadForm />
     </div>

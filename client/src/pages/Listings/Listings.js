@@ -13,7 +13,7 @@ function Listings({ listings, setListings, user, handleListingsSearch, setSortBy
 
 // const [value, setValue] = useState([0, 2000])
 
-const all_listings = filterListings.map((listing) => {
+const all_listings = filterListings?.map((listing) => {
     return (
         <ListingsCard listing={listing}/>
     )
@@ -41,7 +41,7 @@ console.log(priceValue)
 
     return (
         <div>
-           <h3>Listings.</h3>
+           <h2>Listings.</h2>
            <input 
            className="search-term"
            type="text"

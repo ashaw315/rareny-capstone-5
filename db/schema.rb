@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_27_194804) do
+ActiveRecord::Schema.define(version: 2022_03_01_150245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,12 +79,10 @@ ActiveRecord::Schema.define(version: 2022_02_27_194804) do
   create_table "forum_posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
-    t.bigint "forum_id", null: false
     t.bigint "subforum_id"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["forum_id"], name: "index_forum_posts_on_forum_id"
     t.index ["subforum_id"], name: "index_forum_posts_on_subforum_id"
     t.index ["user_id"], name: "index_forum_posts_on_user_id"
   end
@@ -182,7 +180,6 @@ ActiveRecord::Schema.define(version: 2022_02_27_194804) do
   add_foreign_key "comments", "comments"
   add_foreign_key "comments", "forum_posts"
   add_foreign_key "comments", "users"
-  add_foreign_key "forum_posts", "forums"
   add_foreign_key "forum_posts", "users"
   add_foreign_key "listing_images", "listings"
   add_foreign_key "listings", "users"
