@@ -6,6 +6,8 @@ import Box from "../styles/Box";
 import { Button } from '@mui/material';
 import ForumPostCard from "../components/ForumPostCard";
 
+
+
 function SubforumDetail({ user, currentSubforum }){
     const {id} = useParams();
     const [forumPosts, setForumPosts] = useState([])
@@ -24,7 +26,7 @@ function SubforumDetail({ user, currentSubforum }){
           );
       }, [id]);
 
-      console.log(forumPosts.id)
+      console.log(forumPosts)
 
     return (
         <div>

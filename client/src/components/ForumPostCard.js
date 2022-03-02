@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import ReactMarkdown from 'react-markdown';
 import Box from "../styles/Box";
+import CommentForm from "./CommentForm";
 
 function ForumPostCard({ post }){
     return (
@@ -15,6 +16,7 @@ function ForumPostCard({ post }){
                     {/* <img src={post.p}/> */}
                     </p>
                     <ReactMarkdown>{post.body}</ReactMarkdown>
+                    <CommentForm post={post}/>
                 </Box>
                 </Post>
             </Wrapper>
