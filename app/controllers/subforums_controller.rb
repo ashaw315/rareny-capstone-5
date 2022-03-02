@@ -6,7 +6,7 @@ class SubforumsController < ApplicationController
     end
 
     def show 
-        subforum = Suborum.find(params[:id])
+        subforum = Subforum.find(params[:id])
         render json: subforum
     end
 

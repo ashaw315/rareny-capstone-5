@@ -11,7 +11,7 @@ class ForumPostsController < ApplicationController
     end
 
     def create
-        forum_post =  @current_user.forum_post.create!(forum_post_params)
+        forum_post =  @current_user.forum_posts.create!(forum_post_params)
         render json: forum_post, status: :created 
     end
 
@@ -24,6 +24,6 @@ class ForumPostsController < ApplicationController
     private
 
     def forum_post_params
-        params.require(:forum_post).permit(:title, :body)
+        params.require(:forum_post).permit(:title, :body, :user_id, :subforum_id)
     end
 end

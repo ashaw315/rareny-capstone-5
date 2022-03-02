@@ -3,28 +3,35 @@ import { useNavigate, Link, useParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import SubforumDetail from "./SubforumDetail";
 
-function Subforums({ user, currentForum }){
-    // const {id} = useParams();
+function Subforums({ user, currentForum, setCurrentSubforum, setCurrentSubforumTitle }){
+    const {id} = useParams();
     const [subforums, setSubforums] = useState([])
-  
+    // const [currentSubforum, setCurrentSubforum] = useState('')
+    
+    // const cf = currentForum
 
     console.log(currentForum)
 
     useEffect(() => {
-        fetch("/subforums")
-            .then((r) => r.json()
-                .then((data) => setSubforums(data))
-            );
-    }, []);
-
-    
+        // auto-login
+        fetch(`/forums/${id}`)
+        .then((r) => r.json()
+        .then((data) => {
+            setSubforums(data.subforums)
+        })
+          );
+      }, [id]);
 
     return (
         <div>
             <Link className='subforumlink' to='/new_subforum'>
                 <Button className='newsubforumbutton' sx={{ color: "black", width: "50%", border: "2px black solid" }}>New Subforum</Button>
             </Link>
-            {subforums?.map((subforum) => <SubforumDetail key={subforum.id} subforum={subforum} user={user}/> )}
+            {subforums?.map((subforum) => 
+            <Link className="forum-card" to={`/subforums/${subforum.id}`} key={subforum.id} onClick={() => setCurrentSubforum(subforum.id)}>
+                <h2 className="forum-title" onClick={() => setCurrentSubforumTitle(subforum.name)}>{subforum.name}</h2>
+            </Link>)}
+            {/* <SubforumDetail key={subforum.id} subforum={subforum} user={user}/> )} */}
         </div>
     )
 }

@@ -15,6 +15,7 @@ import Resources from './pages/Resources';
 import Subforums from './pages/Subforums';
 import SubforumDetail from './pages/SubforumDetail';
 import SubforumForm from './components/SubforumForm';
+import ForumPostForm from './components/ForumPostForm';
 
 function App() {
   const {id} = useParams();
@@ -26,7 +27,10 @@ function App() {
   const [sortBy, setSortBy] = useState("Sort By");
   const [priceValue, setPriceValue] = useState([0, 3000])
   const [sqFootValue, setSqFootValue] = useState([0, 3000])
+
   const [currentForum, setCurrentForum] = useState(null)
+  const [currentSubforum, setCurrentSubforum] = useState([])
+  const [currentSubForumTitle, setCurrentSubforumTitle] = useState('')
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -51,10 +55,16 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetch(`/forums/${id}`)
+    fetch('/forums')
     .then((r) => r.json())
     .then((forumData) => setCurrentForum(forumData))
- }, [id]);
+ }, []);
+
+ useEffect(() => {
+  fetch('/subforums')
+  .then((r) => r.json())
+  .then((forumData) => setCurrentSubforum(forumData))
+}, []);
 
 const filterListings = listings
     .filter((list) => {
@@ -86,7 +96,7 @@ const filterListings = listings
       setSearch(searchListings);
   }
 
-  console.log(user)
+ console.log(currentSubForumTitle)
 
   return (
     <div>
@@ -97,10 +107,11 @@ const filterListings = listings
           <Route path='/listings' element={<Listings listings={listings} setListings={setListings} user={user} handleListingsSearch={handleListingsSearch} setSortBy={setSortBy} sortBy={sortBy} filterListings={filterListings} setPriceValue={setPriceValue} priceValue={priceValue} sqFootValue={sqFootValue} setSqFootValue={setSqFootValue} />}/>
           <Route path='/listings/:id' element={<ListingsDetail listings={listings} setListings={setListings} user={user}/>}/>
           <Route path='/listingform' element={<ListingsForm listings={listings} setListings={setListings} user={user}/>}/>
-          <Route path='/forums' element={<Forum user={user} setCurrentForum={setCurrentForum}/> }/>
-          <Route path='/forums/:id' element={<Subforums user={user} currentForum={currentForum}/> }/>
-          <Route path='/subforums/:id' element={<SubforumDetail user={user} /> }/>
+          <Route path='/forums' element={<Forum user={user} setCurrentForum={setCurrentForum} /> }/>
+          <Route path='/forums/:id' element={<Subforums user={user} currentForum={currentForum} setCurrentSubforum={setCurrentSubforum} setCurrentSubforumTitle={setCurrentSubforumTitle}/> }/>
+          <Route path='/subforums/:id' element={<SubforumDetail user={user} currentSubforum={currentSubforum}/> }/>
           <Route path='/new_subforum' element={<SubforumForm user={user} currentForum={currentForum}/>}/>
+          <Route path='/new_forum_post' element={<ForumPostForm user={user} currentSubforum={currentSubforum} currentSubForumTitle={currentSubForumTitle}/>}/>
           <Route path='/resources' element={<Resources />}/>
         </Routes>
         <ImageUploadForm />
