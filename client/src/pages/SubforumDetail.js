@@ -12,6 +12,7 @@ function SubforumDetail({ user, currentSubforum }){
     const {id} = useParams();
     const [forumPosts, setForumPosts] = useState([])
     const [subforumData, setSubforumData] = useState([])
+    const [postComments, setPostComments] = useState([])
     
     // const csf = currentSubforum
 
@@ -22,11 +23,12 @@ function SubforumDetail({ user, currentSubforum }){
         .then((data) => {
             setSubforumData(data)
             setForumPosts(data.forum_posts)
+            setPostComments(data.comments)
         })
           );
       }, [id]);
 
-      console.log(forumPosts)
+      console.log(subforumData)
 
     return (
         <div>
@@ -35,10 +37,13 @@ function SubforumDetail({ user, currentSubforum }){
                 <Button className='newforumpostbutton' sx={{ color: "black", width: "50%", border: "2px black solid" }}>Add to this discussion.</Button>
             </Link>
             <Wrapper>
-            {
+            {/* {
             forumPosts?.map((post) => (
-                <ForumPostCard key={post.id} post={post}/>
-            ))}
+                <ForumPostCard key={post.id} post={post} user={user} subforumData={subforumData} />
+            ))} */}
+
+            <ForumPostCard subforumData={subforumData} user={user}/>
+
             </Wrapper>
       </div>
     );

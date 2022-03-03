@@ -16,6 +16,7 @@ import Subforums from './pages/Subforums';
 import SubforumDetail from './pages/SubforumDetail';
 import SubforumForm from './components/SubforumForm';
 import ForumPostForm from './components/ForumPostForm';
+import UserAccount from './pages/UserAccount';
 
 function App() {
   const {id} = useParams();
@@ -90,13 +91,12 @@ const filterListings = listings
       return (list.sq_footage >= sqFootValue[0] && list.sq_footage <= sqFootValue[1])
     })  
 
-    console.log(filterListings)
 
   function handleListingsSearch (searchListings) {
       setSearch(searchListings);
   }
 
- console.log(currentSubForumTitle)
+//  console.log(currentSubForumTitle)
 
   return (
     <div>
@@ -104,6 +104,7 @@ const filterListings = listings
         <Routes>
           <Route path='/' element={<Home user={user} setUser={setUser} logInForm={logInForm} setLogInForm={setLogInForm}/>}/>
           <Route path='/signup' element={ <SignUp setUser={setUser} /> }/>
+          <Route path='/account' element={<UserAccount user={user} />}/>
           <Route path='/listings' element={<Listings listings={listings} setListings={setListings} user={user} handleListingsSearch={handleListingsSearch} setSortBy={setSortBy} sortBy={sortBy} filterListings={filterListings} setPriceValue={setPriceValue} priceValue={priceValue} sqFootValue={sqFootValue} setSqFootValue={setSqFootValue} />}/>
           <Route path='/listings/:id' element={<ListingsDetail listings={listings} setListings={setListings} user={user}/>}/>
           <Route path='/listingform' element={<ListingsForm listings={listings} setListings={setListings} user={user}/>}/>
@@ -114,7 +115,7 @@ const filterListings = listings
           <Route path='/new_forum_post' element={<ForumPostForm user={user} currentSubforum={currentSubforum} currentSubForumTitle={currentSubForumTitle}/>}/>
           <Route path='/resources' element={<Resources />}/>
         </Routes>
-        <ImageUploadForm />
+        {/* <ImageUploadForm /> */}
     </div>
   )
 }

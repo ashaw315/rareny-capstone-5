@@ -21,6 +21,7 @@ const WrapperChild = styled.div`
 `;
 
 function SubforumForm({ user, currentForum }){
+    const {id} = useParams();
     const [name, setName] = useState('Painters Materials Thread')
     const [title, setTitle] = useState('Best Paint Brands')
     const [instructions, setInstructions] = useState(`Here's how you make a post.
@@ -44,6 +45,7 @@ Tell me what you think in the **comments** or share your own!
     
     const [subforums, setSubforums] = useState([])
     const [errors, setErrors] = useState([])
+    
 
     const navigate = useNavigate();
 
@@ -53,6 +55,8 @@ Tell me what you think in the **comments** or share your own!
                 .then((data) => setSubforums(data))
             );
     }, []);
+
+    
 
     function handleSubmit(e) {
         e.preventDefault();

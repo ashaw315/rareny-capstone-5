@@ -37,6 +37,20 @@ class UsersController < ApplicationController
 
     # end
 
+    def update
+        profile_picture = Cloudinary::Uploader.upload(params[:user][:profile_picture])
+        user = User.find(params[:id])
+        user.update!( 
+            username: params[:username],
+            password: params[:password],
+            password_confirmation: params[:password_confirmation],
+            website: params[:website],
+            discipline: params[:discipline],
+            bio: params[:bio],
+            profile_picture: profile_picture['url'])
+            render json: user
+        end
+
     def me
         render json: @current_user, status: :created
     end

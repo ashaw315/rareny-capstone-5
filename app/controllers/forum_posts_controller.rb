@@ -2,7 +2,7 @@ class ForumPostsController < ApplicationController
 
     def index
         forum_posts = ForumPost.all
-        render json: forum_posts
+        render json: forum_posts, include: ['comments', 'comments.user']
     end
 
     def show

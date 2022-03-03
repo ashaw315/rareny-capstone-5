@@ -1,75 +1,94 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from 'react-router-dom';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import FormField from "../styles/FormField";
+import Label from "../styles/Label";
+import Textarea from "../styles/TextArea";
+import styled from "styled-components";
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 800,
-    height: 700,
-    bgcolor: 'background.paper',
-    border: '5px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
+const Wrapper = styled.section`
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 16px;
+  display: flex;
+  gap: 24px;
+`;
 
-function CommentForm(){
+const WrapperChild = styled.div`
+  flex: 1;
+`;
+
+function CommentForm({ post, user }){
     const [body, setBody] = useState('');
     const [errors, setErrors] = useState([]);
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const [comments, setComments] = useState([])
 
+    const [isToggle, setIsToggle] = useState(true)
+
+    function handleToggle() {
+        setIsToggle((isToggle) => !isToggle)
+      }
+
+      useEffect(() => {
+        fetch("/comments")
+            .then((r) => r.json()
+                .then((data) => setComments(data))
+            );
+    }, []);
+
+
+      function handleSubmit(e) {
+        e.preventDefault();
+        fetch("/comments", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                    body: body,
+                    forum_post_id: post.id,
+                    user_id: user.id,
+            }),
+        })
+            .then((r) => {
+                if (r.ok) {
+                    r.json().then((data) => setComments([data,...comments]))
+                    // .then(navigate('/forums'))
+                  } else {
+                      r.json().then((err) => setErrors(err.errors));
+                  }
+                })
+            };
+      
     return (
         <div>
-            <Button sx={{ color: "black" }} onClick={handleOpen}>Login</Button>
-            <Link className='loginlink' to='/signup'>
-                <Button className='loginbutton' sx={{ color: "black"}}>SIGN UP</Button>
-            </Link>
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-        
-            >
-                <Box  className="box" sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                Welcome back
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                <form className="form" >
-                    <span>
-                        <p className='loginp'>Please log in.</p>
-                    </span>
-                    <p className='logintitle'>Username</p>
-                    <div className='logininputdiv'>
-                        <input className='logininput'
-                        type='textbox'
-                        autoComplete='off'
-                        value={body}
-                        onChange={(e) => setBody(e.target.value)}
-                        />
-                    </div>
-                    <div className="loginbuttonmodal">
-                        <Button className='loginbuttonmodal' type="submit" sx={{ color: "black", border: "2px black solid"}}>LOGIN</Button>
-                    </div>
-                    <div className="loginerrorsnmodal"> 
-                        {errors.map((e)=><p key={e}>{e}</p>)}
-                    </div>
-                <p className="signuplink">Don't have an account?</p>
-                <Link className='loginlink' to='/signup'>
-                    <Button className='signupbutton' sx={{ color: "black", width: "50%", border: "2px black solid" }}>SIGN UP</Button>
-                </Link>
-                </form>
-                    </Typography>
-                    </Box>
-                </Modal>
+            <Button sx={{ color: "black", border: 1 }} onClick={handleToggle}>{isToggle ? "Add A Comment +" : "Add A Comment -"}</Button>
+            {isToggle ? 
+                null :
+                <Wrapper>
+                    <WrapperChild>
+                        <form onSubmit={handleSubmit}>
+                        <FormField>
+                            <Label htmlFor="instructions">Post Text</Label>
+                            <Textarea
+                            id="instructions"
+                            rows="5"
+                            value={body}
+                            onChange={(e) => setBody(e.target.value)}
+                            />
+                        </FormField>
+                        <FormField>
+                            <Button sx={{ color: "black", border: 1 }} type="submit">
+                            Submit Comment
+                            </Button>
+                        </FormField>
+                        <FormField>
+                            {errors?.map((e)=><p key={e}>{e}</p>)}
+                        </FormField>
+                        </form>
+                    </WrapperChild>
+                </Wrapper> 
+                }
             </div>   
     )
 }

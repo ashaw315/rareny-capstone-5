@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
 
     def index
         comments= Comment.all
-        render json: comments, status: :ok
+        render json: comments, include: :user
     end
 
     def show
@@ -24,6 +24,6 @@ class CommentsController < ApplicationController
 private
 
 def comment_params
-   params.require(:comment).permit(:body)
+   params.require(:comment).permit(:body, :forum_post_id, :user_id)
 end
 end

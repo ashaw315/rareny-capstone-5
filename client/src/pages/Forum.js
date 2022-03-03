@@ -14,7 +14,7 @@ function Forum({ user, setCurrentForum }){
 
     
 
-    console.log(forums)
+    // console.log(forums)
 
     return (
         <div>
