@@ -64,7 +64,7 @@ Tell me what you think in the **comments** or share your own!
                     user_id: user.id,
                     title: title,
                     body: instructions,
-                    subforum_id: currentSubforum,
+                    subforum_id: currentSubforum.id,
             }),
         })
             .then((r) => {

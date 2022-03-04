@@ -5,15 +5,15 @@ class UsersController < ApplicationController
     skip_before_action :authorize, only: [:create, :index]
 
     def create
-        profile_picture = Cloudinary::Uploader.upload(params[:profile_picture])
-        user = User.create!(
-            username: params[:username],
-            password: params[:password],
-            password_confirmation: params[:password_confirmation],
-            website: params[:website],
-            discipline: params[:discipline],
-            bio: params[:bio],
-            profile_picture: profile_picture['url'])
+        # profile_picture = Cloudinary::Uploader.upload(params[:profile_picture])
+        user = User.create!(user_params)
+            # username: params[:username],
+            # password: params[:password],
+            # password_confirmation: params[:password_confirmation],
+            # website: params[:website],
+            # discipline: params[:discipline],
+            # bio: params[:bio],
+            # profile_picture: profile_picture['url'])
         session[:user_id] = user.id
         if user
             render json: user, status: :created
@@ -38,17 +38,9 @@ class UsersController < ApplicationController
     # end
 
     def update
-        profile_picture = Cloudinary::Uploader.upload(params[:user][:profile_picture])
         user = User.find(params[:id])
-        user.update!( 
-            username: params[:username],
-            password: params[:password],
-            password_confirmation: params[:password_confirmation],
-            website: params[:website],
-            discipline: params[:discipline],
-            bio: params[:bio],
-            profile_picture: profile_picture['url'])
-            render json: user
+        user.update!(user_params) 
+        render json: user
         end
 
     def me
@@ -58,8 +50,8 @@ class UsersController < ApplicationController
 
     # private
 
-    # def user_params
-    #     params.permit(:username, :password, :password_confirmation, :website, :discipline, :bio)
-    # end
+    def user_params
+        params.permit(:username, :password, :password_confirmation, :website, :discipline, :bio)
+    end
 
 end

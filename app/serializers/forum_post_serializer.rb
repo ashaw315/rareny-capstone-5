@@ -1,5 +1,5 @@
 class ForumPostSerializer < ActiveModel::Serializer
-  attributes :id, :title, :body, :user, :user_pic, :subforum_name, :userid, :comments
+  attributes :id, :title, :body, :user, :subforum_name, :userid, :comments
   # has_one :forum
   has_one :subforum
   has_one :user
@@ -12,10 +12,6 @@ class ForumPostSerializer < ActiveModel::Serializer
 
   def userid
     object.user.id
-  end
-
-  def user_pic
-    object.user.profile_picture
   end
 
   def subforum_name

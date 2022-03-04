@@ -8,15 +8,15 @@ const [passwordConfirmation, setPasswordConfirmation] = useState('')
 const [website, setWebsite] = useState('')
 const [discipline, setDiscipline] = useState('')
 const [bio, setBio] = useState('')
-const [profilePicture, setProfilePicture] = useState('')
+// const [profilePicture, setProfilePicture] = useState('')
 const navigate = useNavigate();
 
 const [errors, setErrors] = useState([])
 
-const handleProfilePicChange = e => {
-    e.persist();
-    setProfilePicture(e.target.files[0]);
-  };
+// const handleProfilePicChange = e => {
+//     e.persist();
+//     setProfilePicture(e.target.files[0]);
+//   };
 
 const handleUsernameChange = e => {
     setUsername(e.target.value);
@@ -51,7 +51,7 @@ function handleSubmit(e) {
     userData.append('website', website)
     userData.append('discipline', discipline)
     userData.append('bio', bio)
-    userData.append('profile_picture', profilePicture)
+    // userData.append('profile_picture', profilePicture)
     
     fetch('/signup', {
         method: "POST",
@@ -128,12 +128,12 @@ function handleSubmit(e) {
                 autoComplete="off"
                 />
 
-                <input 
+                {/* <input 
                 type="file" 
                 name="image1" 
                 onChange={handleProfilePicChange}
                 required
-                />
+                /> */}
 
                 <input type="submit"/>
                 {errors.map((e)=><p key={e}>{e}</p>)}
