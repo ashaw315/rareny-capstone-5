@@ -56,7 +56,7 @@ Tell me what you think in the **comments** or share your own!
             );
     }, []);
 
-    
+    console.log(currentForum)
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -80,7 +80,7 @@ Tell me what you think in the **comments** or share your own!
             .then((r) => {
                 if (r.ok) {
                     r.json().then((data) => setSubforums([data,...subforums]))
-                    .then(navigate('/forums'))
+                    .then(navigate(`/forums/${currentForum}`))
                   } else {
                       r.json().then((err) => setErrors(err.errors));
                   }

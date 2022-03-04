@@ -13,6 +13,8 @@ function SubforumDetail({ user, currentSubforum }){
     const [forumPosts, setForumPosts] = useState([])
     const [subforumData, setSubforumData] = useState([])
     const [postComments, setPostComments] = useState([])
+
+    const navigate = useNavigate();
     
     // const csf = currentSubforum
 
@@ -37,13 +39,8 @@ function SubforumDetail({ user, currentSubforum }){
                 <Button className='newforumpostbutton' sx={{ color: "black", width: "50%", border: "2px black solid" }}>Add to this discussion.</Button>
             </Link>
             <Wrapper>
-            {/* {
-            forumPosts?.map((post) => (
-                <ForumPostCard key={post.id} post={post} user={user} subforumData={subforumData} />
-            ))} */}
-
-            <ForumPostCard subforumData={subforumData} user={user}/>
-
+              <ForumPostCard subforumData={subforumData} user={user}/>
+              <Button onClick={() => navigate(-1)}>Go Back</Button>
             </Wrapper>
       </div>
     );

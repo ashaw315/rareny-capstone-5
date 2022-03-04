@@ -70,7 +70,7 @@ Tell me what you think in the **comments** or share your own!
             .then((r) => {
                 if (r.ok) {
                     r.json().then((data) => setForumPosts([data,...forumPosts]))
-                    .then(navigate('/forums'))
+                    .then(navigate(`/subforums/${currentSubforum}`))
                   } else {
                       r.json().then((err) => setErrors(err.errors));
                   }

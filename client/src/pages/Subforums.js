@@ -11,7 +11,7 @@ function Subforums({ user, currentForum, setCurrentSubforum, setCurrentSubforumT
     // const cf = currentForum
 
 
-    
+    // console.log(currentForum)
 
     useEffect(() => {
         // auto-login
