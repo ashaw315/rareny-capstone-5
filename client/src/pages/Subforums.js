@@ -6,12 +6,8 @@ import SubforumDetail from "./SubforumDetail";
 function Subforums({ user, currentForum, setCurrentSubforum, setCurrentSubforumTitle }){
     const {id} = useParams();
     const [subforums, setSubforums] = useState([])
-    // const [currentSubforum, setCurrentSubforum] = useState('')
     
-    // const cf = currentForum
-
-
-    // console.log(currentForum)
+    const navigate = useNavigate();
 
     useEffect(() => {
         // auto-login
@@ -25,6 +21,8 @@ function Subforums({ user, currentForum, setCurrentSubforum, setCurrentSubforumT
 
     return (
         <div>
+            <h3>{currentForum.name}</h3>
+            <Button onClick={() => navigate('/forums')}>Go Back</Button>
             <Link className='subforumlink' to='/new_subforum'>
                 <Button className='newsubforumbutton' sx={{ color: "black", width: "50%", border: "2px black solid" }}>New Subforum</Button>
             </Link>

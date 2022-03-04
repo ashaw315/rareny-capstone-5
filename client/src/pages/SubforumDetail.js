@@ -8,7 +8,7 @@ import ForumPostCard from "../components/ForumPostCard";
 
 
 
-function SubforumDetail({ user, currentSubforum }){
+function SubforumDetail({ user, currentSubforum, setCurrentForumPost, currentForum }){
     const {id} = useParams();
     const [forumPosts, setForumPosts] = useState([])
     const [subforumData, setSubforumData] = useState([])
@@ -30,17 +30,18 @@ function SubforumDetail({ user, currentSubforum }){
           );
       }, [id]);
 
-      console.log(subforumData)
+
+      console.log(currentSubforum)
 
     return (
         <div>
             <h3>{subforumData.forum} / {subforumData.name}</h3>
+            <Button onClick={() => navigate(`/forums/${currentForum.id}`)}>Go Back</Button>
             <Link className='postforumlink' to='/new_forum_post'>
                 <Button className='newforumpostbutton' sx={{ color: "black", width: "50%", border: "2px black solid" }}>Add to this discussion.</Button>
             </Link>
             <Wrapper>
-              <ForumPostCard subforumData={subforumData} user={user}/>
-              <Button onClick={() => navigate(-1)}>Go Back</Button>
+              <ForumPostCard subforumData={subforumData} user={user} currentSubforum={currentSubforum} setCurrentForumPost={setCurrentForumPost}/>
             </Wrapper>
       </div>
     );

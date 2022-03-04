@@ -3,10 +3,10 @@ import { useNavigate, Link, useParams } from 'react-router-dom';
 import styled from "styled-components";
 import ReactMarkdown from 'react-markdown';
 import Box from "../styles/Box";
-import CommentForm from "./CommentForm";
 import CommentCard from "./CommentCard";
+import { Button } from "@mui/material";
 
-function ForumPostCard({ post, user, subforumData }){
+function ForumPostCard({ post, user, subforumData, currentSubforum, setCurrentForumPost }){
     // const {id} = useParams();
     const [forumPosts, setForumPosts] = useState([])
 
@@ -34,7 +34,9 @@ function ForumPostCard({ post, user, subforumData }){
                     {/* <img src={post.p}/> */}
                     </p>
                     <ReactMarkdown>{post.body}</ReactMarkdown>
-                    <CommentForm post={post} user={user}/>
+                    <Link className="forum-card" to={`/new_comment`} onClick={() => setCurrentForumPost(post)}>
+                    <Button className='newcommentmbutton' sx={{ color: "black", width: "50%", border: "2px black solid" }}>Add a comment</Button>
+                    </Link>
                     <CommentCard post={post} subforumData={subforumData} forumPosts={forumPosts}/>
                     <p>this is tezt</p>
                 </Box>

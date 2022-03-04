@@ -56,7 +56,7 @@ Tell me what you think in the **comments** or share your own!
             );
     }, []);
 
-    console.log(currentForum)
+    console.log(currentForum.id)
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -68,7 +68,7 @@ Tell me what you think in the **comments** or share your own!
             body: JSON.stringify({
                 "subforum": {
                     name: name,
-                    forum_id: currentForum,
+                    forum_id: currentForum.id,
                 },
                 "forum_post": {
                         user_id: user.id,
@@ -80,7 +80,7 @@ Tell me what you think in the **comments** or share your own!
             .then((r) => {
                 if (r.ok) {
                     r.json().then((data) => setSubforums([data,...subforums]))
-                    .then(navigate(`/forums/${currentForum}`))
+                    .then(navigate(`/forums/${currentForum.id}`))
                   } else {
                       r.json().then((err) => setErrors(err.errors));
                   }
@@ -141,6 +141,7 @@ Tell me what you think in the **comments** or share your own!
                     <ReactMarkdown>{instructions}</ReactMarkdown>
                 </WrapperChild>
             </Wrapper>
+            <Button onClick={() => navigate(-1)}>Go Back</Button>
         </div>
     )
 }

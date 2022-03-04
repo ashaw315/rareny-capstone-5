@@ -5,29 +5,32 @@ import FormField from "../styles/FormField";
 import Label from "../styles/Label";
 import Textarea from "../styles/TextArea";
 import styled from "styled-components";
+import ReactMarkdown from 'react-markdown';
+import Box from "../styles/Box";
 
 const Wrapper = styled.section`
-  max-width: 1000px;
+  max-width: 800px;
   margin: 40px auto;
-  padding: 16px;
-  display: flex;
-  gap: 24px;
 `;
 
-const WrapperChild = styled.div`
-  flex: 1;
+const Post = styled.article`
+  margin-bottom: 24px;
 `;
 
-function CommentForm({ post, user }){
+function CommentForm({ post, user, currentSubforum, currentForumPost }){
     const [body, setBody] = useState('');
     const [errors, setErrors] = useState([]);
     const [comments, setComments] = useState([])
 
-    const [isToggle, setIsToggle] = useState(true)
+    // const [isToggle, setIsToggle] = useState(true)
 
-    function handleToggle() {
-        setIsToggle((isToggle) => !isToggle)
-      }
+    const navigate = useNavigate();
+
+    // function handleToggle() {
+    //     setIsToggle((isToggle) => !isToggle)
+    //   }
+
+    console.log(currentSubforum)
 
       useEffect(() => {
         fetch("/comments")
@@ -46,14 +49,14 @@ function CommentForm({ post, user }){
             },
             body: JSON.stringify({
                     body: body,
-                    forum_post_id: post.id,
+                    forum_post_id: currentForumPost.id,
                     user_id: user.id,
             }),
         })
             .then((r) => {
                 if (r.ok) {
                     r.json().then((data) => setComments([data,...comments]))
-                    // .then(navigate('/forums'))
+                    .then(navigate(`/subforums/${currentSubforum}`))
                   } else {
                       r.json().then((err) => setErrors(err.errors));
                   }
@@ -62,12 +65,16 @@ function CommentForm({ post, user }){
       
     return (
         <div>
-            <Button sx={{ color: "black", border: 1 }} onClick={handleToggle}>{isToggle ? "Add A Comment +" : "Add A Comment -"}</Button>
-            {isToggle ? 
-                null :
-                <Wrapper>
-                    <WrapperChild>
-                        <form onSubmit={handleSubmit}>
+             <Wrapper>
+                <Post key={currentForumPost.id}>
+                <Box>
+                    <h2>{currentForumPost.title}</h2>
+                    <p>
+                    <cite>By {currentForumPost.user}</cite>
+                    {/* <img src={post.p}/> */}
+                    </p>
+                    <ReactMarkdown>{currentForumPost.body}</ReactMarkdown>
+                    <form onSubmit={handleSubmit}>
                         <FormField>
                             <Label htmlFor="instructions">Post Text</Label>
                             <Textarea
@@ -86,9 +93,10 @@ function CommentForm({ post, user }){
                             {errors?.map((e)=><p key={e}>{e}</p>)}
                         </FormField>
                         </form>
-                    </WrapperChild>
-                </Wrapper> 
-                }
+                </Box>
+                </Post>
+            </Wrapper>
+            <Button onClick={() => navigate(-1)}>Go Back</Button>
             </div>   
     )
 }

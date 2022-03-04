@@ -17,6 +17,7 @@ import SubforumDetail from './pages/SubforumDetail';
 import SubforumForm from './components/SubforumForm';
 import ForumPostForm from './components/ForumPostForm';
 import UserAccount from './pages/UserAccount';
+import CommentForm from './components/CommentForm';
 
 function App() {
   const {id} = useParams();
@@ -29,9 +30,10 @@ function App() {
   const [priceValue, setPriceValue] = useState([0, 3000])
   const [sqFootValue, setSqFootValue] = useState([0, 3000])
 
-  const [currentForum, setCurrentForum] = useState(null)
+  const [currentForum, setCurrentForum] = useState([])
   const [currentSubforum, setCurrentSubforum] = useState([])
   const [currentSubForumTitle, setCurrentSubforumTitle] = useState('')
+  const [currentForumPost, setCurrentForumPost] = useState([])
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -110,9 +112,10 @@ const filterListings = listings
           <Route path='/listingform' element={<ListingsForm listings={listings} setListings={setListings} user={user}/>}/>
           <Route path='/forums' element={<Forum user={user} setCurrentForum={setCurrentForum} /> }/>
           <Route path='/forums/:id' element={<Subforums user={user} currentForum={currentForum} setCurrentSubforum={setCurrentSubforum} setCurrentSubforumTitle={setCurrentSubforumTitle}/> }/>
-          <Route path='/subforums/:id' element={<SubforumDetail user={user} currentSubforum={currentSubforum}/> }/>
+          <Route path='/subforums/:id' element={<SubforumDetail user={user} currentSubforum={currentSubforum} setCurrentForumPost={setCurrentForumPost} currentForum={currentForum}/> }/>
           <Route path='/new_subforum' element={<SubforumForm user={user} currentForum={currentForum}/>}/>
           <Route path='/new_forum_post' element={<ForumPostForm user={user} currentSubforum={currentSubforum} currentSubForumTitle={currentSubForumTitle}/>}/>
+          <Route path='/new_comment' element={<CommentForm user={user} currentForumPost={currentForumPost} currentSubforum={currentSubforum}/>}/>
           <Route path='/resources' element={<Resources />}/>
         </Routes>
         {/* <ImageUploadForm /> */}
