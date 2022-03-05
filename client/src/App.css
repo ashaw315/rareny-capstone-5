@@ -1,0 +1,39 @@
+
+/* FORUM CSS */
+
+.forum-post-card {
+font-size: 20px;
+}
+
+.subforums-forum-posts {
+    padding: 15px;
+}
+
+.forum-post-title {
+    text-decoration: underline;
+}
+
+.forum-comment-card {
+    text-decoration: none;
+    width: 20%;
+}
+
+.forum-post-link-position{
+    text-align: center;
+}
+
+.postforumlink{
+    text-align: center;
+    text-decoration: none;
+    background-color: black;
+}
+
+.subforum-title {
+    padding: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    /* list-style-type: circle; */
+    /* border: 1px solid black; */
+    /* text-decoration: underline; */
+    /* letter-spacing: -4px; */
+}

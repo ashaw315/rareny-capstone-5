@@ -27,9 +27,9 @@ class UsersController < ApplicationController
         render json: users, status: :ok
     end
 
-   # def show
-  #      render json: @current_user, status: :created
-    #end
+   def show
+       render json: @current_user, status: :created
+    end
 
     # def show
     #     a_user = User.find(params[:id])

@@ -28,14 +28,14 @@ console.log(post.comments)
 
     return (
         <div>
-            <Button sx={{ color: "black", border: 1 }} onClick={handleToggle}>{isToggle ? "Show Comments +" : "Hide Comments -"}</Button>
+            <Button className="forum-post-button" sx={{ color: "black", border: "2px black solid" }} onClick={handleToggle}>{isToggle ? "Show Comments +" : "Hide Comments -"}</Button>
             {isToggle ? 
             null : 
             <Wrapper>
                 {post.comments.map((comment) => 
                 <Post key={comment.id}>
                     <Box>
-                        <cite>By {getCommentUser(comment.id)}</cite>
+                        <p>By <strong>{getCommentUser(comment.id)}</strong></p>
                         <p>{comment.body}</p>
                     </Box>
                 </Post>

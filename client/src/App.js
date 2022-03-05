@@ -107,6 +107,7 @@ const filterListings = listings
           <Route path='/' element={<Home user={user} setUser={setUser} logInForm={logInForm} setLogInForm={setLogInForm}/>}/>
           <Route path='/signup' element={ <SignUp setUser={setUser} /> }/>
           <Route path='/account' element={<UserAccount user={user} />}/>
+          <Route path='/profile' element={<Profile user={user} />}/>
           <Route path='/listings' element={<Listings listings={listings} setListings={setListings} user={user} handleListingsSearch={handleListingsSearch} setSortBy={setSortBy} sortBy={sortBy} filterListings={filterListings} setPriceValue={setPriceValue} priceValue={priceValue} sqFootValue={sqFootValue} setSqFootValue={setSqFootValue} />}/>
           <Route path='/listings/:id' element={<ListingsDetail listings={listings} setListings={setListings} user={user}/>}/>
           <Route path='/listingform' element={<ListingsForm listings={listings} setListings={setListings} user={user}/>}/>

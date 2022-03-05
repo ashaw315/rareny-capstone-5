@@ -11,14 +11,14 @@ function UserAccount({ user }){
     // const [discipline, setDiscipline] = useState('')
     // const [bio, setBio] = useState('')
 
-    
-
-    const [profilePicture, setProfilePicture] = useState('')
+    // const username = user.username
 
     const [accountUpdatedNote, setAccountUpdatedNote] = useState('');
 
 
     const navigate = useNavigate();
+
+    
 
     function handleUpdate(e, field) {
         setUpdatedAccount({...updatedAccount, [field]: e.target.value})
@@ -33,7 +33,7 @@ function UserAccount({ user }){
     //     setUpdatedAccount({...updatedAccount, [field]: e.target.files[0]})
     // };
 
-    console.log(user)
+    // console.log(user.username)
 
     function handleUpdateAccount(e) {
         e.preventDefault();
@@ -66,23 +66,23 @@ function UserAccount({ user }){
                         </span>
                         <div className='accountinputdiv'>
                             <p className='accountp'>Username</p>
-                            {updatedAccount.username ? <input className='accountinput' value={updatedAccount.username} onChange={(e) => handleUpdate(e, 'username')}></input> : navigate('/', {replace: true}) }
+                            {updatedAccount ? <input className='accountinput' value={updatedAccount.username} onChange={(e) => handleUpdate(e, 'username')}></input> : null } 
                         </div>
                         <div className='accountinputdiv'>
                             <p className='accountp'>Password</p>
-                            {user ? <input className='accountinput' value={updatedAccount.password} onChange={(e) => handleUpdate(e, 'password')}></input> : null }
+                            {updatedAccount? <input className='accountinput' value={updatedAccount.password} onChange={(e) => handleUpdate(e, 'password')}></input> : null }
                         </div>
                         <div className='accountinputdiv'>
                             <p className='accountp'>Website</p>
-                            {user ? <input className='accountinput' value={updatedAccount.website} onChange={(e) => handleUpdate(e, 'website')}></input> : null}
+                            {updatedAccount ? <input className='accountinput' value={updatedAccount.website} onChange={(e) => handleUpdate(e, 'website')}></input> : null}
                         </div>
                         <div className='accountinputdiv'>
                             <p className='accountp'>Discipline</p>
-                            {user ? <input className='accountinput' value={updatedAccount.discipline} onChange={(e) => handleUpdate(e, 'discipline')}></input> : null}
+                            {updatedAccount ? <input className='accountinput' value={updatedAccount.discipline} onChange={(e) => handleUpdate(e, 'discipline')}></input> : null}
                         </div>
                         <div className='accountinputdiv'>
                             <p className='accountp'>Bio</p>
-                            {user ? <textarea className='accountinput' value={updatedAccount.bio} onChange={(e) => handleUpdate(e, 'bio')}></textarea> : null }
+                            {updatedAccount ? <textarea className='accountinput' value={updatedAccount.bio} onChange={(e) => handleUpdate(e, 'bio')}></textarea> : null }
                         </div>
                         {/* <div className='accountinputdiv'>
                             <p className='accountp'>Profile Picture</p>

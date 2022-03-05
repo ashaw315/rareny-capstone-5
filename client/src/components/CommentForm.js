@@ -56,7 +56,7 @@ function CommentForm({ post, user, currentSubforum, currentForumPost }){
             .then((r) => {
                 if (r.ok) {
                     r.json().then((data) => setComments([data,...comments]))
-                    .then(navigate(`/subforums/${currentSubforum}`))
+                    .then(navigate(`/subforums/${currentSubforum.id}`))
                   } else {
                       r.json().then((err) => setErrors(err.errors));
                   }
