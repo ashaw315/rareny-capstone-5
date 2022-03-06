@@ -18,6 +18,8 @@ import SubforumForm from './components/SubforumForm';
 import ForumPostForm from './components/ForumPostForm';
 import UserAccount from './pages/UserAccount';
 import CommentForm from './components/CommentForm';
+import ForumPostCard from './components/ForumPostCard';
+// import ForumPosts from './pages/ForumPosts';
 
 function App() {
   const {id} = useParams();
@@ -98,6 +100,12 @@ const filterListings = listings
       setSearch(searchListings);
   }
 
+  // function handleDeleteForumPost(deletedForumPost) {
+  //   setCurrentForumPost((currentForumPost) =>
+  //   currentForumPost.filter((fp) => fp.title !== deletedForumPost.title)
+  //   );
+  // }
+
 //  console.log(currentSubForumTitle)
 
   return (
@@ -114,6 +122,7 @@ const filterListings = listings
           <Route path='/forums' element={<Forum user={user} setCurrentForum={setCurrentForum} /> }/>
           <Route path='/forums/:id' element={<Subforums user={user} currentForum={currentForum} setCurrentSubforum={setCurrentSubforum} setCurrentSubforumTitle={setCurrentSubforumTitle}/> }/>
           <Route path='/subforums/:id' element={<SubforumDetail user={user} currentSubforum={currentSubforum} setCurrentForumPost={setCurrentForumPost} currentForum={currentForum}/> }/>
+          {/* <Route path='/forum_posts/:id' element={<ForumPosts user={user} currentForumPost={currentForumPost} currentSubforum={currentSubforum}/>}/> */}
           <Route path='/new_subforum' element={<SubforumForm user={user} currentForum={currentForum}/>}/>
           <Route path='/new_forum_post' element={<ForumPostForm user={user} currentSubforum={currentSubforum} currentSubForumTitle={currentSubForumTitle}/>}/>
           <Route path='/new_comment' element={<CommentForm user={user} currentForumPost={currentForumPost} currentSubforum={currentSubforum}/>}/>

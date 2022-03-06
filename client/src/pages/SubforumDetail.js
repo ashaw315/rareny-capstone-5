@@ -6,6 +6,7 @@ import Box from "../styles/Box";
 import { Button } from '@mui/material';
 import ForumPostCard from "../components/ForumPostCard";
 import '../App.css'
+import Subforums from "./Subforums";
 
 
 
@@ -31,11 +32,20 @@ function SubforumDetail({ user, currentSubforum, setCurrentForumPost, currentFor
           );
       }, [id]);
 
-
-      console.log(currentSubforum)
+      function handleDeleteForumPost(deletedForumPost) {
+        setSubforumData((subforumData) => {
+          subforumData.forumPosts.map((post) => {
+            post.filter((fp) => fp.id !== deletedForumPost)
+          })
+        }
+        );
+      }
 
     return (
         <div className="subforums-forum-posts">
+           <Link className="forum-card" to={'/forums'}>
+                <h2 className="forum-header-title">Forum.</h2>
+            </Link>
             <Button className="go-back-button" sx={{ color: "black", fontSize: 25, border: "2px black solid" }} onClick={() => navigate(`/forums/${currentForum.id}`)}>Go Back</Button>
             <h3 className="subforum-title">{subforumData.forum} / {subforumData.name}</h3>
             <div className='postforumlink'>
@@ -43,19 +53,7 @@ function SubforumDetail({ user, currentSubforum, setCurrentForumPost, currentFor
                   <Button className='newforumpostbutton' sx={{ color: "white", width: "25%", border: "2px black solid" }}>Add to this discussion.</Button>
               </Link>
             </div>
-            {/* <Wrapper> */}
-              <ForumPostCard subforumData={subforumData} user={user} currentSubforum={currentSubforum} setCurrentForumPost={setCurrentForumPost}/>
-            {/* </Wrapper> */}
-            <div className='homepagefooter'>
-                            <h3 className='footerheader'>About</h3>
-                            <h3  className='footerheader1'>Contact</h3>
-                        </div>
-                            <ul className='footerul'>
-                                <div className='footerp'>Rare NY is a conceptual project by adamshaw.</div>
-                                <div className='footerp1'>Resources for Artists Everywhere looks to offer artists a space to communicate and share resources.</div>
-                                <div className='footerp2'>Email us.</div>
-                            </ul>
-                        
+              <ForumPostCard subforumData={subforumData} user={user} currentSubforum={currentSubforum} setCurrentForumPost={setCurrentForumPost} forumPosts={forumPosts} onDeleteForumPost={handleDeleteForumPost} />
       </div>
     );
   }

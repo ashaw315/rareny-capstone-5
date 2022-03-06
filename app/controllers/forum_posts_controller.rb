@@ -16,8 +16,8 @@ class ForumPostsController < ApplicationController
     end
 
     def destroy
-        forum_post = @current_user.forum_post.find(params[:id])
-        review.destroy
+        forum_post = @current_user.forum_posts.find(params[:id])
+        forum_post.destroy
         head :no_content
     end
 

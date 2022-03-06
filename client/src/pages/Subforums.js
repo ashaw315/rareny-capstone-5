@@ -6,6 +6,7 @@ import SubforumDetail from "./SubforumDetail";
 function Subforums({ user, currentForum, setCurrentSubforum, setCurrentSubforumTitle }){
     const {id} = useParams();
     const [subforums, setSubforums] = useState([])
+    const [forum, setForum] = useState([])
     
     const navigate = useNavigate();
 
@@ -15,42 +16,51 @@ function Subforums({ user, currentForum, setCurrentSubforum, setCurrentSubforumT
         .then((r) => r.json()
         .then((data) => {
             setSubforums(data.subforums)
+            setForum(data)
         })
           );
       }, [id]);
 
-      function handleDelete(id) {
-        fetch(`/subforums/${id}`,
-            {
-                method: "DELETE",
-            })
-            .then((r) => {
-                if (r.ok) {
-                    setSubforums((subforums) =>
-                    subforums.filter((s) =>
-                            s.id !== id)
-                    );
-                }
-            });
-    }
-
-    return (
-        <div>
-            <h3>{currentForum.name}</h3>
-            <Button onClick={() => navigate('/forums')}>Go Back</Button>
-            <Link className='subforumlink' to='/new_subforum'>
-                <Button className='newsubforumbutton' sx={{ color: "black", width: "50%", border: "2px black solid" }}>New Subforum</Button>
-            </Link>
-            {subforums?.map((subforum) => 
-            <div>
-                <Link className="forum-card" to={`/subforums/${subforum.id}`} key={subforum.id} onClick={() => setCurrentSubforum(subforum)}>
-                    <h2 className="forum-title" onClick={() => setCurrentSubforumTitle(subforum.name)}>{subforum.name}</h2>
+      if(forum.subforums_length > 0 ){
+        return (
+            <div className="subforums-forum-posts">
+                <Link className="forum-card" to={'/forums'}>
+                    <h2 className="forum-header-title">Forum.</h2>
                 </Link>
-                {/* {user.id== subforum.users.id ? <button onClick={() => handleDelete(subforum.id)}>DELETE!</button> : null} */}
-            </div> )}
-            {/* <SubforumDetail key={subforum.id} subforum={subforum} user={user}/> )} */}
-        </div>
-    )
+                <Button className="go-back-button" sx={{ color: "black", fontSize: 25, border: "2px black solid" }} onClick={() => navigate('/forums')}>Go Back</Button>
+                <h3 className="subforum-title">{currentForum.name}</h3>
+                <div className='postforumlink'>
+                    <Link className='postforumlink' to='/new_subforum'>
+                        <Button className='newsubforumbutton' sx={{ color: "white", width: "25%", border: "2px black solid" }}>New Subforum</Button>
+                    </Link>
+                </div>
+                {subforums?.map((subforum) => 
+                <div className="forums-list">
+                    <Link className="forum-card" to={`/subforums/${subforum.id}`} key={subforum.id} onClick={() => setCurrentSubforum(subforum)}>
+                        <h2 className="forum-title" onClick={() => setCurrentSubforumTitle(subforum.name)}>{subforum.name}</h2>
+                        <h2 className="forum-title-length">► {subforum.forum_posts_length} {subforum.forum_posts_length > 1 ? "subtopics" : "subtopic"}</h2> 
+                    </Link>
+                    {/* {user.id== subforum.users.id ? <button onClick={() => handleDelete(subforum.id)}>DELETE!</button> : null} */}
+                </div> )}
+            </div> 
+        )
+      } else {
+          return (
+            <div className="subforums-forum-posts">
+            <Link className="forum-card" to={'/forums'}>
+                <h2 className="forum-header-title">Forum.</h2>
+            </Link>
+            <Button className="go-back-button" sx={{ color: "black", fontSize: 25, border: "2px black solid" }} onClick={() => navigate('/forums')}>Go Back</Button>
+            <h3 className="subforum-title">{currentForum.name}</h3>
+            <div className='postforumlink'>
+                <Link className='postforumlink' to='/new_subforum'>
+                    <Button className='newsubforumbutton' sx={{ color: "white", width: "25%", border: "2px black solid" }}>New Subforum</Button>
+                </Link>
+            </div>
+            <h2 className="no-subforums">Nothing here yet.</h2>
+         </div> 
+          )
+      }
 }
 
 export default Subforums;

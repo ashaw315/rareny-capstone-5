@@ -22,7 +22,7 @@ const WrapperChild = styled.div`
 
 function ForumPostForm({ user, currentSubforum, currentSubForumTitle }){
     const {id} = useParams();
-    const [title, setTitle] = useState('Best Paint Brands')
+    const [title, setTitle] = useState('')
     const [instructions, setInstructions] = useState(`Here's how you make a post.
   
 #### Oil Paints
@@ -70,7 +70,7 @@ Tell me what you think in the **comments** or share your own!
             .then((r) => {
                 if (r.ok) {
                     r.json().then((data) => setForumPosts([data,...forumPosts]))
-                    .then(navigate(`/subforums/${currentSubforum}`))
+                    .then(navigate(`/subforums/${currentSubforum.id}`))
                   } else {
                       r.json().then((err) => setErrors(err.errors));
                   }
@@ -78,10 +78,14 @@ Tell me what you think in the **comments** or share your own!
             };
 
     return (
-        <div>
-            <h3>New Post in:</h3>
-            <h2>{currentSubForumTitle}</h2>
-            <Wrapper>
+        <div className="subforums-forum-posts">
+             <Link className="forum-card" to={'/forums'}>
+                <h2 className="forum-header-title">Forum.</h2>
+            </Link>
+            <Button className="go-back-button" sx={{ color: "black", fontSize: 25, border: "2px black solid" }} onClick={() => navigate(-1)}>Go Back</Button>
+            <div className="subforum-form-style">
+            <h2 className="subforum-title">{currentSubforum.name} / (New Post)</h2>
+            <Wrapper className="subforum-form-wrapper">
                 <WrapperChild>
                     <form onSubmit={handleSubmit}>
                     <FormField>
@@ -122,6 +126,7 @@ Tell me what you think in the **comments** or share your own!
                     <ReactMarkdown>{instructions}</ReactMarkdown>
                 </WrapperChild>
             </Wrapper>
+            </div>
         </div>
     )
 }

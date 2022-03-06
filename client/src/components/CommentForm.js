@@ -30,8 +30,6 @@ function CommentForm({ post, user, currentSubforum, currentForumPost }){
     //     setIsToggle((isToggle) => !isToggle)
     //   }
 
-    console.log(currentSubforum)
-
       useEffect(() => {
         fetch("/comments")
             .then((r) => r.json()
@@ -64,8 +62,14 @@ function CommentForm({ post, user, currentSubforum, currentForumPost }){
             };
       
     return (
-        <div>
-             <Wrapper>
+        <div className="subforums-forum-posts">
+             <Link className="forum-card" to={'/forums'}>
+                <h2 className="forum-header-title">Forum.</h2>
+            </Link>
+            <Button className="go-back-button" sx={{ color: "black", fontSize: 25, border: "2px black solid" }} onClick={() => navigate(-1)}>Go Back</Button>
+            <h2 className="subforum-title">New Comment</h2>
+            <div className="subforum-form-style">
+             <Wrapper className="subforum-form-wrapper">
                 <Post key={currentForumPost.id}>
                 <Box>
                     <h2>{currentForumPost.title}</h2>
@@ -76,7 +80,7 @@ function CommentForm({ post, user, currentSubforum, currentForumPost }){
                     <ReactMarkdown>{currentForumPost.body}</ReactMarkdown>
                     <form onSubmit={handleSubmit}>
                         <FormField>
-                            <Label htmlFor="instructions">Post Text</Label>
+                            <Label htmlFor="instructions">Comment Text</Label>
                             <Textarea
                             id="instructions"
                             rows="5"
@@ -96,8 +100,8 @@ function CommentForm({ post, user, currentSubforum, currentForumPost }){
                 </Box>
                 </Post>
             </Wrapper>
-            <Button onClick={() => navigate(-1)}>Go Back</Button>
-            </div>   
+            </div>
+        </div>   
     )
 }
 

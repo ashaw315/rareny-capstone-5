@@ -2,7 +2,7 @@
 /* FORUM CSS */
 
 .forum-post-card {
-font-size: 20px;
+font-size: 25px;
 }
 
 .subforums-forum-posts {
@@ -11,11 +11,16 @@ font-size: 20px;
 
 .forum-post-title {
     text-decoration: underline;
+    font-size: 40px;
 }
 
 .forum-comment-card {
     text-decoration: none;
     width: 20%;
+}
+
+.forum-post-card-body{
+    margin-left: 40px;
 }
 
 .forum-post-link-position{
@@ -32,8 +37,90 @@ font-size: 20px;
     padding: 15px;
     font-size: 40px;
     font-weight: bold;
-    /* list-style-type: circle; */
-    /* border: 1px solid black; */
-    /* text-decoration: underline; */
-    /* letter-spacing: -4px; */
+}
+
+.forum-header-title {
+    border-bottom-style: solid;
+    border-bottom-width: 5px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 75px;
+}
+
+.forums-list {
+    border: 5px solid black;
+    margin: 20px;
+    margin-bottom: 40px;
+}
+
+.forum-card {
+    text-decoration: none;
+    display: inline;
+    color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.forum-card:hover{
+    color:black;
+}
+
+.forum-title {
+    font-size: 75px;
+    color: black;
+    padding: 20px;
+}
+
+.forum-title-length {
+    font-size: 50px;
+    color: black;
+    padding: 20px;
+    margin-top: 15px;
+}
+.length-alighment {
+    text-align: right;
+}
+
+.homepagefooter-subforum {
+    display: flex;
+    justify-content: space-between;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgb(0, 0, 0);
+}
+
+.footer-position {
+    position:relative;
+    bottom:0;
+    width:100%;
+    height:60px;
+}
+
+.no-subforums {
+    margin-top: 350px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.subforum-form-style {
+    margin-top: 20px;
+    border-top-style: solid;
+    border-top-width: 5px;
+    border-bottom-style: solid;
+    border-bottom-width: 5px;
+}
+
+.subforum-form-title {
+    text-decoration: underline;
+}
+
+.subforum-forum-submit {
+   text-align: center;
+}
+
+.subforum-form-wrapper {
+    border: 2px solid black;
+    border-radius: 6px;
 }

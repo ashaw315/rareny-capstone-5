@@ -15,8 +15,6 @@ const Post = styled.article`
 function CommentCard({ subforumData, forumPosts, post }){
     const [isToggle, setIsToggle] = useState(true)
 
-    console.log(post)
-
     function handleToggle() {
         setIsToggle((isToggle) => !isToggle)
       }
@@ -24,7 +22,6 @@ function CommentCard({ subforumData, forumPosts, post }){
     function getCommentUser(id) {
         return subforumData.comments.find((comment) => comment.id === id).user
     }
-console.log(post.comments)
 
     return (
         <div>

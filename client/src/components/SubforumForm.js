@@ -22,8 +22,8 @@ const WrapperChild = styled.div`
 
 function SubforumForm({ user, currentForum }){
     const {id} = useParams();
-    const [name, setName] = useState('Painters Materials Thread')
-    const [title, setTitle] = useState('Best Paint Brands')
+    const [name, setName] = useState('')
+    const [title, setTitle] = useState('')
     const [instructions, setInstructions] = useState(`Here's how you make a post.
   
 #### Oil Paints
@@ -88,10 +88,16 @@ Tell me what you think in the **comments** or share your own!
             };
 
     return (
-        <div>
-            <Wrapper>
+        <div className="subforums-forum-posts">
+            <Link className="forum-card" to={'/forums'}>
+                <h2 className="forum-header-title">Forum.</h2>
+            </Link>
+            <Button className="go-back-button" sx={{ color: "black", fontSize: 25, border: "2px black solid" }} onClick={() => navigate(-1)}>Go Back</Button>
+            <div className="subforum-form-style">
+            <h2 className="subforum-title">New Subforum</h2>
+            <Wrapper className="subforum-form-wrapper">
                 <WrapperChild>
-                    <h2>New Subforum</h2>
+                    {/* <h2 className="subforum-form-title">New Subforum</h2> */}
                     <form onSubmit={handleSubmit}>
                     <FormField>
                         <Label htmlFor="name">Subforum Name</Label>
@@ -120,8 +126,8 @@ Tell me what you think in the **comments** or share your own!
                         onChange={(e) => setInstructions(e.target.value)}
                         />
                     </FormField>
-                    <FormField>
-                        <Button color="primary" type="submit">
+                    <FormField className="subforum-forum-submit">
+                        <Button className="subforum-forum-submit"  sx={{ color: "black", width: "50%", border: "2px black solid" }} type="submit">
                         Submit
                         </Button>
                     </FormField>
@@ -141,7 +147,7 @@ Tell me what you think in the **comments** or share your own!
                     <ReactMarkdown>{instructions}</ReactMarkdown>
                 </WrapperChild>
             </Wrapper>
-            <Button onClick={() => navigate(-1)}>Go Back</Button>
+            </div>
         </div>
     )
 }

@@ -7,21 +7,33 @@ import CommentCard from "./CommentCard";
 import { Button } from "@mui/material";
 import '../App.css'
 
-function ForumPostCard({ post, user, subforumData, currentSubforum, setCurrentForumPost }){
-    // const {id} = useParams();
-    const [forumPosts, setForumPosts] = useState([])
+function ForumPostCard({ post, user, subforumData, currentSubforum, setCurrentForumPost, onDeleteForumPost, forumPosts }){
+    
+  const {id} = useParams();
+  // const [forumPosts, setForumPosts] = useState([])
+  const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     // auto-login
-    //     fetch(`/forum_posts/${id}`)
-    //     .then((r) => r.json()
-    //     .then((data) => {
-    //         setForumPosts(data)
-    //     })
-    //       );
-    //   }, [id]);
+console.log(forumPosts)
+console.log(subforumData)
 
-      // console.log(subforumData.forum_posts)
+    // function handleDelete(id) {
+    //   const config = {
+    //     method: 'DELETE',
+    //   }
+    //   fetch(`/forum_posts/${id}`, config)
+    //   .then(() => navigate('/'));
+    // };
+
+
+    function handleDeleteForumPost() {
+      fetch(`/subforums/${id}`, {
+        method: "DELETE",
+      }).then((r) => {
+        if (r.ok) {
+          onDeleteForumPost(forumPosts);
+        }
+      });
+    }
 
     return (
         <div className="forum-post-card">
@@ -29,7 +41,10 @@ function ForumPostCard({ post, user, subforumData, currentSubforum, setCurrentFo
              {subforumData.forum_posts?.map((post) =>
                 <Post key={post.id}>
                 <Box>
+                  {/* <Link className="forum-comment-card" to={`/forum_posts/${post.id}`} onClick={() => setCurrentForumPost(post)}>
                     <h2 className="forum-post-title">{post.title}</h2>
+                  </Link> */}
+                  <h2 className="forum-post-title">{post.title}</h2>
                     <p>
                       <cite>By {post.user}</cite>
                     </p>
@@ -40,8 +55,9 @@ function ForumPostCard({ post, user, subforumData, currentSubforum, setCurrentFo
                     <Link className="forum-comment-card" to={`/new_comment`} onClick={() => setCurrentForumPost(post)}>
                         <Button className='newcommentmbutton' sx={{ color: "black", width: "30%", border: "2px black solid" }}>Add a comment</Button>
                     </Link>
+                    {/* {user.id == post.userid ? <button onClick={handleDeleteForumPost}>DELETE!</button> : null} */}
                     </div>
-                    <CommentCard post={post} subforumData={subforumData} forumPosts={forumPosts}/>
+                    <CommentCard post={post} subforumData={subforumData} />
                 </Box>
                 </Post>
                  )}
@@ -51,8 +67,8 @@ function ForumPostCard({ post, user, subforumData, currentSubforum, setCurrentFo
 }
 
 const Wrapper = styled.section`
-  max-width: 1000px;
-  width: 1000px;
+  max-width: 1200px;
+  width: 1200px;
   /* margin: 40px */
   margin: 40px auto;
 `;
