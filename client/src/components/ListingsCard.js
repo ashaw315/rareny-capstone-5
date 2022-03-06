@@ -9,7 +9,6 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 function ListingsCard({ listing }){
     return (
        <div className="card-column">
-           This is the ListingsCard
            <Card sx={{ maxWidth: 445, border: "3px black solid"}}>
             <Link className='listinglink' to={`/listings/${listing.id}`}>
             <CardActionArea>
@@ -39,8 +38,8 @@ function ListingsCard({ listing }){
                     </Typography>
                 </CardContent>
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        {listing.price} / Month
+                    <Typography gutterBottom variant="h4" component="div">
+                        $ {listing.price} / Month
                     </Typography>
                 </CardContent>
             <CardActions>

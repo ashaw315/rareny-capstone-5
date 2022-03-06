@@ -1,5 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import Label from "../styles/Label";
+import Input from "../styles/Input";
+import { Button } from '@mui/material';
+import styled from "styled-components";
+import Textarea from "../styles/TextArea";
+import FormField from "../styles/FormField";
+
+const Wrapper = styled.section`
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 16px;
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+`;
+
+const WrapperChild = styled.div`
+  flex: 1;
+`;
 
 const boroughs = ['Manhattan', 'Brooklyn', 'Bronx', 'Queens', 'Staten Island']
 
@@ -87,6 +106,21 @@ useEffect(() => {
   return () => URL.revokeObjectURL(objectUrl)
 }, [image5])
 
+const removeSelectedImage1 = () => {
+  setImage1();
+};
+const removeSelectedImage2 = () => {
+  setImage2();
+};
+const removeSelectedImage3 = () => {
+  setImage3();
+};
+const removeSelectedImage4 = () => {
+  setImage4();
+};
+const removeSelectedImage5 = () => {
+  setImage5();
+};
 
 const handleImage1Change = e => {
     e.persist();
@@ -173,67 +207,90 @@ function handleSubmit(e) {
 };
 
     return (
-        <div>
-        <p>This is Listings Form</p>
-        <form onSubmit={handleSubmit}>
-          <div>
+        <div className="listings-form">
+            <Link className="forum-card" to={'/listings'}>
+                <h2 className="forum-header-title">Listings.</h2>
+            </Link>
+            <div className="page-style">
+            <Button className="go-back-button-listing-form" sx={{ color: "black", fontSize: 25, border: "2px black solid" }} onClick={() => navigate(-1)}>Go Back</Button>
+            </div>
+          <Wrapper className="wrapper-extra-css">
+          <form onSubmit={handleSubmit}>
+            <WrapperChild>
+          <div className="image-input">
             <input 
             type="file" 
             name="image1" 
             onChange={handleImage1Change}
             required
             />
-            {image1 &&  <img src={preview} /> }
+            {image1 &&  <img className="image-preview-size" src={preview} /> }
+            {image1 ? <Button sx={{ color: "black" }} onClick={removeSelectedImage1} >
+              Remove This Image
+            </Button> : null}
           </div>
-          <div>
+          <div className="image-input">
             <input 
             type="file" 
             name="image2" 
             onChange={handleImage2Change}
             required
             />
-            {image2 &&  <img src={preview2} /> }
+            {image2 &&  <img className="image-preview-size" src={preview2} /> }
+            {image2 ? <Button sx={{ color: "black" }} onClick={removeSelectedImage2} >
+              Remove This Image
+            </Button> : null}
           </div>
-          <div>
+          <div className="image-input">
             <input 
             type="file" 
             name="image3" 
             onChange={handleImage3Change}
             required
             />
-            {image3 &&  <img src={preview3} /> }
+            {image3 &&  <img className="image-preview-size" src={preview3} /> }
+            {image3 ? <Button sx={{ color: "black" }} onClick={removeSelectedImage3} >
+              Remove This Image
+            </Button> : null}
           </div>
-          <div>
+          <div className="image-input">
             <input 
             type="file" 
             name="image4" 
             onChange={handleImage4Change}
             required
             />
-            {image4 &&  <img src={preview4} /> }
+            {image4 &&  <img className="image-preview-size" src={preview4} /> }
+            {image4 ? <Button sx={{ color: "black" }} onClick={removeSelectedImage4} >
+              Remove This Image
+            </Button> : null}
           </div>
-          <div>
+          <div className="image-input">
             <input 
             type="file" 
             name="image5" 
             onChange={handleImage5Change}
             required
             />
-            {image5 &&  <img src={preview5} /> }
+            {image5 &&  <img className="image-preview-size" src={preview5} /> }
+            {image5 ? <Button sx={{ color: "black" }} onClick={removeSelectedImage5} >
+              Remove This Image
+            </Button> : null}
           </div>
-            
-            <label>Title</label>
-            <input
-             id="title"
-             name="title"
-             value={title}
-             autoComplete="off"
-             type="text"
-             onChange={handleTitleChange} 
-             />
-
-            <label>Neighborhood</label>
-            <input
+          </WrapperChild>
+          <WrapperChild>
+              <Label className="listing-input">Title</Label>
+              <Input 
+              id="title"
+              name="title"
+              value={title}
+              autoComplete="off"
+              type="text"
+              onChange={handleTitleChange} 
+              />
+             
+            <Label className="listing-input">Neighborhood</Label>
+            <Input className="image-input"
              id="neighborhood"
              name="neighborhood"
              value={neighborhood}
@@ -241,16 +298,16 @@ function handleSubmit(e) {
              type="text"
              onChange={handleNeighborhoodChange} 
              />
-
-            <label>Borough</label>
+            
+            <Label className="listing-input">Borough</Label>
             <select name="nyc_borough" value={nycBorough} onChange={handleBoroughChange}>
                 <option>Select Listing</option>
                     {boroughs.map(b => 
                         <option value = {b}>{b}</option> )}
             </select>
 
-            <label>Rent (by Month)</label>
-            <input
+            <Label className="listing-input">Rent (by Month)</Label>
+            <Input
             id="price"
             name="price"
             value={price}
@@ -259,8 +316,8 @@ function handleSubmit(e) {
             onChange={handlePriceChange}
             />
 
-            <label>Sq. Footage</label>
-            <input
+            <Label className="listing-input">Sq. Footage</Label>
+            <Input
             type="text"
             name="sq_footage"
             id="sq_footage"
@@ -269,7 +326,7 @@ function handleSubmit(e) {
             onChange={handlesqFootageChange}
             />
 
-            <label>Email</label>
+            <label className="listing-label">Email</label>
             <input
             type="text"
             id="email"
@@ -279,18 +336,21 @@ function handleSubmit(e) {
             autoComplete="off"
             />
 
-            <label>Description</label>
-            <input
-            type="text"
+            <label className="listing-input-last">Description</label>
+            <Textarea 
+            type="textarea"
             id="description"
+            rows="10"
             value={description}
             onChange={handleDescriptionChange}
             autoComplete="off"
             />
 
-            <input type="submit"/>
+            <input className="listing-submit-button" type="submit"/>
             {errors.map((e)=><p key={e}>{e}</p>)}
+            </WrapperChild>
         </form>
+        </Wrapper>
     </div>
     )
 }

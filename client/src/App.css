@@ -124,3 +124,86 @@ font-size: 25px;
     border: 2px solid black;
     border-radius: 6px;
 }
+
+/* Listings Style */
+
+.search-term {
+    width: 50px;
+}
+
+.listing-slider {
+    margin-left: 40px auto;
+}
+
+.image-input {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+}
+
+.image-preview-size {
+    width: 450px;
+}
+
+.text-input {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.listings-form {
+    padding: 15px;
+}
+
+.wrapper-extra-css {
+    border: 2px solid black;
+    border-radius: 6px;
+}
+
+.page-style {
+    border-bottom: 4px solid black;
+    padding-bottom: 20px;
+}
+
+.go-back-button-listing-form {
+    padding-bottom: 50px;
+}
+
+.listing-submit-button {
+    background-color: white;
+    border: 2px solid black;
+    color: #363636;
+    font-weight: bold;
+}
+.listing-submit-button:hover {
+    background-color: black;
+    color: white;
+}
+
+.listing-input {
+    padding-top: 20px;
+}
+.listing-input-last {
+    margin-bottom: 20px;
+    color: #363636;
+    /* display: block; */
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    padding-top: 20px;
+}
+
+.listing-label {
+    color: #363636;
+    /* display: block; */
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    padding-top: 20px;
+}
+
+.description-listing-detail {
+    line-height: 40px;
+    text-align: justify;
+}

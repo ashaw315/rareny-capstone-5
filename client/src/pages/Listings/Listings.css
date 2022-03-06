@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: 500px 500px;
     gap: 3rem;
+    margin-left: 300px;
     justify-content: center;
   }
 
@@ -16,7 +17,62 @@
     color: rgb(0, 0, 0);
 }
 
-.main-slide {
-    width: 50%;
+.carousel-container {
+    margin-left: 50px;
 }
 
+.listing-title-detail {
+    padding-top: 20px;
+    font-size: 50px;
+}
+
+.main-slide {
+    width: 45%;
+}
+
+.carousel {
+    text-align: center;
+}
+
+.listings-sort {
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 0 2px rgb(204, 204, 204);
+    position: relative;
+    font-size: 14px;
+    color: #474747;
+    height: 100%;
+    text-align: left
+  }
+
+ .filter-title {
+   text-decoration: underline;
+ }
+
+ .listings-main-page {
+    padding: 15px;
+    border-right-style: solid;
+    border-bottom-width: 5px;
+}
+
+.listing-detail-top-info {
+    display: flex;
+    flex-direction: row;
+    margin-left: 50px;
+    padding-bottom: 10px;
+}
+
+.listing-detail-top-info-left {
+    border: 2px black solid;
+    border-radius: 6px;
+    padding: 15px;
+}
+
+.listing-detail-top-posted-by {
+    display: flex;
+    flex-direction: row;
+    margin-left: 50px;
+    padding-bottom: 10px;
+    font-size: 25px;
+}
