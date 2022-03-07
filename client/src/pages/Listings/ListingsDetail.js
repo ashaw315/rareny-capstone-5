@@ -18,7 +18,7 @@ const Post = styled.article`
   border-radius: 6px;
 `;
 
-function ListingsDetail(){
+function ListingsDetail({ user, listings, setListings, onDeleteListing }){
     const {id} = useParams();
     const [listing, setListing] = useState([])
     const [userData, setUserData] = useState([])
@@ -34,6 +34,19 @@ function ListingsDetail(){
         });
     }, [id]);
 
+    console.log(userData)
+
+    function handleDelete() {
+        fetch(`/listings/${id}`, {
+          method: "DELETE",
+        }).then((r) => {
+          if (r.ok) {
+            onDeleteListing(listing)
+            // .then(() => navigate('/listings'));
+          }
+        });
+      }
+
     return (
        <div className="subforums-forum-posts">
            <Link className="forum-card" to={'/listings'}>
@@ -42,6 +55,12 @@ function ListingsDetail(){
             <div className="page-style">
             <Button className="go-back-button-listing-form" sx={{ color: "black", fontSize: 25, border: "2px black solid" }} onClick={() => navigate(-1)}>Go Back</Button>
             </div>
+            {user ? <div>
+                {user.id == userData.id ? <Button className="listing-delete-button" sx={{ color: "red", fontSize: 25, border: "2px red solid", mt: 2 }} onClick={handleDelete}>Delete Listing</Button> : null}
+                </div> : null }
+            {/* <div>
+                 {user.id == userData.id ? <Button className="listing-delete-button" sx={{ color: "black", fontSize: 25, border: "2px black solid" }} onClick={handleDelete}>Delete Listing</Button> : null}
+            </div> */}
            <h2 className="listing-title-detail">{listing.title}</h2>
            <cite className="listing-detail-top-posted-by"> Posted by {userData.username}</cite>
            <div className="listing-detail-top-info">

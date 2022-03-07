@@ -1,39 +1,19 @@
 import React, { useState } from "react";
 import {Link, useNavigate} from 'react-router-dom';
+import Input from "../styles/Input";
+import Textarea from "../styles/TextArea";
 
 function UserAccount({ user }){
 
     const [updatedAccount, setUpdatedAccount] = useState(user);
 
-    // const [username, setUsername] = useState(user.username)
-    // const [password, setPassword] = useState('')
-    // const [website, setWebsite] = useState('')
-    // const [discipline, setDiscipline] = useState('')
-    // const [bio, setBio] = useState('')
-
-    // const username = user.username
-
     const [accountUpdatedNote, setAccountUpdatedNote] = useState('');
 
-
     const navigate = useNavigate();
-
-    
 
     function handleUpdate(e, field) {
         setUpdatedAccount({...updatedAccount, [field]: e.target.value})
     };
-
-    // const handleProfilePicChange = e => {
-    //     e.persist();
-    //     setProfilePicture(e.target.files[0]);
-    //   };
-
-    // function handleUpdateProfilePicture(e, field) {
-    //     setUpdatedAccount({...updatedAccount, [field]: e.target.files[0]})
-    // };
-
-    // console.log(user.username)
 
     function handleUpdateAccount(e) {
         e.preventDefault();
@@ -51,7 +31,10 @@ function UserAccount({ user }){
     };
 
     return (
-        <div>
+        <div className="subforums-forum-posts">
+            <Link className="forum-card" to={'/account'}>
+                <h2 className="forum-header-title">Account.</h2>
+            </Link>
             <div className='accountpagecontainer'>
                 <div className='accountlinkscontainer'>
                     <h4 className='accountheader'>Account</h4>
@@ -82,13 +65,11 @@ function UserAccount({ user }){
                         </div>
                         <div className='accountinputdiv'>
                             <p className='accountp'>Bio</p>
-                            {updatedAccount ? <textarea className='accountinput' value={updatedAccount.bio} onChange={(e) => handleUpdate(e, 'bio')}></textarea> : null }
+                            {updatedAccount ? <Textarea rows="10" className='accountinput' value={updatedAccount.bio} onChange={(e) => handleUpdate(e, 'bio')}></Textarea> : null }
                         </div>
-                        {/* <div className='accountinputdiv'>
-                            <p className='accountp'>Profile Picture</p>
-                            <input type="file" accept="image/*" className='accountinput' value={updatedAccount.profile_picture} onChange={(e) => handleUpdateProfilePicture(e, '')}></input>
-                        </div> */}
+                        <div className='accountbuttoncenter'>
                         <button className='accountbutton' type='submit' >Update</button>
+                        </div>
                         {accountUpdatedNote ? (<p className='accountsavedp'>{accountUpdatedNote}</p>) : null}
                     </form>
                 </div>

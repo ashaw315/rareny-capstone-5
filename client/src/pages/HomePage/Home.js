@@ -58,30 +58,31 @@ function Home({ user, setUser, logInForm, setLogInForm }){
             <div className='homepagedivloggedin'>
                 <div className='homepagecontainerloggedin'>
                     <div className='homepageloggedinleft'>
-                        <h2 className='homepageh2loggedin'>Welcome back, {user.username}.</h2>
+                        <h2 className='homepageh2loggedin'>Welcome, {user.username}.</h2>
                         <p className='homepageploggedin'>Enjoy your vist.</p>
                         <h3 className='homepageh3loggedin'>Not sure where to begin?</h3>
                         <div className='homepageoptionsdivloggedin'>
-                            <Link className='homepagelinkloggedin' to='/newentry'>Write down your thoughts {'>'}</Link>
+                            <Link className='homepagelinkloggedin' to='/forums'>Check out the forums.</Link>
                         </div>
                         <div className='homepageoptionsdivloggedin'>
-                            <Link className='homepagelinkloggedin' to='/account'>Update your account. {'>'}</Link>
+                            <Link className='homepagelinkloggedin' to='/account'>Update your account.</Link>
                         </div>
                         <div className='homepageoptionsdivloggedin'>
-                            <Link className='homepagelinkloggedin' to='/profile'>View your profile. {'>'}</Link>
+                            <Link className='homepagelinkloggedin' to='/profile'>View your profile.</Link>
                         </div>
                     </div>
                 </div>
-               <div className='homepagefooter'>
+                <div className="footer-position">
+                <div className='homepagefooter-subforum'>
                             <h3 className='footerheader'>About</h3>
                             <h3  className='footerheader1'>Contact</h3>
                         </div>
-                        {/* <div className='homepagefooter'> */}
                             <ul className='footerul'>
                                 <div className='footerp'>Rare NY is a conceptual project by adamshaw.</div>
                                 <div className='footerp1'>Resources for Artists Everywhere looks to offer artists a space to communicate and share resources.</div>
-                                <div className='footerp2'>Email us.</div>
+                                <a className='footerp2' href="mailto:info.rareny@gmail.com">Email Us</a>  
                             </ul>
+                </div>
             </div>
         )
     } 

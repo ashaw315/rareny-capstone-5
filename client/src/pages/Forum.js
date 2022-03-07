@@ -29,7 +29,7 @@ function Forum({ user, setCurrentForum }){
                     {/* <h2 className="forum-title-length">{f.subforums_length > 0 ? <h2>{f.subforums_length}</h2> : "subtopic"}</h2>  */}
                 </Link>
             </div>)}
-            <div className="footer-position">
+            {/* <div className="footer-position">
             <div className='homepagefooter-subforum'>
                             <h3 className='footerheader'>About</h3>
                             <h3  className='footerheader1'>Contact</h3>
@@ -39,7 +39,7 @@ function Forum({ user, setCurrentForum }){
                                 <div className='footerp1'>Resources for Artists Everywhere looks to offer artists a space to communicate and share resources.</div>
                                 <a className='footerp2' href="mailto:info.rareny@gmail.com">Email Us</a>  
                             </ul>
-            </div>
+            </div> */}
         </div>
     )
 }

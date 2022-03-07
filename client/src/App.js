@@ -100,6 +100,12 @@ const filterListings = listings
       setSearch(searchListings);
   }
 
+  function handleDeleteListing(deletedSpice) {
+    setListings((listings) =>
+      listings.filter((listing) => listing.id !== deletedSpice.id)
+    );
+  }
+
   // function handleDeleteForumPost(deletedForumPost) {
   //   setCurrentForumPost((currentForumPost) =>
   //   currentForumPost.filter((fp) => fp.title !== deletedForumPost.title)
@@ -117,7 +123,7 @@ const filterListings = listings
           <Route path='/account' element={<UserAccount user={user} />}/>
           <Route path='/profile' element={<Profile user={user} />}/>
           <Route path='/listings' element={<Listings listings={listings} setListings={setListings} user={user} handleListingsSearch={handleListingsSearch} setSortBy={setSortBy} sortBy={sortBy} filterListings={filterListings} setPriceValue={setPriceValue} priceValue={priceValue} sqFootValue={sqFootValue} setSqFootValue={setSqFootValue} />}/>
-          <Route path='/listings/:id' element={<ListingsDetail listings={listings} setListings={setListings} user={user}/>}/>
+          <Route path='/listings/:id' element={<ListingsDetail listings={listings} setListings={setListings} user={user} onDeleteListing={handleDeleteListing}/>}/>
           <Route path='/listingform' element={<ListingsForm listings={listings} setListings={setListings} user={user}/>}/>
           <Route path='/forums' element={<Forum user={user} setCurrentForum={setCurrentForum} /> }/>
           <Route path='/forums/:id' element={<Subforums user={user} currentForum={currentForum} setCurrentSubforum={setCurrentSubforum} setCurrentSubforumTitle={setCurrentSubforumTitle}/> }/>

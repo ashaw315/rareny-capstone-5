@@ -207,3 +207,109 @@ font-size: 25px;
     line-height: 40px;
     text-align: justify;
 }
+
+.listing-delete-button {
+    margin-top: 10px;
+}
+
+/* User Account */
+
+.accountpagecontainer {
+    position: fixed;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding-top: 8%;
+}
+
+.accountlinkscontainer {
+    width: 5%;
+    margin-left: 27.5%;
+    float: left;
+    top: 0;
+    bottom: 0;
+}
+
+.accountformcontainer {
+    width: 40%;
+    margin-right: 18%;
+    padding-left: 5%;
+    float: right;
+    top: 0;
+    bottom: 0;
+    border-left: 3px solid #000;
+}
+
+.accountheader {
+    letter-spacing: 1px;
+    text-decoration: overline;
+}
+
+.accountp {
+    font-size: 15px;
+    font-weight: 600;
+    width: 100%;
+}
+
+.accountsavedp {
+    text-align: center;
+    font-size: 50px;
+    margin-left: 10px;
+    width: 100%;
+}
+
+.accountinput {
+    padding: 10px;
+    font-size: 15px;
+    width: 80%;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    font-family: Corbert, Arial, Helvetica, sans-serif;
+}
+
+.accountinputdiv {
+    margin: 10px;
+}
+
+.accountlink {
+    background-color: rgb(255, 255, 255);
+    color: #000;
+    font-size: 20px;
+    border: none;
+    text-decoration: none;
+}
+
+.accountlink:hover {
+    text-decoration: underline;
+    color: rgb(0, 0, 0);
+}
+
+.accountlinkdiv {
+    margin-bottom: 10px;
+}
+
+.accountbuttoncenter{
+    text-align: center;
+}
+
+.accountbutton {
+    padding: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 40%;
+    background-color: rgb(0, 0, 0);
+    border: 2px solid #000;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.accountbutton:hover {
+    background-color: white;
+    color: #000;
+    border: 2px solid #000;
+}
