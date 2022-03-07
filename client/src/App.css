@@ -313,3 +313,46 @@ font-size: 25px;
     color: #000;
     border: 2px solid #000;
 }
+
+/* About Page */
+
+.homepageh2signedoutabout{
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+    font-size: 400px;
+    /* padding-top: -5px; */
+    letter-spacing: 1px;
+  }
+
+  .homepagesignedoutleftabout {
+    position: relative;
+    padding-top: 80px;
+    z-index: 90;
+    text-align: center;
+    /* padding-left: 80px;
+    width: 371px;
+    height: 382px; */
+  }
+
+  .signupinput {
+      width: 20%;
+  }
+
+  .signupformcontainer {
+    width: 40%;
+    margin-right: auto;
+    margin-left: auto;
+    float: center;
+    top: 0;
+    bottom: 0;
+    /* border-left: 3px solid #000; */
+}
+
+.signupinput {
+    padding: 10px;
+    font-size: 15px;
+    width: 100%;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    font-family: Corbert, Arial, Helvetica, sans-serif;
+}

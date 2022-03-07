@@ -19,6 +19,10 @@ import ForumPostForm from './components/ForumPostForm';
 import UserAccount from './pages/UserAccount';
 import CommentForm from './components/CommentForm';
 import ForumPostCard from './components/ForumPostCard';
+import About from './pages/About';
+import Artists from './pages/Artists';
+import Messages from './pages/Messages';
+
 // import ForumPosts from './pages/ForumPosts';
 
 function App() {
@@ -26,6 +30,9 @@ function App() {
   const [user, setUser] = useState(null);
   const [logInForm, setLogInForm] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
+  const [artists, setArtists] = useState([])
+
   const [listings, setListings] = useState([])
   const [search, setSearch] = useState('')
   const [sortBy, setSortBy] = useState("Sort By");
@@ -71,6 +78,12 @@ function App() {
   .then((forumData) => setCurrentSubforum(forumData))
 }, []);
 
+useEffect(() => {
+  fetch('/users')
+  .then((r) => r.json())
+  .then((data) => setArtists(data))
+}, []);
+
 const filterListings = listings
     .filter((list) => {
       if(search === "") {
@@ -112,7 +125,7 @@ const filterListings = listings
   //   );
   // }
 
-//  console.log(currentSubForumTitle)
+ console.log(artists)
 
   return (
     <div>
@@ -133,6 +146,9 @@ const filterListings = listings
           <Route path='/new_forum_post' element={<ForumPostForm user={user} currentSubforum={currentSubforum} currentSubForumTitle={currentSubForumTitle}/>}/>
           <Route path='/new_comment' element={<CommentForm user={user} currentForumPost={currentForumPost} currentSubforum={currentSubforum}/>}/>
           <Route path='/resources' element={<Resources />}/>
+          <Route path='/artists' element={<Artists user={user} artists={artists}/>} />
+          <Route path='/about' element={<About />}/>
+          <Route path='/messages' element={<Messages />}/>
         </Routes>
         {/* <ImageUploadForm /> */}
     </div>

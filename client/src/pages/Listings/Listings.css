@@ -76,3 +76,14 @@
     padding-bottom: 10px;
     font-size: 25px;
 }
+
+.artistcards {
+  margin: 0 auto;
+  list-style: none;
+  width: 95%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(250px, 1fr));
+  gap: 5rem;
+  cursor: pointer;
+  margin-top: -130px;
+}

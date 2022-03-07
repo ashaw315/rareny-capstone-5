@@ -53,6 +53,9 @@ function NavBar({user, setUser, setLogInForm, setErrorMessage}) {
                                 <Link className='dropdownlink' to={`/profile`}>Profile</Link>
                             </div>
                             <div className='dropdowndiv'>
+                                <Link className='dropdownlink' to={`/messages`}>Messages</Link>
+                            </div>
+                            <div className='dropdowndiv'>
                                 <button className='dropdownlink' onClick={handleLogout}>Log Out</button>
                             </div>
                             {/* <div className='dropdownclosediv'>

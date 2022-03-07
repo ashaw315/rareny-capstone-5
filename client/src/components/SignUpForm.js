@@ -1,5 +1,11 @@
 import React, {useState} from "react";
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, Link} from 'react-router-dom';
+import Textarea from "../styles/TextArea";
+import FormField from "../styles/FormField";
+import Label from "../styles/Label";
+import { Button } from "@mui/material";
+
+
 
 function SignUpForm({ setUser }) {
 const [username, setUsername] = useState('')
@@ -65,15 +71,30 @@ function handleSubmit(e) {
             r.json().then((err) => setErrors(err.errors));
         }
       })
+      fetch('https://api.chatengine.io/users/', {
+        method: 'POST',
+        headers: {
+          'PRIVATE-KEY': '{{4fbd9907-dda4-461e-bf57-83477785aa07}}'
+        },
+        body: JSON.stringify({
+          username: username,
+          secret: password,
+        }),
+      })
   };
 
 
     return(
-        <div>
-            <p>This is SignUp Form</p>
+      <div className="subforums-forum-posts">
+      <Link className="forum-card" to={'/signup'}>
+          <h2 className="forum-header-title">Sign Up.</h2>
+      </Link>
+      <Button className="go-back-button" sx={{ color: "black", fontSize: 25, border: "2px black solid" }} onClick={() => navigate(-1)}>Go Back</Button>
+        <div className='signupformcontainer'>
             <form onSubmit={handleSubmit}>
-                <label>Username</label>
-                <input
+              <FormField>
+                <Label>Username</Label>
+                <input className="signupinput"
                  id="username"
                  name="username"
                  value={username}
@@ -81,9 +102,10 @@ function handleSubmit(e) {
                  type="text"
                  onChange={handleUsernameChange} 
                  />
-
-                <label>Password</label>
-                <input
+                 </FormField>
+                 <FormField>
+                <Label>Password</Label>
+                <input  className="signupinput"
                 id="password"
                 name="password"
                 value={password}
@@ -91,54 +113,61 @@ function handleSubmit(e) {
                 type="password"
                 onChange={handlePasswordChange}
                 />
-
-                <label>Password Confirmation</label>
-                <input
+                </FormField>
+                <FormField>
+                <Label>Password Confirmation</Label>
+                <input className="signupinput"
                 type="password"
                 id="password_confirmation"
                 value={passwordConfirmation}
                 onChange={handlePasswordConChange}
                 autoComplete="off"
                 />
-
-                <label>Website</label>
-                <input
+                </FormField>
+                <FormField>
+                <Label>Website</Label>
+                <input className="signupinput"
                 type="text"
                 id="website"
                 value={website}
                 onChange={handleWesbiteChange}
                 autoComplete="off"
                 />
-
-                <label>Discipline</label>
-                <input
+                </FormField>
+                <FormField>
+                <Label>Discipline</Label>
+                <input className="signupinput"
                 type="text"
                 id="discipline"
                 value={discipline}
                 onChange={handleDisciplineChange}
                 autoComplete="off"
                 />
-
-                <label>Bio</label>
-                <input
-                type="text"
+                </FormField>
+                <FormField>
+                <Label>Bio / Artist statment</Label>
+                <Textarea className="signupinput"
+                type="textarea"
                 id="bio"
+                rows="10"
                 value={bio}
                 onChange={handleBioChange}
                 autoComplete="off"
                 />
-
+                </FormField>
                 {/* <input 
                 type="file" 
                 name="image1" 
                 onChange={handleProfilePicChange}
                 required
                 /> */}
-
-                <input type="submit"/>
+                <div className='accountbuttoncenter'>
+                <input className='accountbutton' type="submit"/>
+                </div>
                 {errors.map((e)=><p key={e}>{e}</p>)}
             </form>
         </div>
+      </div>
     )
 }
 

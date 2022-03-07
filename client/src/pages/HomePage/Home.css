@@ -156,7 +156,7 @@ select:focus {
   .homepageh2signedout {
     color: rgb(0, 0, 0);
     font-weight: 600;
-    font-size: 200px;
+    font-size: 400px;
     padding-top: 60px;
     letter-spacing: 1px;
   }
