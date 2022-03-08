@@ -13,12 +13,13 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 800,
-    height: 700,
+    width: 900,
+    height: 800,
     bgcolor: 'background.paper',
     border: '5px solid #000',
     boxShadow: 24,
     p: 4,
+    overflow:'scroll',
   };
 
 function ArtistCard({ artist }){
@@ -50,53 +51,26 @@ console.log(artist)
         </CardActions>
         </div>
     </Card>
-    <Modal
-                                open={open}
-                                onClose={handleClose}
-                                aria-labelledby="modal-modal-title"
-                                aria-describedby="modal-modal-description"
-                        
-                            >
-                                <Box  className="box" sx={style}>
-                                <Typography id="modal-modal-title" variant="h6" component="h2">
-                                Welcome back
-                                </Typography>
-                                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                <form className="form" >
-                                    <span>
-                                        <p className='loginp'>Please log in.</p>
-                                     </span>
-                                    <p className='logintitle'>Username</p>
-                                    <div className='logininputdiv'>
-                                        {/* <input className='logininput'
-                                        type='text'
-                                        autoComplete='off'
-                                        value={username}
-                                        onChange={(e) => setUsername(e.target.value)}
-                                        /> */}
-                                    </div>
-                                    <p className='logintitle'>Password</p>
-                                    <div className='logininputdiv1'>
-                                        {/* <input className='logininput'
-                                            type='password'
-                                            autoComplete='off'
-                                            value={password}
-                                            onChange={(e) => setPassword(e.target.value)}
-                                        /> */}
-                                    </div>
-                                    <div className="loginbuttonmodal">
-                                        <Button className='loginbuttonmodal' type="submit" sx={{ color: "black", border: "2px black solid"}}>LOGIN</Button>
-                                    </div>
-                                    <div className="loginbuttonmodal">
-                                    </div>
-                                <p className="signuplink">Don't have an account?</p>
-                            <Link className='loginlink' to='/signup'>
-                                <Button className='signupbutton' sx={{ color: "black", width: "50%", border: "2px black solid" }}>SIGN UP</Button>
-                            </Link>
-                        </form>
-                                </Typography>
-                                </Box>
-                            </Modal>
+        <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"            
+            >
+            <Box  className="artist-box" sx={style}>
+                <h1 className="artist-modal-header">{artist.username}</h1>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    <div className="artist-modal" >
+                        <p className="artist-bio">{artist.discipline}</p>
+                                    
+                        <p className="artist-bio">{artist.bio}</p>
+                        <div className="artist-website">
+                            <a  className="website-link" href={artist.website} targer="_blank">Website</a>
+                        </div>
+                    </div>
+                </Typography>
+            </Box>
+        </Modal>
         </div>
     )
 }

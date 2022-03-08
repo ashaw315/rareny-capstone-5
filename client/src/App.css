@@ -456,3 +456,62 @@ font-size: 25px;
     background-color: black;
     color: white;
 }
+
+/* #modal-modal-title {
+    flex: left;
+} */
+
+
+.artist-modal {
+    display: flex;
+    flex-direction: column;
+    /* width: 500px; */
+    text-align: justify;
+    margin: 0 auto;
+  }
+
+
+  .artist-bio {
+    padding-top: 50px;
+    font-size: 20px;
+    text-align: justify;
+    display: inline-block;
+  }
+
+  .artist-modal-header {
+      border-bottom: 3px solid black;
+      border-top: 3px solid black;
+      padding: 5px;
+  }
+
+  .loginlink {
+    padding-top: 20px;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    border: 1px;
+  }
+
+  .artist-website {
+      color: black;
+      font-size: 25px;
+      padding-top: 50px;
+      text-align: center;
+
+  }
+
+  .website-link {
+      text-align: center;
+      color: black;
+      font-size: 25px;
+      padding: 10px;
+      padding-left: 50px;
+      padding-right: 50px;
+      border: 2px solid black;
+      text-decoration: none;
+  }
+
+  .website-link:hover {
+      background-color: #000;
+      color: white;
+  }

@@ -6,7 +6,10 @@ function Profile({ user }){
 console.log(user)
 
 const user_listings = user?.listings.map((listing) => 
-            <p>{listing.title}</p>)
+            <Link className="user-posts-detail" to={`/listings/${listing.id}`}>
+            <h5>{listing.listing_summary}</h5>
+            <p>{listing.post_date}</p>
+            </Link>)
 
 const user_subforums = user?.subforums.map((subforum) => 
             <Link className="user-posts-detail" to={`/forums/${subforum.forum_id}`}>
@@ -33,9 +36,9 @@ const user_forum_posts = user?.forum_posts.map((post) =>
                     </div>
                     <div className='accountlinkdiv'>
                     <h5><strong>YOUR LISTINGS</strong></h5>
-                            {user_listings > 0 ? (
+                            {user_listings?.length > 0 ? (
                                 <ul >
-                                    <p>okay</p>
+                                    {user_listings}
                                 </ul>) : (
                                 <ul>
                                 <h5><em>No listings posted yet</em></h5>
