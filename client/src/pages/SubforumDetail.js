@@ -32,13 +32,22 @@ function SubforumDetail({ user, currentSubforum, setCurrentForumPost, currentFor
           );
       }, [id]);
 
+      // function handleDeleteForumPost(deletedForumPost) {
+      //   setSubforumData((subforumData) => {
+      //     return {...subforumData, forumPosts.map((post) => {
+      //       return post.filter((fp) => fp.id !== deletedForumPost)
+      //     })
+      //   }}
+      //   );
+      // }
+
       function handleDeleteForumPost(deletedForumPost) {
         setSubforumData((subforumData) => {
-          subforumData.forumPosts.map((post) => {
-            post.filter((fp) => fp.id !== deletedForumPost)
-          })
-        }
-        );
+          console.log(subforumData)
+          return {...subforumData, forum_posts: subforumData.forum_posts.filter((post) => {
+            return post.id !== deletedForumPost.id 
+          })}
+        })
       }
 
     return (

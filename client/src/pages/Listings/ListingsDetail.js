@@ -42,7 +42,7 @@ function ListingsDetail({ user, listings, setListings, onDeleteListing }){
         }).then((r) => {
           if (r.ok) {
             onDeleteListing(listing)
-            // .then(() => navigate('/listings'));
+            navigate('/listings')
           }
         });
       }

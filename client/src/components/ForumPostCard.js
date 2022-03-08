@@ -25,12 +25,13 @@ console.log(subforumData)
     // };
 
 
-    function handleDeleteForumPost() {
-      fetch(`/subforums/${id}`, {
+    function handleDeleteForumPost(post) {
+      fetch(`/forum_posts/${post.id}`, {
         method: "DELETE",
       }).then((r) => {
         if (r.ok) {
-          onDeleteForumPost(forumPosts);
+          onDeleteForumPost(post);
+          navigate(`/subforums/${currentSubforum.id}`)
         }
       });
     }
@@ -55,7 +56,7 @@ console.log(subforumData)
                     <Link className="forum-comment-card" to={`/new_comment`} onClick={() => setCurrentForumPost(post)}>
                         <Button className='newcommentmbutton' sx={{ color: "black", width: "30%", border: "2px black solid" }}>Add a comment</Button>
                     </Link>
-                    {/* {user.id == post.userid ? <button onClick={handleDeleteForumPost}>DELETE!</button> : null} */}
+                    {user.id == post.userid ? <button onClick={() => handleDeleteForumPost(post)}>DELETE!</button> : null}
                     </div>
                     <CommentCard post={post} subforumData={subforumData} />
                 </Box>

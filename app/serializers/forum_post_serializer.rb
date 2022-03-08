@@ -1,5 +1,5 @@
 class ForumPostSerializer < ActiveModel::Serializer
-  attributes :id, :title, :body, :user, :subforum_name, :userid, :comments
+  attributes :id, :title, :body, :user, :subforum_name, :subforum_id, :userid, :comments, :title_summary, :post_date
   # has_one :forum
   has_one :subforum
   has_one :user
@@ -18,8 +18,21 @@ class ForumPostSerializer < ActiveModel::Serializer
     object.subforum.name
   end
 
+  def subforum_id
+    object.subforum.id
+  end
+
   def comments
     object.comments
   end
+
+  def title_summary
+    "#{object.title[0..20]}..."
+  end
+
+  def post_date
+    object.created_at.strftime('%m/%d/%Y')
+  end
+
 
 end

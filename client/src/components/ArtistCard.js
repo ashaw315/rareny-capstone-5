@@ -30,19 +30,25 @@ function ArtistCard({ artist }){
 console.log(artist)
 
     return (
-        <div className="card-column">
-        <Card sx={{ maxWidth: 445, border: 2 }}>
-        <CardContent>
-            <Typography sx={{ fontSize: 30, color: 'black' }} gutterBottom>
+        <div className="artist-card">
+        <Card className='full-card-wrap' sx={{ minWidth: 500, minHeight: 300, border: 3 }}>
+        <CardContent >
+            {/* <Typography className="name-decoration" sx={{ fontSize: 30, color: 'white', textTransform: 'uppercase', fontWeight: 'bold'  }} gutterBottom>
             {artist.username}
-            </Typography>
-            <a href={artist.website} target="_blank">Website: {artist.website}</a>
-            <p>Discipline: {artist.discipline}</p>
-            <p>Member since: {artist.member_since}</p>
+            </Typography> */}
+            {/* <div className="artist-details">
+                <p><strong>Member since:</strong> {artist.member_since}</p>
+                <div className="website-artist">
+                <span><strong>Website: </strong></span><a className='artist-website-link' href={artist.website} target="_blank">{artist.website}</a>
+                </div>
+                <p><strong>Discipline: </strong> {artist.discipline}</p>
+            </div> */}
         </CardContent>
+        <div className="card-wrap">
         <CardActions>
-            <Button sx={{ color: "black", border: 2 }} size="small" onClick={handleOpen} >Learn More</Button>
+            <Button className="button-wrap" sx={{ color: "black", border: 3, mx: "auto", mt: 9, fontSize: 30  }} onClick={handleOpen} >{artist.username}</Button>
         </CardActions>
+        </div>
     </Card>
     <Modal
                                 open={open}

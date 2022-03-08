@@ -225,11 +225,14 @@ font-size: 25px;
 }
 
 .accountlinkscontainer {
-    width: 5%;
-    margin-left: 27.5%;
+    width: 20%;
+    height: 20%;
+    margin-left: 10%;
+    margin-top: 5%;
     float: left;
     top: 0;
     bottom: 0;
+    /* border: 1px solid black; */
 }
 
 .accountformcontainer {
@@ -288,6 +291,9 @@ font-size: 25px;
 
 .accountlinkdiv {
     margin-bottom: 10px;
+    margin-top: 30px;
+    
+    /* border: 1px solid black; */
 }
 
 .accountbuttoncenter{
@@ -355,4 +361,98 @@ font-size: 25px;
     background-color: rgb(0, 0, 0);
     color: rgb(255, 255, 255);
     font-family: Corbert, Arial, Helvetica, sans-serif;
+}
+
+  .artist-card {
+      padding: 30px;
+      margin: auto;
+      width: 70%;
+      
+  }
+
+  .artists-users {
+    padding: 15px;
+    
+}
+
+.display-artists {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-top: 20px;
+    margin: auto;
+    width: 90%;
+    border-top: 4px solid #000000;
+    border-bottom: 4px solid #000000;
+    padding: 30px;
+}
+
+.artist-name {
+    background-color: #000;
+}
+
+.artist-website-link {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+.artist-website-link:hover {
+    text-decoration: underline;
+    color: rgb(255, 255, 255);
+}
+
+.website-artist {
+    padding-top: 5px;
+    padding-bottom: 20px;
+}
+
+.artist-details {
+    color: white
+}
+
+.name-decoration{
+    text-decoration: underline;
+    color: white;
+}
+
+.card-wrap {
+    border: 5px solid black;
+    margin-top: 40px auto;
+    height: 225px;
+    width: 80%;
+    margin-left: 50px;
+    box-shadow: 10px 10px lightblue;
+}
+
+.button-wrap {
+    box-shadow: 7px 7px rgb(230, 173, 211);
+}
+
+.full-card-wrap {  
+    box-shadow: 10px 10px rgb(224, 230, 173);
+}
+
+/* .user-posts-info {
+    display: flex;
+    flex-direction: row;
+} */
+
+.user-posts-detail {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 7%;
+    border: 2px solid black;
+    /* padding: 10px; */
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    margin-top: 15px;
+    width: 115%;
+    color: black;
+    text-decoration: none;
+}
+
+.user-posts-detail:hover {
+    background-color: black;
+    color: white;
 }
