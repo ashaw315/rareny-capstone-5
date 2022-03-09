@@ -146,7 +146,7 @@ const filterListings = listings
           <Route path='/new_subforum' element={<SubforumForm user={user} currentForum={currentForum}/>}/>
           <Route path='/new_forum_post' element={<ForumPostForm user={user} currentSubforum={currentSubforum} currentSubForumTitle={currentSubForumTitle}/>}/>
           <Route path='/new_comment' element={<CommentForm user={user} currentForumPost={currentForumPost} currentSubforum={currentSubforum}/>}/>
-          <Route path='/resources' element={<Resources boroughs={boroughs} setBoroughs={setBoroughs}/>}/>
+          <Route path='/resources' element={<Resources boroughs={boroughs} setBoroughs={setBoroughs} setCurrentBorough={setCurrentBorough}/>}/>
           <Route path='/resources/:id'element={<ResourcesDetail boroughs={boroughs} setBoroughs={setBoroughs}/>}/>
           <Route path='/artists' element={<Artists user={user} artists={artists}/>} />
           <Route path='/about' element={<About />}/>

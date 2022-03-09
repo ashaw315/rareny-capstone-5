@@ -61,11 +61,11 @@ console.log(artist)
                 <h1 className="artist-modal-header">{artist.username}</h1>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                     <div className="artist-modal" >
-                        <p className="artist-bio">{artist.discipline}</p>
+                        <h3 className="artist-discipline">{artist.discipline}</h3>
                                     
                         <p className="artist-bio">{artist.bio}</p>
                         <div className="artist-website">
-                            <a  className="website-link" href={artist.website} targer="_blank">Website</a>
+                            <a  className="website-link" href={artist.website} target="_blank">Website</a>
                         </div>
                     </div>
                 </Typography>

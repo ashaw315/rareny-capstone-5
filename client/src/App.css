@@ -415,16 +415,28 @@ font-size: 25px;
 }
 
 .card-wrap {
-    border: 5px solid black;
+    border: 5px solid rgb(70, 70, 70);
     margin-top: 40px auto;
     height: 225px;
     width: 80%;
     margin-left: 50px;
     box-shadow: 10px 10px lightblue;
+    border-radius: 5px;
 }
 
+
 .button-wrap {
-    box-shadow: 7px 7px rgb(230, 173, 211);
+    box-shadow: 7px 7px rgb(49, 117, 139);
+    background-color: #000;
+      /* color: white;
+      box-shadow: 14px 14px rgb(196, 196, 196);
+      transform: translate(-4px, -4px); */
+      transition: 0.3s ease;
+}
+.button-wrap:hover{
+    box-shadow: 14px 14px rgb(49, 117, 139);
+      transform: translate(-4px, -4px);
+      transition: 0.3s ease;
 }
 
 .full-card-wrap {  
@@ -470,9 +482,14 @@ font-size: 25px;
     margin: 0 auto;
   }
 
+  .artist-discipline {
+    padding-top: 30px;
+    padding-left: 35px;
+}
 
   .artist-bio {
     padding-top: 50px;
+    padding: 40px;
     font-size: 20px;
     text-align: justify;
     display: inline-block;
@@ -481,6 +498,7 @@ font-size: 25px;
   .artist-modal-header {
       border-bottom: 3px solid black;
       border-top: 3px solid black;
+      font-size: 50px;
       padding: 5px;
   }
 
@@ -495,9 +513,8 @@ font-size: 25px;
   .artist-website {
       color: black;
       font-size: 25px;
-      padding-top: 50px;
+      padding-top: 10px;
       text-align: center;
-
   }
 
   .website-link {
@@ -524,6 +541,8 @@ font-size: 25px;
     position: absolute;
     top: 0;
     margin-left: 18%;
+    z-index: 0.5;
+    /* background-color: #000; */
     
     /* border: 2px solid black; */
   }
@@ -598,10 +617,10 @@ font-size: 25px;
   .resource-intro-box {
       border: 4px solid black;
       width: 40%;
-      position: absolute;
+      /* position: absolute; */
       padding: 10px;
-      margin-top: 4%;
-      margin-left: 3%;
+      /* margin-top: 4%;
+      margin-left: 3%; */
       box-shadow: 10px 10px rgb(196, 196, 196);
 
   }
@@ -612,5 +631,105 @@ font-size: 25px;
       border: 4px solid black;
       font-size: 30px;
       font-weight: bold;
-      
   }
+
+  .resource-borough-names {
+    justify-content: space-evenly;
+    display: flex;
+    flex-direction: row;
+    margin-top: 51.5%;
+    z-index: 1;
+    /* border: 2px solid black; */
+  }
+
+  .borough-button-links {
+    text-decoration: none;
+    color: black;
+  }
+
+  .name-button-links {
+      border: 2px solid black;
+      padding: 15px;
+      /* border-radius: 6px; */
+      box-shadow: 7px 7px rgb(196, 196, 196);
+  }
+
+  .name-button-links:hover{
+      background-color: #000;
+      color: white;
+      box-shadow: 14px 14px rgb(196, 196, 196);
+      transform: translate(-4px, -4px);
+      transition: 0.3s ease;
+  }
+ 
+  .resource-card-image {
+      padding: 50px;
+      background-color: #8effe6;
+  }
+
+  .borough-name-header-detail {
+      text-transform: uppercase;
+      font-size: 150px;
+      margin-bottom: 50px;
+      border-bottom: 5px solid black;
+  }
+
+  .art-resource-modal-image {
+      width: 25%;
+  }
+
+  .art-resource-modal-container {
+      display: flex;
+      justify-content: space-around;  
+      padding: 20px;
+      border-bottom: 4px solid black;
+  }
+
+  .artist-resource-modal-header {
+      margin-top: 10%;
+      font-size: 50px;
+      text-transform: uppercase;
+      font-weight: bold;
+      /* transform: scaleY(3); */
+      letter-spacing: 3px;
+      /* height: 10%; */
+  }
+
+  .art-resource-modal-add-phone {
+      display: flex;
+      justify-content: space-around;
+      /* margin-left: 4%;
+      margin-right: 26%; */
+      margin-top: 5%;
+  }
+
+  .artist-resource-website {
+    color: black;
+    font-size: 25px;
+    padding-top: 50px;
+    text-align: center;
+}
+
+.art-resource-description {
+    padding: 30px;
+    line-height: 50px;
+}
+
+.display-resources {
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
+    flex-wrap: wrap;
+    padding-top: 20px;
+    /* margin: auto; */
+    width: 90%;
+    border-top: 4px solid #000000;
+    border-bottom: 4px solid #000000;
+    padding: 30px;
+}
+
+.resource-card {
+    padding: 60px;
+    padding-left: 100px;
+}
