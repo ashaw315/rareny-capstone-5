@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   
+  resources :boroughs, only: [:index, :show ]
   resources :comments
   resources :forum_posts, only: [:index, :show, :create, :destroy]
   resources :subforums, only: [:index, :show, :create, :destroy]
   resources :forums, only: [:index, :show]
   resources :residencies
-  resources :addresses
-  resources :artist_resources
+  resources :addresses, only: [:index, :show ]
+  resources :artist_resources, only: [:index, :show ]
   resources :listing_images
   resources :listings, only: [:index, :create, :show, :destroy]
   resources :profile_pictures

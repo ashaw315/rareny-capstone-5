@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route, useParams } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ImageUploadForm from './ImageUploadForm';
 import NavBar from './components/NavBar/NavBar';
 import Home from './pages/HomePage/Home'; 
 import SignUp from './pages/SignUp'
@@ -12,13 +11,13 @@ import ListingsForm from './components/ListingsForm';
 import ListingsDetail from './pages/Listings/ListingsDetail';
 import Forum from './pages/Forum'
 import Resources from './pages/Resources';
+import ResourcesDetail from './pages/ResourcesDetail';
 import Subforums from './pages/Subforums';
 import SubforumDetail from './pages/SubforumDetail';
 import SubforumForm from './components/SubforumForm';
 import ForumPostForm from './components/ForumPostForm';
 import UserAccount from './pages/UserAccount';
 import CommentForm from './components/CommentForm';
-import ForumPostCard from './components/ForumPostCard';
 import About from './pages/About';
 import Artists from './pages/Artists';
 import Messages from './pages/Messages';
@@ -32,6 +31,8 @@ function App() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const [artists, setArtists] = useState([])
+  const [boroughs, setBoroughs] = useState([])
+  const [currentBorough, setCurrentBorough] = useState([])
 
   const [listings, setListings] = useState([])
   const [search, setSearch] = useState('')
@@ -84,6 +85,13 @@ useEffect(() => {
   .then((data) => setArtists(data))
 }, []);
 
+useEffect(() => {
+  fetch('/boroughs')
+  .then((r) => r.json())
+  .then((data) => setBoroughs(data))
+}, []);
+
+
 const filterListings = listings
     .filter((list) => {
       if(search === "") {
@@ -119,12 +127,6 @@ const filterListings = listings
     );
   }
 
-  // function handleDeleteForumPost(deletedForumPost) {
-  //   setCurrentForumPost((currentForumPost) =>
-  //   currentForumPost.filter((fp) => fp.title !== deletedForumPost.title)
-  //   );
-  // }
-
  console.log(artists)
 
   return (
@@ -141,16 +143,15 @@ const filterListings = listings
           <Route path='/forums' element={<Forum user={user} setCurrentForum={setCurrentForum} /> }/>
           <Route path='/forums/:id' element={<Subforums user={user} currentForum={currentForum} setCurrentSubforum={setCurrentSubforum} setCurrentSubforumTitle={setCurrentSubforumTitle}/> }/>
           <Route path='/subforums/:id' element={<SubforumDetail user={user} currentSubforum={currentSubforum} setCurrentForumPost={setCurrentForumPost} currentForum={currentForum}/> }/>
-          {/* <Route path='/forum_posts/:id' element={<ForumPosts user={user} currentForumPost={currentForumPost} currentSubforum={currentSubforum}/>}/> */}
           <Route path='/new_subforum' element={<SubforumForm user={user} currentForum={currentForum}/>}/>
           <Route path='/new_forum_post' element={<ForumPostForm user={user} currentSubforum={currentSubforum} currentSubForumTitle={currentSubForumTitle}/>}/>
           <Route path='/new_comment' element={<CommentForm user={user} currentForumPost={currentForumPost} currentSubforum={currentSubforum}/>}/>
-          <Route path='/resources' element={<Resources />}/>
+          <Route path='/resources' element={<Resources boroughs={boroughs} setBoroughs={setBoroughs}/>}/>
+          <Route path='/resources/:id'element={<ResourcesDetail boroughs={boroughs} setBoroughs={setBoroughs}/>}/>
           <Route path='/artists' element={<Artists user={user} artists={artists}/>} />
           <Route path='/about' element={<About />}/>
           <Route path='/messages' element={<Messages />}/>
         </Routes>
-        {/* <ImageUploadForm /> */}
     </div>
   )
 }

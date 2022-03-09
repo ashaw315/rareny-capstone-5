@@ -125,7 +125,7 @@ font-size: 25px;
     border-radius: 6px;
 }
 
-/* Listings Style */
+/* LISTINGS CSS */
 
 .search-term {
     width: 50px;
@@ -212,7 +212,7 @@ font-size: 25px;
     margin-top: 10px;
 }
 
-/* User Account */
+/* USER ACCOUNT CSS */
 
 .accountpagecontainer {
     position: fixed;
@@ -320,7 +320,7 @@ font-size: 25px;
     border: 2px solid #000;
 }
 
-/* About Page */
+/* ABOUT PAGE CSS */
 
 .homepageh2signedoutabout{
     color: rgb(0, 0, 0);
@@ -514,4 +514,103 @@ font-size: 25px;
   .website-link:hover {
       background-color: #000;
       color: white;
+  }
+
+  /* RESOURCES CSS */
+
+  .nyc-map-container {
+    width: 75%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    margin-left: 18%;
+    
+    /* border: 2px solid black; */
+  }
+
+  .mapdiv {
+    fill: #004dc9;
+    stroke: #ffffff;
+    stroke-width: 4px;
+    transition: fill 0.5s;
+  }
+  
+  .mapdiv :hover {
+    fill: #000;
+  }
+  
+  
+  .manhattan {
+    fill: #79e416;
+    stroke: #ffffff;
+    stroke-width: 2px;
+    transition: fill 0.5s;
+  }
+  
+  .manhattan :hover {
+    fill: rgb(169, 10, 209);
+  }
+  
+  .staten {
+    fill: #e49709;
+    stroke: #ffffff;
+    stroke-width: 2px;
+    transition: fill 0.5s;
+  }
+  
+  .staten :hover {
+    fill: rgb(10, 23, 209);
+  }
+  
+  .bronx {
+    fill: #510cd1;
+    stroke: #ffffff;
+    stroke-width: 2px;
+    transition: fill 0.5s;
+  }
+  
+  .bronx :hover {
+    fill: rgb(214, 245, 40);
+  }
+  
+  .queens{
+    fill: #d10c4e;
+    stroke: #ffffff;
+    stroke-width: 2px;
+    transition: fill 0.5s;
+  }
+  
+  .queens :hover {
+    fill: rgb(69, 11, 228);
+  }
+  
+  .brooklyn{
+    fill: #0f3b9b;
+    stroke: #ffffff;
+    stroke-width: 2px;
+    transition: fill 0.5s;
+  }
+  
+  .brooklyn :hover {
+    fill: rgb(228, 11, 11);
+  }
+
+  .resource-intro-box {
+      border: 4px solid black;
+      width: 40%;
+      position: absolute;
+      padding: 10px;
+      margin-top: 4%;
+      margin-left: 3%;
+      box-shadow: 10px 10px rgb(196, 196, 196);
+
+  }
+
+  .resource-intro-container {
+      padding: 50px;
+      text-align: center;
+      border: 4px solid black;
+      font-size: 30px;
+      font-weight: bold;
+      
   }

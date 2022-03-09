@@ -4,7 +4,6 @@ import Input from "../styles/Input";
 import Textarea from "../styles/TextArea";
 
 function UserAccount({ user }){
-
     const [updatedAccount, setUpdatedAccount] = useState(user);
 
     const [accountUpdatedNote, setAccountUpdatedNote] = useState('');
@@ -30,6 +29,8 @@ function UserAccount({ user }){
         setAccountUpdatedNote('Account updates saved.')
     };
 
+    console.log(updatedAccount)
+
     return (
         <div className="subforums-forum-posts">
             <Link className="forum-card" to={'/account'}>
@@ -49,7 +50,7 @@ function UserAccount({ user }){
                         </span>
                         <div className='accountinputdiv'>
                             <p className='accountp'>Username</p>
-                            {updatedAccount ? <input className='accountinput' value={updatedAccount.username} onChange={(e) => handleUpdate(e, 'username')}></input> : null } 
+                            {updatedAccount ? <input className='accountinput' value={updatedAccount.username} onChange={(e) => handleUpdate(e, 'username')}></input> : null }
                         </div>
                         <div className='accountinputdiv'>
                             <p className='accountp'>Password</p>

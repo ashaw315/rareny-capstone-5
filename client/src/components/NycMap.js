@@ -2,8 +2,8 @@ import React from "react";
 
 function NycMap() {
     return (
-        <div>
-            <div >
+        <div >
+            <div className="nyc-map-container">
             <svg version="1.1" x="0px" y="0px"
 	         viewBox="0 0 900 900">
 <g id="staten" className="staten">

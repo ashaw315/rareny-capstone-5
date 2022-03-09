@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_04_175355) do
+ActiveRecord::Schema.define(version: 2022_03_08_232042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,9 +57,17 @@ ActiveRecord::Schema.define(version: 2022_03_04_175355) do
   create_table "artist_resources", force: :cascade do |t|
     t.string "name"
     t.string "location"
-    t.integer "phone"
+    t.bigint "phone"
     t.text "description"
     t.string "website"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "borough_id", null: false
+    t.index ["borough_id"], name: "index_artist_resources_on_borough_id"
+  end
+
+  create_table "boroughs", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -174,6 +182,7 @@ ActiveRecord::Schema.define(version: 2022_03_04_175355) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "artist_resources"
+  add_foreign_key "artist_resources", "boroughs"
   add_foreign_key "comments", "forum_posts"
   add_foreign_key "comments", "users"
   add_foreign_key "forum_posts", "users"
