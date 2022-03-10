@@ -19,9 +19,10 @@ function Resources({boroughs, setCurrentBorough}){
                 </div>
             </div>
             {boroughs?.map((borough) => 
-            <div >
+            <div>
                 <NycMap key={borough.id} borough={borough} setCurrentBorough={setCurrentBorough}/>
             </div>)}
+            {/* <div id="hide">SHOW</div> */}
             {/* <NycMap /> */}
             
             <div className="resource-borough-names">
@@ -31,6 +32,14 @@ function Resources({boroughs, setCurrentBorough}){
                     {/* <h3 className="name-button-links" key={borough.id}>{borough.name}</h3> */}
                 </div>
                 )}
+            </div>
+            <div className="art-resource-footer">
+                <h1 className="art-resource-footer-header">Know a place?</h1>
+                <h4>Know a supply shop, fabricator, or other resource? </h4>
+                <h4>Give us a shout!We're always on the lookout for new spots doing awesome things.</h4>
+                <div className="resource-email-postition">
+                    <a className='art-resource-footer-email' href="mailto:info.rareny@gmail.com">Send us a resource!</a> 
+                </div>
             </div>
             </div>
         </div>

@@ -56,7 +56,10 @@ console.log(subforumData)
                     <Link className="forum-comment-card" to={`/new_comment`} onClick={() => setCurrentForumPost(post)}>
                         <Button className='newcommentmbutton' sx={{ color: "black", width: "30%", border: "2px black solid" }}>Add a comment</Button>
                     </Link>
-                    {user.id == post.userid ? <button onClick={() => handleDeleteForumPost(post)}>DELETE!</button> : null}
+                    {user ? (<div>
+                      {user.id == post.userid ? <Button className="post-delete-button" sx={{ color: "red", width: "30%", border: "2px red solid" }} onClick={() => handleDeleteForumPost(post)}>Delete</Button> : null}
+                    </div>) : (null) }
+                    {/* {user.id == post.userid ? <button className="post-delete-button" onClick={() => handleDeleteForumPost(post)}>DELETE!</button> : null} */}
                     </div>
                     <CommentCard post={post} subforumData={subforumData} />
                 </Box>

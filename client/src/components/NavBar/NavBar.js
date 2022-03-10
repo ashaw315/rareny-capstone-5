@@ -38,7 +38,7 @@ function NavBar({user, setUser, setLogInForm, setErrorMessage}) {
                     <p className='navbardivider'>|</p>
                     <Link className='navbarlink' to='/resources'>Resources.</Link>
                     <Link className='navbarlink' to='/listings'>Listings.</Link>
-                    <Link className='navbarlink' to='/residencies'>Residencies.</Link>
+                    {/* <Link className='navbarlink' to='/residencies'>Residencies.</Link> */}
                     <Link className='navbarlink' to='/forums'>Forum.</Link>
                     <Link className='navbarlink' to='/artists'>Artists.</Link>
                     <p className='navbardivider'>|</p>

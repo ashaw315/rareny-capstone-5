@@ -158,7 +158,7 @@ function Home({ user, setUser, logInForm, setLogInForm }){
                             <ul className='footerul'>
                                 <div className='footerp'>Rare NY is a conceptual project by adamshaw.</div>
                                 <div className='footerp1'>Resources for Artists Everywhere looks to offer artists a space to communicate and share resources.</div>
-                                <div className='footerp2'>Email us.</div>
+                                <a className='footerp2' href="mailto:info.rareny@gmail.com">Email Us</a> 
                             </ul>
                         {/* </div> */}
             </div>

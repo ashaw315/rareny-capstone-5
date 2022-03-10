@@ -301,7 +301,7 @@ function handleSubmit(e) {
             
             <Label className="listing-input">Borough</Label>
             <select name="nyc_borough" value={nycBorough} onChange={handleBoroughChange}>
-                <option>Select Listing</option>
+                <option>Select Borough</option>
                     {boroughs.map(b => 
                         <option value = {b}>{b}</option> )}
             </select>
