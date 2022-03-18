@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom'
-// import Login from "../../pages/Login";
 import './NavBar.css'
 
 
@@ -17,12 +16,6 @@ function NavBar({user, setUser, setLogInForm, setErrorMessage}) {
         });
         navigate('/');
       }
-
-    // function handleLogInForm() {
-    //     navigate('/', {replace: true});
-    //     setLogInForm(true);
-    //     setErrorMessage('');
-    // };
 
     function handleRevertHome() {
         navigate('/', {replace: true});
@@ -43,7 +36,6 @@ function NavBar({user, setUser, setLogInForm, setErrorMessage}) {
                     <Link className='navbarlink' to='/artists'>Artists.</Link>
                     <p className='navbardivider'>|</p>
                     <span className='navbardropdownspan'>
-                        {/* <img className='navbardotdaydot' src={dotdaydot}/> */}
                         <button className='navbarnamelink'>☀︎ Hello, {user.username}.</button>
                         <div className='navbardropdown'>
                             <div className='dropdowndiv'>
@@ -58,9 +50,6 @@ function NavBar({user, setUser, setLogInForm, setErrorMessage}) {
                             <div className='dropdowndiv'>
                                 <button className='dropdownlink' onClick={handleLogout}>Log Out</button>
                             </div>
-                            {/* <div className='dropdownclosediv'>
-                                <button className='dropdownlink' onClick={() => setDropDown(!dropDown)}>Close</button>
-                            </div> */}
                         </div>
                     </span>
                 </ul>
@@ -69,8 +58,7 @@ function NavBar({user, setUser, setLogInForm, setErrorMessage}) {
                     <button className='navbarlink' onClick={handleRevertHome}>Home</button>
                     {/* <p className='navbardivider'>|</p> */}
                     <Link className='navbarlink' to='/about'>About</Link>
-                    <Link className='navbarlink' to='/themes'>Contact</Link>
-                    {/* <img className='navbarlogo' onClick={handleRevertHome} alt='.Day logo' src={dotdaylogo}></img> */}
+                    <Link className='navbarlink' to='/contact'>Contact</Link>
                 </ul>
             )}
         </div>

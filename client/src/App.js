@@ -21,6 +21,7 @@ import CommentForm from './components/CommentForm';
 import About from './pages/About';
 import Artists from './pages/Artists';
 import Messages from './pages/Messages';
+import Contact from './pages/Contact';
 
 // import ForumPosts from './pages/ForumPosts';
 
@@ -96,7 +97,7 @@ const filterListings = listings
     .filter((list) => {
       if(search === "") {
         return true;
-      } return list.title.toLowerCase().includes(search.toLowerCase()) 
+      } return list.title.toLowerCase().includes(search.toLowerCase()) || list.nyc_borough.toLowerCase().includes(search.toLowerCase())
     })
     .sort((list1, list2) => {
       if (sortBy === "Sort By") {
@@ -150,6 +151,7 @@ const filterListings = listings
           <Route path='/resources/:id'element={<ResourcesDetail boroughs={boroughs} setBoroughs={setBoroughs}/>}/>
           <Route path='/artists' element={<Artists user={user} artists={artists}/>} />
           <Route path='/about' element={<About />}/>
+          <Route path='/contact' element={<Contact />}/>
           <Route path='/messages' element={<Messages />}/>
         </Routes>
     </div>

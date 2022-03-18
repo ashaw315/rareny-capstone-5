@@ -51,7 +51,7 @@ const user_forum_posts = user?.forum_posts.map((post) =>
                                     {user_subforums}
                                 </ul>) : (
                                 <ul>
-                                    <p>No listings posted yet</p>
+                                    <h5><em>No listings posted yet</em></h5>
                                 </ul>)}   
                     </div>
                     <div className='accountlinkdiv'>
@@ -61,7 +61,7 @@ const user_forum_posts = user?.forum_posts.map((post) =>
                                     {user_forum_posts}
                                 </ul>) : (
                                 <ul>
-                                    <p>No listings posted yet</p>
+                                   <h5><em>No listings posted yet</em></h5>
                                 </ul>)}   
                     </div>
                 </div>

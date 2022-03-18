@@ -59,7 +59,7 @@ function Home({ user, setUser, logInForm, setLogInForm }){
                 <div className='homepagecontainerloggedin'>
                     <div className='homepageloggedinleft'>
                         <h2 className='homepageh2loggedin'>Welcome, {user.username}.</h2>
-                        <p className='homepageploggedin'>Enjoy your vist.</p>
+                        <p className='homepageploggedin'>Enjoy your visit.</p>
                         <h3 className='homepageh3loggedin'>Not sure where to begin?</h3>
                         <div className='homepageoptionsdivloggedin'>
                             <Link className='homepagelinkloggedin' to='/forums'>Check out the forums.</Link>

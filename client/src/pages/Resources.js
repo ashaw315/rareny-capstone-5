@@ -18,10 +18,10 @@ function Resources({boroughs, setCurrentBorough}){
                     <p>Click on a Borough to get started.</p>
                 </div>
             </div>
-            {boroughs?.map((borough) => 
+            {boroughs ? boroughs?.map((borough) => 
             <div>
                 <NycMap key={borough.id} borough={borough} setCurrentBorough={setCurrentBorough}/>
-            </div>)}
+            </div>): null }
             {/* <div id="hide">SHOW</div> */}
             {/* <NycMap /> */}
             
