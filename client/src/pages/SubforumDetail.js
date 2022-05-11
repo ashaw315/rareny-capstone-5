@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link, useParams } from 'react-router-dom';
 import styled from "styled-components";
-import ReactMarkdown from 'react-markdown';
-import Box from "../styles/Box";
 import { Button } from '@mui/material';
 import ForumPostCard from "../components/ForumPostCard";
 import '../App.css'
-import Subforums from "./Subforums";
 
 
 
@@ -17,8 +14,6 @@ function SubforumDetail({ user, currentSubforum, setCurrentForumPost, currentFor
     const [postComments, setPostComments] = useState([])
 
     const navigate = useNavigate();
-    
-    // const csf = currentSubforum
 
     useEffect(() => {
         // auto-login
@@ -31,15 +26,6 @@ function SubforumDetail({ user, currentSubforum, setCurrentForumPost, currentFor
         })
           );
       }, [id]);
-
-      // function handleDeleteForumPost(deletedForumPost) {
-      //   setSubforumData((subforumData) => {
-      //     return {...subforumData, forumPosts.map((post) => {
-      //       return post.filter((fp) => fp.id !== deletedForumPost)
-      //     })
-      //   }}
-      //   );
-      // }
 
       function handleDeleteForumPost(deletedForumPost) {
         setSubforumData((subforumData) => {
@@ -67,13 +53,6 @@ function SubforumDetail({ user, currentSubforum, setCurrentForumPost, currentFor
     );
   }
 
-const Wrapper = styled.section`
-  max-width: 800px;
-  margin: 40px auto;
-`;
 
-const Post = styled.article`
-  margin-bottom: 24px;
-`;
 
 export default SubforumDetail;

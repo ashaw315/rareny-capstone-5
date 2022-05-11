@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useParams } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './components/NavBar/NavBar';
@@ -20,13 +20,11 @@ import UserAccount from './pages/UserAccount';
 import CommentForm from './components/CommentForm';
 import About from './pages/About';
 import Artists from './pages/Artists';
-import Messages from './pages/Messages';
 import Contact from './pages/Contact';
 
 // import ForumPosts from './pages/ForumPosts';
 
 function App() {
-  const {id} = useParams();
   const [user, setUser] = useState(null);
   const [logInForm, setLogInForm] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -152,7 +150,6 @@ const filterListings = listings
           <Route path='/artists' element={<Artists user={user} artists={artists}/>} />
           <Route path='/about' element={<About />}/>
           <Route path='/contact' element={<Contact />}/>
-          <Route path='/messages' element={<Messages />}/>
         </Routes>
     </div>
   )

@@ -40,7 +40,6 @@ function Subforums({ user, currentForum, setCurrentSubforum, setCurrentSubforumT
                         <h2 className="forum-title" onClick={() => setCurrentSubforumTitle(subforum.name)}>{subforum.name}</h2>
                         <h2 className="forum-title-length">► {subforum.forum_posts_length} {subforum.forum_posts_length > 1 ? "subtopics" : "subtopic"}</h2> 
                     </Link>
-                    {/* {user.id== subforum.users.id ? <button onClick={() => handleDelete(subforum.id)}>DELETE!</button> : null} */}
                 </div> )}
             </div> 
         )

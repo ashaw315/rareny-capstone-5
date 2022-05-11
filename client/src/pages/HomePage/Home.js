@@ -93,7 +93,7 @@ function Home({ user, setUser, logInForm, setLogInForm }){
                         <div className='homepagesignedoutleft'>
                             <h2 className='homepageh2signedout'>RARE NY</h2>
                             <p className='homepagepsignedout'>Resources for Artist Everywhere.</p>
-                            {/* <button onClick={handleLogInForm} className='homepagebuttonsignedout'>Log In</button><p className='homepagedividersignedout'>|</p><Link className='homepagelinksignedout' to='/signup'>Sign Up</Link> */}
+
                             <div>
                             <Button sx={{ color: "black" }} onClick={handleOpen}>Login</Button>
                             <Link className='loginlink' to='/signup'>

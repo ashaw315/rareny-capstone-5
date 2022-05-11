@@ -58,9 +58,6 @@ function ListingsDetail({ user, listings, setListings, onDeleteListing }){
             {user ? <div>
                 {user.id == userData.id ? <Button className="listing-delete-button" sx={{ color: "red", fontSize: 25, border: "2px red solid", mt: 2 }} onClick={handleDelete}>Delete Listing</Button> : null}
                 </div> : null }
-            {/* <div>
-                 {user.id == userData.id ? <Button className="listing-delete-button" sx={{ color: "black", fontSize: 25, border: "2px black solid" }} onClick={handleDelete}>Delete Listing</Button> : null}
-            </div> */}
            <h2 className="listing-title-detail">{listing.title}</h2>
            <cite className="listing-detail-top-posted-by"> Posted by {userData.username}</cite>
            <div className="listing-detail-top-info">

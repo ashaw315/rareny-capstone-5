@@ -22,13 +22,7 @@ function CommentForm({ post, user, currentSubforum, currentForumPost }){
     const [errors, setErrors] = useState([]);
     const [comments, setComments] = useState([])
 
-    // const [isToggle, setIsToggle] = useState(true)
-
     const navigate = useNavigate();
-
-    // function handleToggle() {
-    //     setIsToggle((isToggle) => !isToggle)
-    //   }
 
       useEffect(() => {
         fetch("/comments")
@@ -75,7 +69,6 @@ function CommentForm({ post, user, currentSubforum, currentForumPost }){
                     <h2>{currentForumPost.title}</h2>
                     <p>
                     <cite>By {currentForumPost.user}</cite>
-                    {/* <img src={post.p}/> */}
                     </p>
                     <ReactMarkdown>{currentForumPost.body}</ReactMarkdown>
                     <form onSubmit={handleSubmit}>

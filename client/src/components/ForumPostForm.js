@@ -121,7 +121,6 @@ Tell me what you think in the **comments** or share your own!
                     <h3>{title}</h3>
                     &nbsp;·&nbsp;
                     {user ? <cite>Posted by {user.username}</cite> : <p>" Posted by Username_Here!"</p>}
-                    {/* <cite>Posted by {user.username}</cite> */}
                     </p>
                     <ReactMarkdown>{instructions}</ReactMarkdown>
                 </WrapperChild>

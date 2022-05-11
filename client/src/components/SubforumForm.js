@@ -97,7 +97,6 @@ Tell me what you think in the **comments** or share your own!
             <h2 className="subforum-title">New Subforum</h2>
             <Wrapper className="subforum-form-wrapper">
                 <WrapperChild>
-                    {/* <h2 className="subforum-form-title">New Subforum</h2> */}
                     <form onSubmit={handleSubmit}>
                     <FormField>
                         <Label htmlFor="name">Subforum Name</Label>
@@ -142,7 +141,6 @@ Tell me what you think in the **comments** or share your own!
                     <h3>{title}</h3>
                     &nbsp;·&nbsp;
                     {user ? <cite>Posted by {user.username}</cite> : <p>" Posted by Username_Here!"</p>}
-                    {/* <cite>Posted by {user.username}</cite> */}
                     </p>
                     <ReactMarkdown>{instructions}</ReactMarkdown>
                 </WrapperChild>

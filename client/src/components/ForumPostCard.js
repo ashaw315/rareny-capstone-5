@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import { useNavigate, Link, useParams } from 'react-router-dom';
 import styled from "styled-components";
 import ReactMarkdown from 'react-markdown';
@@ -7,23 +7,11 @@ import CommentCard from "./CommentCard";
 import { Button } from "@mui/material";
 import '../App.css'
 
-function ForumPostCard({ post, user, subforumData, currentSubforum, setCurrentForumPost, onDeleteForumPost, forumPosts }){
+function ForumPostCard({ user, subforumData, currentSubforum, setCurrentForumPost, onDeleteForumPost, forumPosts }){
     
   const {id} = useParams();
-  // const [forumPosts, setForumPosts] = useState([])
+  
   const navigate = useNavigate();
-
-console.log(forumPosts)
-console.log(subforumData)
-
-    // function handleDelete(id) {
-    //   const config = {
-    //     method: 'DELETE',
-    //   }
-    //   fetch(`/forum_posts/${id}`, config)
-    //   .then(() => navigate('/'));
-    // };
-
 
     function handleDeleteForumPost(post) {
       fetch(`/forum_posts/${post.id}`, {
@@ -42,9 +30,6 @@ console.log(subforumData)
              {subforumData.forum_posts?.map((post) =>
                 <Post key={post.id}>
                 <Box>
-                  {/* <Link className="forum-comment-card" to={`/forum_posts/${post.id}`} onClick={() => setCurrentForumPost(post)}>
-                    <h2 className="forum-post-title">{post.title}</h2>
-                  </Link> */}
                   <h2 className="forum-post-title">{post.title}</h2>
                     <p>
                       <cite>By {post.user}</cite>
@@ -59,7 +44,6 @@ console.log(subforumData)
                     {user ? (<div>
                       {user.id == post.userid ? <Button className="post-delete-button" sx={{ color: "red", width: "30%", border: "2px red solid" }} onClick={() => handleDeleteForumPost(post)}>Delete</Button> : null}
                     </div>) : (null) }
-                    {/* {user.id == post.userid ? <button className="post-delete-button" onClick={() => handleDeleteForumPost(post)}>DELETE!</button> : null} */}
                     </div>
                     <CommentCard post={post} subforumData={subforumData} />
                 </Box>

@@ -17,12 +17,4 @@ class PostsController < ApplicationController
         }
     end
 
-    # private
-
-    # def post_params
-    #     image1 = Cloudinary::Uploader.upload(params[:image1])
-    #     image2 = Cloudinary::Uploader.upload(params[:image2])
-    #     params.permit(:title, image1: image1['url'], image2: image2['ur'] )
-    # end
-
 end

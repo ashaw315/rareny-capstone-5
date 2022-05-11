@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate, Link } from 'react-router-dom';
+import React from "react";
+import { Link } from 'react-router-dom';
 import ListingsCard from "../../components/ListingsCard";
 import { Button } from '@mui/material';
 import './Listings.css';
@@ -23,9 +23,6 @@ text-align: center;
 `;
 
 function Listings({ listings, setListings, user, handleListingsSearch, setSortBy, filterListings, sortBy, setPriceValue, priceValue, setSqFootValue, sqFootValue }){
-
-
-// const [value, setValue] = useState([0, 2000])
 
 const all_listings = filterListings?.map((listing) => {
     return (

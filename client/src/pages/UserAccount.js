@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {Link, useNavigate} from 'react-router-dom';
-import Input from "../styles/Input";
 import Textarea from "../styles/TextArea";
 
 function UserAccount({ user }){

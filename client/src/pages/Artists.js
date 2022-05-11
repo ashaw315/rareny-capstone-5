@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, Link, useParams } from 'react-router-dom';
+import React from "react";
+import { Link } from 'react-router-dom';
 import ArtistCard from "../components/ArtistCard";
 
 function Artists({ artists }){

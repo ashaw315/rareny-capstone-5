@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -34,16 +33,6 @@ console.log(artist)
         <div className="artist-card">
         <Card className='full-card-wrap' sx={{ minWidth: 500, minHeight: 300, border: 3 }}>
         <CardContent >
-            {/* <Typography className="name-decoration" sx={{ fontSize: 30, color: 'white', textTransform: 'uppercase', fontWeight: 'bold'  }} gutterBottom>
-            {artist.username}
-            </Typography> */}
-            {/* <div className="artist-details">
-                <p><strong>Member since:</strong> {artist.member_since}</p>
-                <div className="website-artist">
-                <span><strong>Website: </strong></span><a className='artist-website-link' href={artist.website} target="_blank">{artist.website}</a>
-                </div>
-                <p><strong>Discipline: </strong> {artist.discipline}</p>
-            </div> */}
         </CardContent>
         <div className="card-wrap">
         <CardActions>

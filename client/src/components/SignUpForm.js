@@ -57,7 +57,6 @@ function handleSubmit(e) {
     userData.append('website', website)
     userData.append('discipline', discipline)
     userData.append('bio', bio)
-    // userData.append('profile_picture', profilePicture)
     
     fetch('/signup', {
         method: "POST",

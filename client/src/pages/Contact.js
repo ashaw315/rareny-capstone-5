@@ -13,7 +13,6 @@ function Contact(){
                 <h3 className='footerheader'>About</h3>
                 <h3  className='footerheader1'>Contact</h3>
             </div>
-            {/* <div className='homepagefooter'> */}
                 <ul className='footerul'>
                     <div className='footerp'>Rare NY is a conceptual project by adamshaw.</div>
                     <div className='footerp1'>Resources for Artists Everywhere looks to offer artists a space to communicate and share resources.</div>
