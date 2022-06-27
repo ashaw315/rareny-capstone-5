@@ -38,8 +38,9 @@ Rare NY, is a resource app for visual artist with a current geographical focus o
 * Once a user/artist is logged in their profile information is stored on an artist page with all artists from the app
 * A user/artist can see more information about other artists with links to their individual sites
 
-### A profile page where users can see their profile information and all the ways they have participated in the app
-    
+### Profile page
+
+* Users can see their profile information and all the ways they have participated in the app    
 * Users can edit and update their profile information
 * Users can navigate to the places they have partipated in the blog
 * User can navaigate to the listings they have posted
