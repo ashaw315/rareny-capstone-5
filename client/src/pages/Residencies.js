@@ -15,7 +15,6 @@ function Residencies({ user, setCurrentForum }){
 
     
 
-    // console.log(forums)
 
     return (
         <div>

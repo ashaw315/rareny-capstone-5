@@ -27,7 +27,6 @@ function ArtistCard({ artist }){
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-console.log(artist)
 
     return (
         <div className="artist-card">

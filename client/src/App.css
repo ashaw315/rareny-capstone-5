@@ -219,34 +219,40 @@ font-size: 25px;
 /* USER ACCOUNT CSS */
 
 .accountpagecontainer {
-    position: fixed;
-    margin: auto;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    padding-top: 8%;
+    display: flex;
+    justify-content: space-evenly;
+    /* max-height: 50vh; */
+    height: 70vh;
+}
+
+.profiledivider {
+    height: 100%;
+    border: 1 px solid black;
+    display: block;
+    width: 2px;
+    background-color: black;
+    border-radius: 3px;
 }
 
 .accountlinkscontainer {
-    width: 20%;
+    /* width: 20%;
     height: 20%;
     margin-left: 10%;
     margin-top: 5%;
     float: left;
     top: 0;
     bottom: 0;
-    /* border: 1px solid black; */
+    border: 1px solid black; */
 }
 
 .accountformcontainer {
-    width: 40%;
+    /* width: 40%;
     margin-right: 18%;
     padding-left: 5%;
     float: right;
     top: 0;
     bottom: 0;
-    border-left: 3px solid #000;
+    border-left: 3px solid #000; */
 }
 
 .accountheader {
@@ -540,13 +546,13 @@ font-size: 25px;
   /* RESOURCES CSS */
 
   .nyc-map-container {
-    width: 75%;
+    /* width: 75%;
     height: 100%;
     position: absolute;
     top: 0;
     margin-top: 5%;
     margin-left: 18%;
-    z-index: 0.5;
+    z-index: 0.5; */
     /* background-color: #000; */
     
     /* border: 2px solid black; */
@@ -641,6 +647,10 @@ font-size: 25px;
       border-bottom: 5px solid black;
   }
 
+  .boroughs-1, .boroughs-2, .boroughs-3, .boroughs-4 {
+    display: none;
+  }
+
   .resource-intro-box {
       border: 4px solid black;
       width: 41%;
@@ -668,7 +678,7 @@ font-size: 25px;
     justify-content: space-evenly;
     display: flex;
     flex-direction: row;
-    margin-top: 51.5%;
+    /* margin-top: 51.5%; */
     z-index: 2;
     /* border: 2px solid black; */
   }

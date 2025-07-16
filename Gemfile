@@ -1,14 +1,14 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.7.4"
+ruby "3.2.2"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem 'rails', '~> 6.1.3', '>= 6.1.3.2'
+gem 'rails', '~> 7.1.0'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 # Use Puma as the app server
-gem 'puma', '~> 5.0'
+gem 'puma', '~> 6.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
@@ -40,20 +40,20 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :development, :test do
-  gem 'rspec-rails', '~> 5.0.0'
+  gem 'rspec-rails', '~> 6.0'
 end
 
 group :test do
   gem 'rspec-json_expectations'
-  gem 'shoulda-matchers', '~> 4.0'
+  gem 'shoulda-matchers', '~> 6.0'
 end
 
-gem "active_model_serializers", "~> 0.10.12"
+gem "active_model_serializers", "~> 0.10.14"
 
 gem 'cloudinary'
 
-gem 'activestorage-cloudinary-service'
+gem 'activestorage-cloudinary-service', '~> 0.2.3'
 
 gem 'image_processing'
 
-gem 'active_storage_validations'
+gem 'active_storage_validations', '~> 1.1.0'

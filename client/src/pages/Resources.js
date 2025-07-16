@@ -18,17 +18,17 @@ function Resources({boroughs, setCurrentBorough}){
                     <p>Click on a Borough to get started.</p>
                 </div>
             </div>
-            {boroughs ? boroughs?.map((borough) => 
-            <div>
-                <NycMap key={borough.id} borough={borough} setCurrentBorough={setCurrentBorough}/>
+            {boroughs ? boroughs?.map((borough, index) => 
+            <div key={borough.id} className={`boroughs-${index}`}>
+                <NycMap borough={borough} setCurrentBorough={setCurrentBorough}/>
             </div>): null }
             {/* <div id="hide">SHOW</div> */}
             {/* <NycMap /> */}
             
             <div className="resource-borough-names">
                 {boroughs?.map((borough) => 
-                <div>
-                    <BoroughNameLinks key={borough.id} borough={borough} setCurrentBorough={setCurrentBorough}/>
+                <div key={borough.id}>
+                    <BoroughNameLinks borough={borough} setCurrentBorough={setCurrentBorough}/>
                     {/* <h3 className="name-button-links" key={borough.id}>{borough.name}</h3> */}
                 </div>
                 )}

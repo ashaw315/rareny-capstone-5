@@ -3,22 +3,21 @@ import {Link, useNavigate} from 'react-router-dom';
 
 function Profile({ user }){
 
-console.log(user)
 
 const user_listings = user?.listings.map((listing) => 
-            <Link className="user-posts-detail" to={`/listings/${listing.id}`}>
+            <Link key={listing.id} className="user-posts-detail" to={`/listings/${listing.id}`}>
             <h5>{listing.listing_summary}</h5>
             <p>{listing.post_date}</p>
             </Link>)
 
 const user_subforums = user?.subforums.map((subforum) => 
-            <Link className="user-posts-detail" to={`/forums/${subforum.forum_id}`}>
+            <Link key={subforum.id} className="user-posts-detail" to={`/forums/${subforum.forum_id}`}>
                 <h5>{subforum.name}</h5>
                 <p>{subforum.post_date}</p>
             </Link>)
 
 const user_forum_posts = user?.forum_posts.map((post) => 
-        <Link className="user-posts-detail" to={`/subforums/${post.subforum_id}`}>
+        <Link key={post.id} className="user-posts-detail" to={`/subforums/${post.subforum_id}`}>
             <h5>{post.title_summary}</h5>
             <p>{post.post_date}</p>
         </Link>)
@@ -65,6 +64,7 @@ const user_forum_posts = user?.forum_posts.map((post) =>
                                 </ul>)}   
                     </div>
                 </div>
+                <div className="profile-divider"><span className="line"></span></div>
                 <div className='accountformcontainer'>
                     <span>
                         <h4 className='accountheader'>Your Profile</h4>

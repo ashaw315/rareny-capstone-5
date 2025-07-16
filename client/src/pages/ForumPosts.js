@@ -30,7 +30,6 @@ function ForumPosts({ post, user, currentSubforum, currentForumPost, handleDelet
           );
       }, [id]);
 
-      console.log(currentSubforum)
 
       function handleDeleteForumPost() {
         fetch(`/forums_posts/${id}`, {

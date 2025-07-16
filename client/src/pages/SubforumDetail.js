@@ -29,7 +29,6 @@ function SubforumDetail({ user, currentSubforum, setCurrentForumPost, currentFor
 
       function handleDeleteForumPost(deletedForumPost) {
         setSubforumData((subforumData) => {
-          console.log(subforumData)
           return {...subforumData, forum_posts: subforumData.forum_posts.filter((post) => {
             return post.id !== deletedForumPost.id 
           })}

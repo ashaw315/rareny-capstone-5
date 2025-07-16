@@ -28,7 +28,6 @@ function UserAccount({ user }){
         setAccountUpdatedNote('Account updates saved.')
     };
 
-    console.log(updatedAccount)
 
     return (
         <div className="subforums-forum-posts">

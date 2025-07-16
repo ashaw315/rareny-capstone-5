@@ -35,8 +35,8 @@ function Subforums({ user, currentForum, setCurrentSubforum, setCurrentSubforumT
                     </Link>
                 </div>
                 {subforums?.map((subforum) => 
-                <div className="forums-list">
-                    <Link className="forum-card" to={`/subforums/${subforum.id}`} key={subforum.id} onClick={() => setCurrentSubforum(subforum)}>
+                <div key={subforum.id} className="forums-list">
+                    <Link className="forum-card" to={`/subforums/${subforum.id}`} onClick={() => setCurrentSubforum(subforum)}>
                         <h2 className="forum-title" onClick={() => setCurrentSubforumTitle(subforum.name)}>{subforum.name}</h2>
                         <h2 className="forum-title-length">► {subforum.forum_posts_length} {subforum.forum_posts_length > 1 ? "subtopics" : "subtopic"}</h2> 
                     </Link>

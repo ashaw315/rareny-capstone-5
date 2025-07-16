@@ -56,7 +56,6 @@ Tell me what you think in the **comments** or share your own!
             );
     }, []);
 
-    console.log(currentForum.id)
 
     function handleSubmit(e) {
         e.preventDefault();

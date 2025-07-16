@@ -26,13 +26,12 @@ function Listings({ listings, setListings, user, handleListingsSearch, setSortBy
 
 const all_listings = filterListings?.map((listing) => {
     return (
-        <ListingsCard listing={listing}/>
+        <ListingsCard key={listing.id} listing={listing}/>
     )
 })
 
 function handleSortChange(event) {
     setSortBy(event.target.value);
-    console.log(event.target.value)
   }
   
 function valuetext(value) {
@@ -48,7 +47,6 @@ function handleSqFootRangeChange(e) {
 }
 
 
-console.log(priceValue)
 
     return (
         <div className="listings-main-page">

@@ -19,7 +19,6 @@ function ResourcesDetail(){
         });
     }, [id]);
 
-    console.log(resources)
 
     return (
         <div className="subforums-forum-posts">

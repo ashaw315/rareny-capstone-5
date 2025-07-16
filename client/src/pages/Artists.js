@@ -4,7 +4,6 @@ import ArtistCard from "../components/ArtistCard";
 
 function Artists({ artists }){
 
-// console.log(artists)
 
     return (
         <div className="artists-users">
@@ -13,8 +12,8 @@ function Artists({ artists }){
             </Link>
             <div className="display-artists">
             {artists?.map((artist) => 
-            <div className="artist-card-row">
-                <ArtistCard key={artist.id} artist={artist}/>
+            <div key={artist.id} className="artist-card-row">
+                <ArtistCard artist={artist}/>
             </div>)}
             </div>
         </div>

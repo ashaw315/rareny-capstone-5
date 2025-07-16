@@ -34,7 +34,6 @@ function ListingsDetail({ user, listings, setListings, onDeleteListing }){
         });
     }, [id]);
 
-    console.log(userData)
 
     function handleDelete() {
         fetch(`/listings/${id}`, {

@@ -40,7 +40,6 @@ function AritistResourceCard({ listing, resource }){
         return null;
       }
 
-      console.log(resource)
 
     return (
        <div className="resource-card">
@@ -76,7 +75,7 @@ function AritistResourceCard({ listing, resource }){
 
                 <div className="art-resource-modal-add-phone">
                 {resource.addresses.map((add) => 
-                <div className="art-resource-modal-address">
+                <div key={add.id || add.street} className="art-resource-modal-address">
                     <h3>{add.street}</h3>
                     <h3>{add.city}, {add.state}</h3>
                     <h3>{add.zip}</h3>
