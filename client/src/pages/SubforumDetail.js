@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link, useParams } from 'react-router-dom';
-import styled from "styled-components";
-import { Button } from '@mui/material';
+import { useAppSelector } from '../store/hooks';
+import { Button } from "../components/ui";
 import ForumPostCard from "../components/ForumPostCard";
 import '../App.css'
 
 
 
-function SubforumDetail({ user, currentSubforum, setCurrentForumPost, currentForum }){
+function SubforumDetail(){
+    const { user } = useAppSelector((state) => state.auth);
     const {id} = useParams();
     const [forumPosts, setForumPosts] = useState([])
     const [subforumData, setSubforumData] = useState([])
@@ -40,14 +41,14 @@ function SubforumDetail({ user, currentSubforum, setCurrentForumPost, currentFor
            <Link className="forum-card" to={'/forums'}>
                 <h2 className="forum-header-title">Forum.</h2>
             </Link>
-            <Button className="go-back-button" sx={{ color: "black", fontSize: 25, border: "2px black solid" }} onClick={() => navigate(`/forums/${currentForum.id}`)}>Go Back</Button>
+            <Button className="go-back-button" sx={{ color: "black", fontSize: 25, border: "2px black solid" }} onClick={() => navigate(`/forums/${subforumData.forum_id || ''}`)}>Go Back</Button>
             <h3 className="subforum-title">{subforumData.forum} / {subforumData.name}</h3>
             <div className='postforumlink'>
-              <Link className='postforumlink' to='/new_forum_post'>
+              <Link className='postforumlink' to='/new_forum_post' state={{ subforumId: id, subforumName: subforumData.name }}>
                   <Button className='newforumpostbutton' sx={{ color: "white", width: "25%", border: "2px black solid" }}>Add to this discussion.</Button>
               </Link>
             </div>
-              <ForumPostCard subforumData={subforumData} user={user} currentSubforum={currentSubforum} setCurrentForumPost={setCurrentForumPost} forumPosts={forumPosts} onDeleteForumPost={handleDeleteForumPost} />
+              <ForumPostCard subforumData={subforumData} user={user} forumPosts={forumPosts} onDeleteForumPost={handleDeleteForumPost} />
       </div>
     );
   }

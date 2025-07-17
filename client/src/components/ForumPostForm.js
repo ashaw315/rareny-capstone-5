@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, Link, useParams } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { useAppSelector } from '../store/hooks';
 import styled from "styled-components";
 import ReactMarkdown from 'react-markdown';
 import FormField from "../styles/FormField";
 import Label from "../styles/Label";
 import Textarea from "../styles/TextArea";
 import Input from "../styles/Input";
-import { Button } from '@mui/material';
+import { Button } from './ui';
 
 const Wrapper = styled.section`
   max-width: 1000px;
@@ -20,8 +21,14 @@ const WrapperChild = styled.div`
   flex: 1;
 `;
 
-function ForumPostForm({ user, currentSubforum, currentSubForumTitle }){
-    const {id} = useParams();
+function ForumPostForm(){
+    const { user } = useAppSelector((state) => state.auth);
+    const location = useLocation();
+    const navigate = useNavigate();
+    
+    // Get subforum data from location state
+    const [subforumId, setSubforumId] = useState(null);
+    const [subforumName, setSubforumName] = useState('');
     const [title, setTitle] = useState('')
     const [instructions, setInstructions] = useState(`Here's how you make a post.
   
@@ -44,17 +51,33 @@ Tell me what you think in the **comments** or share your own!
     const [forumPosts, setForumPosts] = useState([])
     const [errors, setErrors] = useState([])
 
-    const navigate = useNavigate();
-
     useEffect(() => {
+        // Get subforum data from location state
+        if (location.state?.subforumId) {
+            setSubforumId(location.state.subforumId);
+            setSubforumName(location.state.subforumName || '');
+        }
+
         fetch("/forum_posts")
-            .then((r) => r.json()
-                .then((data) => setForumPosts(data))
-            );
-    }, []);
+            .then((r) => r.json())
+            .then((data) => setForumPosts(data))
+            .catch((error) => console.error('Failed to fetch forum posts:', error));
+    }, [location]);
 
     function handleSubmit(e) {
         e.preventDefault();
+        
+        // Validate required data
+        if (!user?.id) {
+            setErrors(['You must be logged in to create a forum post']);
+            return;
+        }
+        
+        if (!subforumId) {
+            setErrors(['Subforum ID is missing. Please navigate back to the subforum and try again.']);
+            return;
+        }
+        
         fetch("/forum_posts", {
             method: "POST",
             headers: {
@@ -64,18 +87,24 @@ Tell me what you think in the **comments** or share your own!
                     user_id: user.id,
                     title: title,
                     body: instructions,
-                    subforum_id: currentSubforum.id,
+                    subforum_id: subforumId,
             }),
         })
             .then((r) => {
                 if (r.ok) {
-                    r.json().then((data) => setForumPosts([data,...forumPosts]))
-                    .then(navigate(`/subforums/${currentSubforum.id}`))
+                    r.json().then((data) => {
+                        setForumPosts([data,...forumPosts]);
+                        navigate(`/subforums/${subforumId}`);
+                    });
                   } else {
                       r.json().then((err) => setErrors(err.errors));
                   }
                 })
-            };
+            .catch((error) => {
+                console.error('Error creating forum post:', error);
+                setErrors(['Failed to create forum post. Please try again.']);
+            });
+    };
 
     return (
         <div className="subforums-forum-posts">
@@ -84,7 +113,7 @@ Tell me what you think in the **comments** or share your own!
             </Link>
             <Button className="go-back-button" sx={{ color: "black", fontSize: 25, border: "2px black solid" }} onClick={() => navigate(-1)}>Go Back</Button>
             <div className="subforum-form-style">
-            <h2 className="subforum-title">{currentSubforum.name} / (New Post)</h2>
+            <h2 className="subforum-title">{subforumName || 'Loading...'} / (New Post)</h2>
             <Wrapper className="subforum-form-wrapper">
                 <WrapperChild>
                     <form onSubmit={handleSubmit}>

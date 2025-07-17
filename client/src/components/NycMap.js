@@ -1,7 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from 'react-router-dom';
+import Tooltip from './ui/Tooltip';
 
 function NycMap({ borough, setCurrentBorough }) {
+    const [tooltip, setTooltip] = useState({
+        visible: false,
+        content: '',
+        position: { x: 0, y: 0 }
+    });
+
+    const handleMouseEnter = (e, boroughName) => {
+        setTooltip({
+            visible: true,
+            content: boroughName,
+            position: {
+                x: e.clientX + 15,
+                y: e.clientY - 60
+            }
+        });
+    };
+
+    const handleMouseMove = (e) => {
+        if (tooltip.visible) {
+            setTooltip(prev => ({
+                ...prev,
+                position: {
+                    x: e.clientX + 15,
+                    y: e.clientY - 60
+                }
+            }));
+        }
+    };
+
+    const handleMouseLeave = () => {
+        setTooltip(prev => ({
+            ...prev,
+            visible: false
+        }));
+    };
 
 
 
@@ -12,7 +48,13 @@ function NycMap({ borough, setCurrentBorough }) {
             <div className="nyc-map-container">
             <svg version="1.1" x="0px" y="0px"
 	         	viewBox="0 0 900 900">
-				<Link className="staten" to={`/resources/5`}>
+				<Link 
+                    className="staten" 
+                    to={`/resources/5`}
+                    onMouseEnter={(e) => handleMouseEnter(e, "Staten Island")}
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
+                >
 					<g id="staten" data-hover="Staten Island">
 						<g >
 							<path d="M356.7,644.7c1.1,0.9,3.7,1.3,3.6,3c0,1.1-1.1,2.1-1.6,3c-0.4,0.8-0.7,1.7-1,2.6c-0.7,2-1.4,4-2.3,6
@@ -78,7 +120,13 @@ function NycMap({ borough, setCurrentBorough }) {
 					</g>
 				</g>
 				 </Link>
-				<Link className="borough-button-links" to={`/resources/1`} >
+				<Link 
+                    className="borough-button-links" 
+                    to={`/resources/1`}
+                    onMouseEnter={(e) => handleMouseEnter(e, "Manhattan")}
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
+                >
 				<g id="manhattan" className="manhattan">
 					<g>
 					<path d="M534.7,220.7c0.6,2.6-0.5,6.7-2.1,8.8c-0.7,0.9-1.7,1.6-2.7,2c-0.8,0.3-1.8,0.3-2.4,1c0.8,0.4,1.4,0.7,1.3,1.7
@@ -128,7 +176,13 @@ function NycMap({ borough, setCurrentBorough }) {
 						</g>
 				</g>
 				</Link>
-				<Link className="borough-button-links" to={`/resources/4`}>
+				<Link 
+                    className="borough-button-links" 
+                    to={`/resources/4`}
+                    onMouseEnter={(e) => handleMouseEnter(e, "The Bronx")}
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
+                >
 				<g id="bronx" className="bronx">
 					<g>
 					<path d="M689.1,265.2c0.7-1.3,4.8-0.2,3.2-2.5c-0.5-0.7-1.6-0.8-2.3-1.3s-1-1.1-1.1-2c-0.1-1.3,0.1-2.9-0.4-4.1
@@ -204,7 +258,13 @@ function NycMap({ borough, setCurrentBorough }) {
 						</g>
 				</g>
 				</Link>
-				<Link className="borough-button-links" to={`/resources/3`}>
+				<Link 
+                    className="borough-button-links" 
+                    to={`/resources/3`}
+                    onMouseEnter={(e) => handleMouseEnter(e, "Queens")}
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
+                >
 				<g id="queens" className="queens uni">
 					<g>
 						<path d="M632.1,658.4c1.1-0.2,2.3-0.3,3.4-0.4c0,0.5-0.1,1.1,0.2,1.5c0.5,0.7,0.8,0.1,1.1-0.3c0.5-0.5,0.9-0.8,1.5-1
@@ -349,7 +409,13 @@ function NycMap({ borough, setCurrentBorough }) {
 					</g>
 				</g>
 				</Link>
-				<Link className="borough-button-links" to={`/resources/2`}>
+				<Link 
+                    className="borough-button-links" 
+                    to={`/resources/2`}
+                    onMouseEnter={(e) => handleMouseEnter(e, "Brooklyn")}
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
+                >
 				<g id="brooklyn" className="brooklyn">
 					<path d="M596.6,555.5c0.4-0.4,0.5-0.4,0.9-0.6c0,0,0.2-0.1,0.4-0.3c4.5-3.4,1.4-21.4,1.4-21.4c-0.5-3.2-1.3-7.8-2.9-13.2
 						c-0.7-2.2-1.3-4.3-2.5-6.9c-2.6-5.8-5-11.3-8.6-11.7c-2.5-0.3-6.1,3-13.1,9.8c-2.1,2.1-4.7,4.8-8.9,5.9c-1.6,0.4-3.4,1-5.1,0.1
@@ -401,7 +467,11 @@ function NycMap({ borough, setCurrentBorough }) {
 				</Link>
 				</svg>
             </div>
-			
+            <Tooltip
+                content={tooltip.content}
+                position={tooltip.position}
+                visible={tooltip.visible}
+            />
         </div>
     )
 }

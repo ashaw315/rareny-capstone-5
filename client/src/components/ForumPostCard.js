@@ -4,10 +4,10 @@ import styled from "styled-components";
 import ReactMarkdown from 'react-markdown';
 import Box from "../styles/Box";
 import CommentCard from "./CommentCard";
-import { Button } from "@mui/material";
+import { Button } from './ui';
 import '../App.css'
 
-function ForumPostCard({ user, subforumData, currentSubforum, setCurrentForumPost, onDeleteForumPost, forumPosts }){
+function ForumPostCard({ user, subforumData, onDeleteForumPost, forumPosts }){
     
   const {id} = useParams();
   
@@ -19,7 +19,7 @@ function ForumPostCard({ user, subforumData, currentSubforum, setCurrentForumPos
       }).then((r) => {
         if (r.ok) {
           onDeleteForumPost(post);
-          navigate(`/subforums/${currentSubforum.id}`)
+          navigate(`/subforums/${id}`)
         }
       });
     }
@@ -38,7 +38,7 @@ function ForumPostCard({ user, subforumData, currentSubforum, setCurrentForumPos
                       <ReactMarkdown >{post.body}</ReactMarkdown>
                     </div>
                     <div className="forum-post-link-position">
-                    <Link className="forum-comment-card" to={`/new_comment`} onClick={() => setCurrentForumPost(post)}>
+                    <Link className="forum-comment-card" to={`/new_comment`} state={{ forumPostId: post.id, subforumId: id }}>
                         <Button className='newcommentmbutton' sx={{ color: "black", width: "30%", border: "2px black solid" }}>Add a comment</Button>
                     </Link>
                     {user ? (<div>

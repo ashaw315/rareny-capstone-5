@@ -1,66 +1,105 @@
 import React, { useState } from "react";
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import { Button, Card, Modal } from './ui';
+import styled from 'styled-components';
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 900,
-    height: 800,
-    bgcolor: 'background.paper',
-    border: '5px solid #000',
-    boxShadow: 24,
-    p: 4,
-    overflow:'scroll',
-  };
+const StyledCard = styled(Card)`
+  min-width: 500px;
+  min-height: 300px;
+  cursor: pointer;
+  transition: transform ${({ theme }) => theme.transition.base};
+  
+  &:hover {
+    transform: translateY(-4px);
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    min-width: 100%;
+    min-height: 200px;
+  }
+`;
+
+const ModalContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing[4]};
+  max-height: 80vh;
+  overflow-y: auto;
+`;
+
+const ArtistName = styled.h1`
+  font-size: ${({ theme }) => theme.typography.fontSize['3xl']};
+  color: ${({ theme }) => theme.colors.text.primary};
+  margin: 0;
+  text-align: center;
+`;
+
+const ArtistDiscipline = styled.h3`
+  font-size: ${({ theme }) => theme.typography.fontSize.xl};
+  color: ${({ theme }) => theme.colors.text.secondary};
+  margin: 0;
+  text-align: center;
+`;
+
+const ArtistBio = styled.p`
+  font-size: ${({ theme }) => theme.typography.fontSize.base};
+  color: ${({ theme }) => theme.colors.text.primary};
+  line-height: ${({ theme }) => theme.typography.lineHeight.relaxed};
+  margin: 0;
+`;
+
+const WebsiteLink = styled.a`
+  color: ${({ theme }) => theme.colors.accent.blue};
+  text-decoration: none;
+  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
+  text-align: center;
+  display: block;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+`;
 
 function ArtistCard({ artist }){
-
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-
     return (
-        <div className="artist-card">
-        <Card className='full-card-wrap' sx={{ minWidth: 500, minHeight: 300, border: 3 }}>
-        <CardContent >
-        </CardContent>
-        <div className="card-wrap">
-        <CardActions>
-            <Button className="button-wrap" sx={{ color: "black", border: 3, mx: "auto", mt: 9, fontSize: 30  }} onClick={handleOpen} >{artist.username}</Button>
-        </CardActions>
-        </div>
-    </Card>
-        <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"            
+        <>
+            <StyledCard variant="outlined" padding="lg" interactive onClick={handleOpen}>
+                <Card.Content>
+                    <Card.Actions align="center">
+                        <Button variant="outline" size="lg" fullWidth>
+                            {artist.username}
+                        </Button>
+                    </Card.Actions>
+                </Card.Content>
+            </StyledCard>
+            
+            <Modal
+                isOpen={open}
+                onClose={handleClose}
+                title={artist.username}
+                size="lg"
             >
-            <Box  className="artist-box" sx={style}>
-                <h1 className="artist-modal-header">{artist.username}</h1>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    <div className="artist-modal" >
-                        <h3 className="artist-discipline">{artist.discipline}</h3>
-                                    
-                        <p className="artist-bio">{artist.bio}</p>
-                        <div className="artist-website">
-                            <a  className="website-link" href={artist.website} target="_blank">Website</a>
-                        </div>
-                    </div>
-                </Typography>
-            </Box>
-        </Modal>
-        </div>
-    )
+                <ModalContent>
+                    <ArtistDiscipline>{artist.discipline}</ArtistDiscipline>
+                    
+                    <ArtistBio>{artist.bio}</ArtistBio>
+                    
+                    {artist.website && (
+                        <WebsiteLink 
+                            href={artist.website} 
+                            target="_blank" 
+                            rel="noreferrer"
+                        >
+                            Visit Website
+                        </WebsiteLink>
+                    )}
+                </ModalContent>
+            </Modal>
+        </>
+    );
 }
 
 export default ArtistCard;

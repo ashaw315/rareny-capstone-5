@@ -6,9 +6,7 @@ import { fetchListings } from './store/slices/listingsSlice';
 import { fetchUsers, setBoroughs } from './store/slices/userSlice';
 import { fetchForums, fetchSubforums } from './store/slices/forumSlice';
 import ErrorBoundary from './components/ErrorBoundary';
-
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import ThemeProvider from './theme/ThemeProvider';
 
 // Components
 import NavBar from './components/NavBar/NavBar';
@@ -60,8 +58,9 @@ function App() {
   }, [dispatch, isAuthenticated]);
 
   return (
-    <ErrorBoundary fallbackMessage="The application encountered an error. Please refresh the page.">
-      <div>
+    <ThemeProvider>
+      <ErrorBoundary fallbackMessage="The application encountered an error. Please refresh the page.">
+        <div className="container">
         <ErrorBoundary fallbackMessage="Navigation bar failed to load.">
           <NavBar />
         </ErrorBoundary>
@@ -175,8 +174,9 @@ function App() {
             </ErrorBoundary>
           }/>
         </Routes>
-      </div>
-    </ErrorBoundary>
+        </div>
+      </ErrorBoundary>
+    </ThemeProvider>
   );
 }
 

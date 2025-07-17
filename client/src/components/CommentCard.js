@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Box from "../styles/Box";
 import styled from "styled-components";
-import Button from '@mui/material/Button';
+import { Button } from './ui';
 
 const Wrapper = styled.section`
   max-width: 800px;

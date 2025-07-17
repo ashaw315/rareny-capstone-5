@@ -1,11 +1,8 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import ListingsCard from "../../components/ListingsCard";
-import { Button } from '@mui/material';
+import { Button, Input } from '../../components/ui';
 import './Listings.css';
-import Box from '@mui/material/Box';
-import Slider from '@mui/material/Slider';
-import Input from "../../styles/Input";
 import styled from "styled-components";
 
 const Wrapper = styled.section`
@@ -71,35 +68,31 @@ function handleSqFootRangeChange(e) {
                     </select>
                 </WrapperChild>
                 <WrapperChild>
-                    <h4>Price</h4>
-                    <Box className="listing-slider" sx={{ m: 1, width: 490 }}>
-                    <Slider sx={{ color: "black"}}
-                        getAriaLabel={() => 'Price Range'}
+                    <Input
+                        label="Max Price"
+                        type="range"
+                        min="0"
+                        max="3000"
                         value={priceValue}
                         onChange={handlePriceRangeChange}
-                        valueLabelDisplay="auto"
-                        getAriaValueText={valuetext}
-                        min={0}
-                        max={3000}
                     />
-                    </Box>
+                    <div>Price Range: $0 - ${priceValue}</div>
             </WrapperChild>
 
-            <h4>Sq Footage</h4>
-            <Box sx={{ m: 1, width: 490 }}>
-            <Slider sx={{ color: "black"}}
-                getAriaLabel={() => 'Sq Footage Range'}
-                value={sqFootValue}
-                onChange={handleSqFootRangeChange}
-                valueLabelDisplay="auto"
-                getAriaValueText={valuetext}
-                min={0}
-                max={3000}
-            />
-            </Box>
+            <WrapperChild>
+                    <Input
+                        label="Max Square Footage"
+                        type="range"
+                        min="0"
+                        max="3000"
+                        value={sqFootValue}
+                        onChange={handleSqFootRangeChange}
+                    />
+                    <div>Sq Footage: 0 - {sqFootValue} sqft</div>
+            </WrapperChild>
             <WrapperChild2>
             <Link className='listinglink' to='/listingform'>
-                <Button className='newlistingbutton' sx={{ color: "black", fontSize: 25, border: "2px black solid", mx: "auto" }}>Add Listing</Button>
+                <Button variant="primary" size="lg">Add Listing</Button>
             </Link>
                 </WrapperChild2>
             </Wrapper>

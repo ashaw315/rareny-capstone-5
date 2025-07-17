@@ -1,9 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from '../store/hooks';
+import { setBoroughs, setCurrentBorough } from '../store/slices/userSlice';
 import NycMap from "../components/NycMap";
 import BoroughNameLinks from "../components/BoroughNameLinks"
 
-function Resources({boroughs, setCurrentBorough}){
+function Resources(){
+    const dispatch = useAppDispatch();
+    const boroughs = useAppSelector((state) => state.users.boroughs);
+    
+    const handleSetCurrentBorough = (borough) => {
+        dispatch(setCurrentBorough(borough));
+    };
+
+    useEffect(() => {
+        // Fetch boroughs if not already loaded
+        if (boroughs.length === 0) {
+            fetch('/boroughs')
+                .then((r) => r.json())
+                .then((data) => dispatch(setBoroughs(data)))
+                .catch((error) => console.error('Failed to fetch boroughs:', error));
+        }
+    }, [boroughs.length, dispatch]);
  
     return (
         <div className="subforums-forum-posts">
@@ -20,7 +38,7 @@ function Resources({boroughs, setCurrentBorough}){
             </div>
             {boroughs ? boroughs?.map((borough, index) => 
             <div key={borough.id} className={`boroughs-${index}`}>
-                <NycMap borough={borough} setCurrentBorough={setCurrentBorough}/>
+                <NycMap borough={borough} setCurrentBorough={handleSetCurrentBorough}/>
             </div>): null }
             {/* <div id="hide">SHOW</div> */}
             {/* <NycMap /> */}
@@ -28,7 +46,7 @@ function Resources({boroughs, setCurrentBorough}){
             <div className="resource-borough-names">
                 {boroughs?.map((borough) => 
                 <div key={borough.id}>
-                    <BoroughNameLinks borough={borough} setCurrentBorough={setCurrentBorough}/>
+                    <BoroughNameLinks borough={borough} setCurrentBorough={handleSetCurrentBorough}/>
                     {/* <h3 className="name-button-links" key={borough.id}>{borough.name}</h3> */}
                 </div>
                 )}

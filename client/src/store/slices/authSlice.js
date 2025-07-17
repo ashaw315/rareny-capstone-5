@@ -48,6 +48,28 @@ export const logoutUser = createAsyncThunk(
   }
 );
 
+export const signupUser = createAsyncThunk(
+  'auth/signupUser',
+  async (userData, { rejectWithValue }) => {
+    try {
+      const response = await fetch('/signup', {
+        method: 'POST',
+        body: userData, // FormData object
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        return rejectWithValue(errorData.errors || 'Signup failed');
+      }
+      
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return rejectWithValue('Network error occurred');
+    }
+  }
+);
+
 export const checkAuthStatus = createAsyncThunk(
   'auth/checkAuthStatus',
   async (_, { rejectWithValue }) => {
@@ -105,6 +127,22 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        state.isAuthenticated = false;
+      })
+      // Signup cases
+      .addCase(signupUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(signupUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+        state.isAuthenticated = true;
+        state.error = null;
+      })
+      .addCase(signupUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
         state.isAuthenticated = false;

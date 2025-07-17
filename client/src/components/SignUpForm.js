@@ -1,13 +1,15 @@
 import React, {useState} from "react";
 import {useNavigate, Link} from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { signupUser } from '../store/slices/authSlice';
 import Textarea from "../styles/TextArea";
 import FormField from "../styles/FormField";
 import Label from "../styles/Label";
-import { Button } from "@mui/material";
+import { Button } from './ui';
 
 
 
-function SignUpForm({ setUser }) {
+function SignUpForm() {
 const [username, setUsername] = useState('')
 const [password, setPassword] = useState('')
 const [passwordConfirmation, setPasswordConfirmation] = useState('')
@@ -16,8 +18,10 @@ const [discipline, setDiscipline] = useState('')
 const [bio, setBio] = useState('')
 // const [profilePicture, setProfilePicture] = useState('')
 const navigate = useNavigate();
+const dispatch = useAppDispatch();
 
-const [errors, setErrors] = useState([])
+const { loading, error } = useAppSelector((state) => state.auth);
+const [localErrors, setLocalErrors] = useState([])
 
 // const handleProfilePicChange = e => {
 //     e.persist();
@@ -48,38 +52,51 @@ const handleBioChange = e => {
     setBio(e.target.value);
   };  
 
-function handleSubmit(e) {
+async function handleSubmit(e) {
     e.preventDefault();
+    setLocalErrors([]);
+    
     const userData = new FormData();
     userData.append('username', username)
     userData.append('password', password)
-    userData.append('passwordConfirmation', passwordConfirmation)
+    userData.append('password_confirmation', passwordConfirmation)
     userData.append('website', website)
     userData.append('discipline', discipline)
     userData.append('bio', bio)
     
-    fetch('/signup', {
-        method: "POST",
-        body: userData,
-    })
-    .then((r) => {
-        if (r.ok) {
-          r.json().then((user) => setUser(user))
-          .then(navigate('/'))
-        } else {
-            r.json().then((err) => setErrors(err.errors));
+    try {
+      const result = await dispatch(signupUser(userData));
+      
+      if (signupUser.fulfilled.match(result)) {
+        // Success - navigate to home
+        navigate('/');
+        
+        // Optional: Also create chat engine user
+        try {
+          await fetch('https://api.chatengine.io/users/', {
+            method: 'POST',
+            headers: {
+              'PRIVATE-KEY': '{{4fbd9907-dda4-461e-bf57-83477785aa07}}'
+            },
+            body: JSON.stringify({
+              username: username,
+              secret: password,
+            }),
+          });
+        } catch (chatError) {
+          console.warn('Chat engine user creation failed:', chatError);
         }
-      })
-      fetch('https://api.chatengine.io/users/', {
-        method: 'POST',
-        headers: {
-          'PRIVATE-KEY': '{{4fbd9907-dda4-461e-bf57-83477785aa07}}'
-        },
-        body: JSON.stringify({
-          username: username,
-          secret: password,
-        }),
-      })
+      } else {
+        // Handle signup errors
+        if (Array.isArray(result.payload)) {
+          setLocalErrors(result.payload);
+        } else {
+          setLocalErrors([result.payload || 'Signup failed']);
+        }
+      }
+    } catch (err) {
+      setLocalErrors(['An unexpected error occurred']);
+    }
   };
 
 
@@ -161,9 +178,18 @@ function handleSubmit(e) {
                 required
                 /> */}
                 <div className='accountbuttoncenter'>
-                <input className='accountbutton' type="submit"/>
+                <Button 
+                  type="submit" 
+                  variant="primary" 
+                  size="lg"
+                  loading={loading}
+                  disabled={loading}
+                >
+                  {loading ? 'Creating Account...' : 'Sign Up'}
+                </Button>
                 </div>
-                {errors.map((e)=><p key={e}>{e}</p>)}
+                {localErrors.map((e, index)=><p key={index} style={{color: 'red'}}>{e}</p>)}
+                {error && <p style={{color: 'red'}}>{error}</p>}
             </form>
         </div>
       </div>

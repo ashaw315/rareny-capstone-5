@@ -575,6 +575,7 @@ font-size: 25px;
     stroke: #ffffff;
     stroke-width: 2px;
     transition: 0.5s ease;
+    cursor: pointer;
   }
   
   .manhattan:hover {
@@ -589,7 +590,7 @@ font-size: 25px;
     stroke: #ffffff;
     stroke-width: 2px;
     transition: 0.5s ease;
-    
+    cursor: pointer;
   }
 
   .staten:hover  {
@@ -604,6 +605,7 @@ font-size: 25px;
     stroke: #ffffff;
     stroke-width: 2px;
     transition: 0.5s ease;
+    cursor: pointer;
   }
   
   .bronx:hover {
@@ -618,6 +620,7 @@ font-size: 25px;
     stroke: #ffffff;
     stroke-width: 2px;
     transition: 0.5s ease;
+    cursor: pointer;
   }
   
   .queens:hover {
@@ -632,6 +635,7 @@ font-size: 25px;
     stroke: #ffffff;
     stroke-width: 2px;
     transition: 0.5s ease;
+    cursor: pointer;
   }
   
   .brooklyn:hover {

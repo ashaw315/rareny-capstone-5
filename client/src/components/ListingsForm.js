@@ -4,11 +4,7 @@ import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { createListing } from '../store/slices/listingsSlice';
 import ImageUpload from './ImageUpload';
 import ErrorBoundary from './ErrorBoundary';
-
-import Label from "../styles/Label";
-import Input from "../styles/Input";
-import Textarea from "../styles/TextArea";
-import { Button } from '@mui/material';
+import { Button, Input, Select, Card } from './ui';
 import styled from "styled-components";
 
 const Wrapper = styled.section`
@@ -147,177 +143,177 @@ function ListingsForm() {
     <ErrorBoundary fallbackMessage="Listing form failed to load.">
       <Wrapper>
         <WrapperChild>
-          <h2>Create New Listing</h2>
-          
-          {errors.length > 0 && (
-            <ErrorMessage>
-              <ul style={{ margin: 0, paddingLeft: '20px' }}>
-                {errors.map((error, index) => (
-                  <li key={index}>{error}</li>
-                ))}
-              </ul>
-            </ErrorMessage>
-          )}
+          <Card padding="lg">
+            <Card.Header>
+              <Card.Title>Create New Listing</Card.Title>
+            </Card.Header>
+            
+            <Card.Content>
+              {errors.length > 0 && (
+                <ErrorMessage>
+                  <ul style={{ margin: 0, paddingLeft: '20px' }}>
+                    {errors.map((error, index) => (
+                      <li key={index}>{error}</li>
+                    ))}
+                  </ul>
+                </ErrorMessage>
+              )}
 
-          {error && (
-            <ErrorMessage>
-              {error}
-            </ErrorMessage>
-          )}
+              {error && (
+                <ErrorMessage>
+                  {error}
+                </ErrorMessage>
+              )}
 
-          <form onSubmit={handleSubmit}>
-            <FormSection>
-              <Label>Title *</Label>
-              <Input
-                type="text"
-                name="title"
-                value={formData.title}
-                onChange={handleInputChange}
-                placeholder="Enter listing title"
-                required
-              />
-            </FormSection>
+              <form onSubmit={handleSubmit}>
+                <FormSection>
+                  <Input
+                    label="Title"
+                    type="text"
+                    name="title"
+                    value={formData.title}
+                    onChange={handleInputChange}
+                    placeholder="Enter listing title"
+                    required
+                  />
+                </FormSection>
 
-            <FormSection>
-              <Label>Neighborhood *</Label>
-              <Input
-                type="text"
-                name="neighborhood"
-                value={formData.neighborhood}
-                onChange={handleInputChange}
-                placeholder="Enter neighborhood"
-                required
-              />
-            </FormSection>
+                <FormSection>
+                  <Input
+                    label="Neighborhood"
+                    type="text"
+                    name="neighborhood"
+                    value={formData.neighborhood}
+                    onChange={handleInputChange}
+                    placeholder="Enter neighborhood"
+                    required
+                  />
+                </FormSection>
 
-            <FormSection>
-              <Label>Borough *</Label>
-              <select
-                name="nycBorough"
-                value={formData.nycBorough}
-                onChange={handleInputChange}
-                style={{
-                  width: '100%',
-                  padding: '8px',
-                  border: '1px solid #ccc',
-                  borderRadius: '4px'
-                }}
-                required
-              >
-                <option value="">Select Borough</option>
-                {boroughs.map((borough) => (
-                  <option key={borough} value={borough}>
-                    {borough}
-                  </option>
-                ))}
-              </select>
-            </FormSection>
+                <FormSection>
+                  <Select
+                    label="Borough"
+                    name="nycBorough"
+                    value={formData.nycBorough}
+                    onChange={handleInputChange}
+                    required
+                  >
+                    <option value="">Select Borough</option>
+                    {boroughs.map((borough) => (
+                      <option key={borough} value={borough}>
+                        {borough}
+                      </option>
+                    ))}
+                  </Select>
+                </FormSection>
 
-            <FormSection>
-              <Label>Price ($) *</Label>
-              <Input
-                type="number"
-                name="price"
-                value={formData.price}
-                onChange={handleInputChange}
-                placeholder="Enter price"
-                min="0"
-                required
-              />
-            </FormSection>
+                <FormSection>
+                  <Input
+                    label="Price ($)"
+                    type="number"
+                    name="price"
+                    value={formData.price}
+                    onChange={handleInputChange}
+                    placeholder="Enter price"
+                    min="0"
+                    required
+                  />
+                </FormSection>
 
-            <FormSection>
-              <Label>Square Footage *</Label>
-              <Input
-                type="number"
-                name="sqFootage"
-                value={formData.sqFootage}
-                onChange={handleInputChange}
-                placeholder="Enter square footage"
-                min="0"
-                required
-              />
-            </FormSection>
+                <FormSection>
+                  <Input
+                    label="Square Footage"
+                    type="number"
+                    name="sqFootage"
+                    value={formData.sqFootage}
+                    onChange={handleInputChange}
+                    placeholder="Enter square footage"
+                    min="0"
+                    required
+                  />
+                </FormSection>
 
-            <FormSection>
-              <Label>Email *</Label>
-              <Input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                placeholder="Enter contact email"
-                required
-              />
-            </FormSection>
+                <FormSection>
+                  <Input
+                    label="Email"
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="Enter contact email"
+                    required
+                  />
+                </FormSection>
 
-            <FormSection>
-              <Label>Description *</Label>
-              <Textarea
-                name="description"
-                value={formData.description}
-                onChange={handleInputChange}
-                placeholder="Enter detailed description"
-                rows="4"
-                required
-              />
-            </FormSection>
+                <FormSection>
+                  <Input
+                    label="Description"
+                    multiline
+                    name="description"
+                    value={formData.description}
+                    onChange={handleInputChange}
+                    placeholder="Enter detailed description"
+                    rows="4"
+                    required
+                  />
+                </FormSection>
 
-            <FormSection>
-              <h3>Images</h3>
-              <ImageUpload
-                imageFile={images.image1}
-                onImageChange={(file) => handleImageChange('image1', file)}
-                onImageRemove={() => handleImageRemove('image1')}
-                label="Primary Image"
-              />
-              <ImageUpload
-                imageFile={images.image2}
-                onImageChange={(file) => handleImageChange('image2', file)}
-                onImageRemove={() => handleImageRemove('image2')}
-                label="Image 2"
-              />
-              <ImageUpload
-                imageFile={images.image3}
-                onImageChange={(file) => handleImageChange('image3', file)}
-                onImageRemove={() => handleImageRemove('image3')}
-                label="Image 3"
-              />
-              <ImageUpload
-                imageFile={images.image4}
-                onImageChange={(file) => handleImageChange('image4', file)}
-                onImageRemove={() => handleImageRemove('image4')}
-                label="Image 4"
-              />
-              <ImageUpload
-                imageFile={images.image5}
-                onImageChange={(file) => handleImageChange('image5', file)}
-                onImageRemove={() => handleImageRemove('image5')}
-                label="Image 5"
-              />
-            </FormSection>
-
-            <div style={{ marginTop: '30px', textAlign: 'center' }}>
+                <FormSection>
+                  <h3>Images</h3>
+                  <ImageUpload
+                    imageFile={images.image1}
+                    onImageChange={(file) => handleImageChange('image1', file)}
+                    onImageRemove={() => handleImageRemove('image1')}
+                    label="Primary Image"
+                  />
+                  <ImageUpload
+                    imageFile={images.image2}
+                    onImageChange={(file) => handleImageChange('image2', file)}
+                    onImageRemove={() => handleImageRemove('image2')}
+                    label="Image 2"
+                  />
+                  <ImageUpload
+                    imageFile={images.image3}
+                    onImageChange={(file) => handleImageChange('image3', file)}
+                    onImageRemove={() => handleImageRemove('image3')}
+                    label="Image 3"
+                  />
+                  <ImageUpload
+                    imageFile={images.image4}
+                    onImageChange={(file) => handleImageChange('image4', file)}
+                    onImageRemove={() => handleImageRemove('image4')}
+                    label="Image 4"
+                  />
+                  <ImageUpload
+                    imageFile={images.image5}
+                    onImageChange={(file) => handleImageChange('image5', file)}
+                    onImageRemove={() => handleImageRemove('image5')}
+                    label="Image 5"
+                  />
+                </FormSection>
+              </form>
+            </Card.Content>
+            
+            <Card.Actions align="center">
               <Button
                 type="submit"
-                variant="contained"
-                color="primary"
-                disabled={loading}
-                style={{ marginRight: '10px' }}
+                variant="primary"
+                loading={loading}
+                onClick={handleSubmit}
               >
-                {loading ? 'Creating...' : 'Create Listing'}
+                Create Listing
               </Button>
               
               <Button
                 type="button"
-                variant="outlined"
+                variant="secondary"
                 onClick={() => navigate('/listings')}
                 disabled={loading}
               >
                 Cancel
               </Button>
-            </div>
-          </form>
+            </Card.Actions>
+          </Card>
         </WrapperChild>
       </Wrapper>
     </ErrorBoundary>

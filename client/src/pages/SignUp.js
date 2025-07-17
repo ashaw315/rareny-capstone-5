@@ -2,11 +2,11 @@ import React, {useState} from "react";
 import SignUpForm from '../components/SignUpForm'
 
 
-function SignUp({ setUser }) {
+function SignUp() {
 
     return(
         <div>
-            <SignUpForm setUser={setUser}/>
+            <SignUpForm />
         </div>
     )
 }

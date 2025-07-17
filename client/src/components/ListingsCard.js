@@ -1,54 +1,57 @@
 import React from "react";
 import { Link } from 'react-router-dom'
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea, CardActions } from '@mui/material';
+import { Card } from './ui';
+import styled from 'styled-components';
+
+const StyledCard = styled(Card)`
+  max-width: 445px;
+  cursor: pointer;
+  transition: transform ${({ theme }) => theme.transition.base};
+  
+  &:hover {
+    transform: translateY(-4px);
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    max-width: 100%;
+  }
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;
+
+const ListingImage = styled.img`
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+`;
+
+const Price = styled.span`
+  font-size: ${({ theme }) => theme.typography.fontSize.lg};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
+  color: ${({ theme }) => theme.colors.accent.blue};
+`;
 
 function ListingsCard({ listing }){
     return (
-       <div className="card-column">
-           <Card sx={{ maxWidth: 445, border: "3px black solid"}}>
-            <Link className='listinglink' to={`/listings/${listing.id}`}>
-            <CardActionArea>
-                
-                <CardMedia
-                component="img"
-                height="400"
-                image={listing.image1}
-                alt="listing image"
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        {listing.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        Added on {listing.created_at}
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
-            </Link>
-                <CardContent>
-                    <Typography variant="body2" color="text.primary">
-                        <strong>Sq. Footage</strong> {listing.sq_footage} sq ft<sup>2</sup>
-                    </Typography>
-                    <Typography variant="body2" color="text.primary">
-                        <strong>Location</strong> {listing.neighborhood}, {listing.nyc_borough}
-                    </Typography>
-                </CardContent>
-                <CardContent>
-                    <Typography gutterBottom variant="h4" component="div">
-                        $ {listing.price} / Month
-                    </Typography>
-                </CardContent>
-            <CardActions>
-            {/* <Link className='listinglink' to={`/listings/${listing.id}`}>
-                <Button size="small" sx={{ color: "black", border: "2px black solid"}}>See Details</Button>
-            </Link> */}
-            </CardActions>
-        </Card>
-       </div>
-    )
+        <StyledLink to={`/listings/${listing.id}`}>
+            <StyledCard variant="outlined" padding="md" interactive>
+                <Card.Image>
+                    <ListingImage 
+                        src={listing.image1} 
+                        alt={listing.title || "Listing image"} 
+                    />
+                </Card.Image>
+                <Card.Content>
+                    <Card.Title>{listing.title}</Card.Title>
+                    <Card.Subtitle>{listing.neighborhood}, {listing.nyc_borough}</Card.Subtitle>
+                    <Price>${listing.price}</Price>
+                </Card.Content>
+            </StyledCard>
+        </StyledLink>
+    );
 }
+
 export default ListingsCard;

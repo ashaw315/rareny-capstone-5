@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, Link, useParams } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { useAppSelector } from '../store/hooks';
 import styled from "styled-components";
 import ReactMarkdown from 'react-markdown';
 import FormField from "../styles/FormField";
 import Label from "../styles/Label";
 import Textarea from "../styles/TextArea";
 import Input from "../styles/Input";
-import { Button } from '@mui/material';
+import { Button } from './ui';
 
 const Wrapper = styled.section`
   max-width: 1000px;
@@ -20,8 +21,13 @@ const WrapperChild = styled.div`
   flex: 1;
 `;
 
-function SubforumForm({ user, currentForum }){
-    const {id} = useParams();
+function SubforumForm(){
+    const { user } = useAppSelector((state) => state.auth);
+    const location = useLocation();
+    const navigate = useNavigate();
+    
+    // Get forum ID from URL state or extract from referer
+    const [forumId, setForumId] = useState(null);
     const [name, setName] = useState('')
     const [title, setTitle] = useState('')
     const [instructions, setInstructions] = useState(`Here's how you make a post.
@@ -45,20 +51,41 @@ Tell me what you think in the **comments** or share your own!
     
     const [subforums, setSubforums] = useState([])
     const [errors, setErrors] = useState([])
-    
-
-    const navigate = useNavigate();
 
     useEffect(() => {
+        // Get forum ID from location state (passed from link) or from referer URL
+        if (location.state?.forumId) {
+            setForumId(location.state.forumId);
+        } else {
+            // Try to extract from document.referrer if available
+            const referer = document.referrer;
+            const forumMatch = referer.match(/\/forums\/(\d+)/);
+            if (forumMatch) {
+                setForumId(parseInt(forumMatch[1]));
+            }
+        }
+
         fetch("/subforums")
-            .then((r) => r.json()
-                .then((data) => setSubforums(data))
-            );
-    }, []);
+            .then((r) => r.json())
+            .then((data) => setSubforums(data))
+            .catch((error) => console.error('Failed to fetch subforums:', error));
+    }, [location]);
 
 
     function handleSubmit(e) {
         e.preventDefault();
+        
+        // Validate required data
+        if (!user?.id) {
+            setErrors(['You must be logged in to create a subforum']);
+            return;
+        }
+        
+        if (!forumId) {
+            setErrors(['Forum ID is missing. Please navigate back to the forum and try again.']);
+            return;
+        }
+        
         fetch("/subforums", {
             method: "POST",
             headers: {
@@ -67,7 +94,7 @@ Tell me what you think in the **comments** or share your own!
             body: JSON.stringify({
                 "subforum": {
                     name: name,
-                    forum_id: currentForum.id,
+                    forum_id: forumId,
                 },
                 "forum_post": {
                         user_id: user.id,
@@ -78,13 +105,19 @@ Tell me what you think in the **comments** or share your own!
         })
             .then((r) => {
                 if (r.ok) {
-                    r.json().then((data) => setSubforums([data,...subforums]))
-                    .then(navigate(`/forums/${currentForum.id}`))
+                    r.json().then((data) => {
+                        setSubforums([data,...subforums]);
+                        navigate(`/forums/${forumId}`);
+                    });
                   } else {
                       r.json().then((err) => setErrors(err.errors));
                   }
                 })
-            };
+            .catch((error) => {
+                console.error('Error creating subforum:', error);
+                setErrors(['Failed to create subforum. Please try again.']);
+            });
+    };
 
     return (
         <div className="subforums-forum-posts">

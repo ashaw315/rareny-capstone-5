@@ -1,169 +1,371 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from 'react-router-dom';
-import './Home.css'
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { loginUser } from '../../store/slices/authSlice';
+import { Button, Input, Modal, Alert, Card } from '../../components/ui';
+import { Container } from '../../components/layout';
+import styled from 'styled-components';
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 800,
-    height: 700,
-    bgcolor: 'background.paper',
-    border: '5px solid #000',
-    boxShadow: 24,
-    p: 4,
+// Styled Components
+const HeroSection = styled.section`
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, 
+    ${({ theme }) => theme.colors.background.primary} 0%,
+    ${({ theme }) => theme.colors.background.accent} 100%
+  );
+  position: relative;
+`;
+
+const HeroContent = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: ${({ theme }) => theme.spacing[8]};
+  align-items: center;
+  
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    grid-template-columns: 1fr 1fr;
+    gap: ${({ theme }) => theme.spacing[16]};
+  }
+`;
+
+const TextContent = styled.div`
+  text-align: center;
+  
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    text-align: left;
+  }
+`;
+
+const Greeting = styled.p`
+  font-size: ${({ theme }) => theme.typography.fontSize.lg};
+  color: ${({ theme }) => theme.colors.text.secondary};
+  margin-bottom: ${({ theme }) => theme.spacing[2]};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
+`;
+
+const Title = styled.h1`
+  font-size: ${({ theme }) => theme.typography.fontSize['6xl']};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
+  color: ${({ theme }) => theme.colors.text.primary};
+  margin-bottom: ${({ theme }) => theme.spacing[4]};
+  line-height: ${({ theme }) => theme.typography.lineHeight.tight};
+  
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    font-size: ${({ theme }) => theme.typography.fontSize['8xl']};
+  }
+`;
+
+const Subtitle = styled.p`
+  font-size: ${({ theme }) => theme.typography.fontSize.xl};
+  color: ${({ theme }) => theme.colors.text.secondary};
+  margin-bottom: ${({ theme }) => theme.spacing[6]};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
+  
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    font-size: ${({ theme }) => theme.typography.fontSize['2xl']};
+  }
+`;
+
+const Description = styled.p`
+  font-size: ${({ theme }) => theme.typography.fontSize.lg};
+  color: ${({ theme }) => theme.colors.text.primary};
+  line-height: ${({ theme }) => theme.typography.lineHeight.relaxed};
+  margin-bottom: ${({ theme }) => theme.spacing[8]};
+  max-width: 600px;
+  
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    margin-left: 0;
+    margin-right: auto;
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+`;
+
+const ActionButtons = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing[4]};
+  align-items: center;
+  
+  @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    justify-content: flex-start;
+  }
+`;
+
+const ModalContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing[6]};
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing[4]};
+`;
+
+const Footer = styled.footer`
+  background-color: ${({ theme }) => theme.colors.primary.black};
+  color: ${({ theme }) => theme.colors.primary.white};
+  padding: ${({ theme }) => theme.spacing[8]} 0;
+  margin-top: ${({ theme }) => theme.spacing[16]};
+`;
+
+const FooterContent = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: ${({ theme }) => theme.spacing[8]};
+  
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    grid-template-columns: 1fr 1fr;
+  }
+`;
+
+const FooterSection = styled.div`
+  h3 {
+    font-size: ${({ theme }) => theme.typography.fontSize.xl};
+    margin-bottom: ${({ theme }) => theme.spacing[4]};
+    color: ${({ theme }) => theme.colors.primary.white};
+  }
+  
+  p {
+    margin-bottom: ${({ theme }) => theme.spacing[2]};
+    color: ${({ theme }) => theme.colors.primary.gray[300]};
+    line-height: ${({ theme }) => theme.typography.lineHeight.relaxed};
+  }
+  
+  a {
+    color: ${({ theme }) => theme.colors.accent.blue};
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;
+
+function Home() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  
+  // Redux state
+  const { user, isAuthenticated, loading, error } = useAppSelector((state) => state.auth);
+  
+  // Local state
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [modalOpen, setModalOpen] = useState(false);
+  const [loginError, setLoginError] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoginError('');
+    
+    try {
+      await dispatch(loginUser({ username, password })).unwrap();
+      setModalOpen(false);
+      setUsername('');
+      setPassword('');
+    } catch (err) {
+      setLoginError(err || 'Login failed. Please try again.');
+    }
   };
 
-function Home({ user, setUser, logInForm, setLogInForm }){
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [errors, setErrors] = useState([]);
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-    const navigate = useNavigate();
+  const handleModalClose = () => {
+    setModalOpen(false);
+    setLoginError('');
+    setUsername('');
+    setPassword('');
+  };
 
-    function handleSubmit(e) {
-        e.preventDefault();
+  return (
+    <>
+      <HeroSection>
+        <Container size="xl">
+          <HeroContent>
+            <TextContent>
+              <Greeting>
+                {isAuthenticated ? `Hello, ${user?.username}!` : 'Hello.'}
+              </Greeting>
+              
+              <Title>RARE NY</Title>
+              
+              <Subtitle>Resources for Artists Everywhere</Subtitle>
+              
+              <Description>
+                Connect with fellow artists in your community. Share your latest work, 
+                find housing, and discover resources and opportunities.
+              </Description>
+              
+              {!isAuthenticated && (
+                <ActionButtons>
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    onClick={() => setModalOpen(true)}
+                  >
+                    Log In
+                  </Button>
+                  
+                  <Button
+                    variant="secondary"
+                    size="lg"
+                    onClick={() => navigate('/signup')}
+                  >
+                    Sign Up
+                  </Button>
+                </ActionButtons>
+              )}
+            </TextContent>
+            
+            {isAuthenticated && (
+              <Card variant="elevated" padding="lg">
+                <Card.Header align="center">
+                  <Card.Title>Welcome back, {user?.username}!</Card.Title>
+                  <Card.Subtitle>Not sure where to begin?</Card.Subtitle>
+                </Card.Header>
+                
+                <Card.Content>
+                  <ActionButtons>
+                    <Button
+                      variant="primary"
+                      fullWidth
+                      onClick={() => navigate('/forums')}
+                    >
+                      Check out the forums
+                    </Button>
+                    
+                    <Button
+                      variant="secondary"
+                      fullWidth
+                      onClick={() => navigate('/listings')}
+                    >
+                      Browse Listings
+                    </Button>
+                    
+                    <Button
+                      variant="outline"
+                      fullWidth
+                      onClick={() => navigate('/resources')}
+                    >
+                      Find Resources
+                    </Button>
+                    
+                    <Button
+                      variant="ghost"
+                      fullWidth
+                      onClick={() => navigate('/account')}
+                    >
+                      Update your account
+                    </Button>
+                  </ActionButtons>
+                </Card.Content>
+              </Card>
+            )}
+          </HeroContent>
+        </Container>
+      </HeroSection>
 
-        fetch('/login', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                username, password
-            }),
-        })
-            .then((r) => {
-                if (r.ok) {
-                    r.json().then((user) =>{ 
-                        setUser(user);
-                    });
-                } else {
-                    r.json().then((err) => {
-                        setErrors(err.errors);
-                    })
-                }
-            });
-    }
+      <Footer>
+        <Container>
+          <FooterContent>
+            <FooterSection>
+              <h3>About</h3>
+              <p>
+                RARE NY is a conceptual project by adamshaw. Resources for Artists 
+                Everywhere looks to offer artists a space to communicate and share resources.
+              </p>
+            </FooterSection>
+            
+            <FooterSection>
+              <h3>Contact</h3>
+              <p>
+                <a href="mailto:info.rareny@gmail.com">
+                  Email Us
+                </a>
+              </p>
+            </FooterSection>
+          </FooterContent>
+        </Container>
+      </Footer>
 
-    if (user) {
-        return (
-            <div className='homepagedivloggedin'>
-                <div className='homepagecontainerloggedin'>
-                    <div className='homepageloggedinleft'>
-                        <h2 className='homepageh2loggedin'>Welcome, {user.username}.</h2>
-                        <p className='homepageploggedin'>Enjoy your visit.</p>
-                        <h3 className='homepageh3loggedin'>Not sure where to begin?</h3>
-                        <div className='homepageoptionsdivloggedin'>
-                            <Link className='homepagelinkloggedin' to='/forums'>Check out the forums.</Link>
-                        </div>
-                        <div className='homepageoptionsdivloggedin'>
-                            <Link className='homepagelinkloggedin' to='/account'>Update your account.</Link>
-                        </div>
-                        <div className='homepageoptionsdivloggedin'>
-                            <Link className='homepagelinkloggedin' to='/profile'>View your profile.</Link>
-                        </div>
-                    </div>
-                </div>
-                <div className="footer-position">
-                <div className='homepagefooter-subforum'>
-                            <h3 className='footerheader'>About</h3>
-                            <h3  className='footerheader1'>Contact</h3>
-                        </div>
-                            <ul className='footerul'>
-                                <div className='footerp'>Rare NY is a conceptual project by adamshaw.</div>
-                                <div className='footerp1'>Resources for Artists Everywhere looks to offer artists a space to communicate and share resources.</div>
-                                <a className='footerp2' href="mailto:info.rareny@gmail.com">Email Us</a>  
-                            </ul>
-                </div>
-            </div>
-        )
-    } 
-        else {
-            return (
-                <div className='homepagediv'>
-                    <div className='homepagecontainersignedout'>
-                        <div className='homepagesignedoutleft'>
-                            <h2 className='homepageh2signedout'>RARE NY</h2>
-                            <p className='homepagepsignedout'>Resources for Artist Everywhere.</p>
-
-                            <div>
-                            <Button sx={{ color: "black" }} onClick={handleOpen}>Login</Button>
-                            <Link className='loginlink' to='/signup'>
-                                <Button className='loginbutton' sx={{ color: "black"}}>SIGN UP</Button>
-                            </Link>
-                            <Modal
-                                open={open}
-                                onClose={handleClose}
-                                aria-labelledby="modal-modal-title"
-                                aria-describedby="modal-modal-description"
-                        
-                            >
-                                <Box  className="box" sx={style}>
-                                <Typography id="modal-modal-title" variant="h6" component="h2">
-                                Welcome back
-                                </Typography>
-                                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                <form className="form" onSubmit={handleSubmit}>
-                                    <span>
-                                        <p className='loginp'>Please log in.</p>
-                                     </span>
-                                    <p className='logintitle'>Username</p>
-                                    <div className='logininputdiv'>
-                                        <input className='logininput'
-                                        type='text'
-                                        autoComplete='off'
-                                        value={username}
-                                        onChange={(e) => setUsername(e.target.value)}
-                                        />
-                                    </div>
-                                    <p className='logintitle'>Password</p>
-                                    <div className='logininputdiv1'>
-                                        <input className='logininput'
-                                            type='password'
-                                            autoComplete='off'
-                                            value={password}
-                                            onChange={(e) => setPassword(e.target.value)}
-                                        />
-                                    </div>
-                                    <div className="loginbuttonmodal">
-                                        <Button className='loginbuttonmodal' type="submit" sx={{ color: "black", border: "2px black solid"}}>LOGIN</Button>
-                                    </div>
-                                    <div className="loginbuttonmodal"> 
-                                    {errors.map((e)=><p key={e}>{e}</p>)}
-                                    </div>
-                                <p className="signuplink">Don't have an account?</p>
-                            <Link className='loginlink' to='/signup'>
-                                <Button className='signupbutton' sx={{ color: "black", width: "50%", border: "2px black solid" }}>SIGN UP</Button>
-                            </Link>
-                        </form>
-                                </Typography>
-                                </Box>
-                            </Modal>
-                            </div>                       
-                        </div>
-                    </div>
-                        <div className='homepagefooter'>
-                            <h3 className='footerheader'>About</h3>
-                            <h3  className='footerheader1'>Contact</h3>
-                        </div>
-                        {/* <div className='homepagefooter'> */}
-                            <ul className='footerul'>
-                                <div className='footerp'>Rare NY is a conceptual project by adamshaw.</div>
-                                <div className='footerp1'>Resources for Artists Everywhere looks to offer artists a space to communicate and share resources.</div>
-                                <a className='footerp2' href="mailto:info.rareny@gmail.com">Email Us</a> 
-                            </ul>
-                        {/* </div> */}
-            </div>
-            )
-        }
-    }
+      {/* Login Modal */}
+      <Modal
+        isOpen={modalOpen}
+        onClose={handleModalClose}
+        title="Welcome back"
+        size="sm"
+      >
+        <ModalContent>
+          {loginError && (
+            <Alert variant="error" closable onClose={() => setLoginError('')}>
+              {loginError}
+            </Alert>
+          )}
+          
+          {error && (
+            <Alert variant="error">
+              {error}
+            </Alert>
+          )}
+          
+          <Form onSubmit={handleSubmit}>
+            <Input
+              label="Username"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              autoComplete="username"
+              placeholder="Enter your username"
+            />
+            
+            <Input
+              label="Password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              autoComplete="current-password"
+              placeholder="Enter your password"
+            />
+            
+            <Button
+              type="submit"
+              variant="primary"
+              fullWidth
+              loading={loading}
+            >
+              Log In
+            </Button>
+          </Form>
+          
+          <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+            <span style={{ fontSize: '0.875rem', color: '#6c757d' }}>
+              Don't have an account?{' '}
+              <Link 
+                to="/signup" 
+                onClick={handleModalClose}
+                style={{ color: '#000', fontWeight: '500' }}
+              >
+                Sign up here
+              </Link>
+            </span>
+          </div>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+}
 
 export default Home;

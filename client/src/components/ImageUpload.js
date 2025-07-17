@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from '@mui/material';
+import { Button } from './ui';
 
 function ImageUpload({ 
   imageFile, 

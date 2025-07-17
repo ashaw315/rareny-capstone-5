@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import AritistResourceCard from "../components/ArtistResourceCard";
-import { Button } from "@mui/material";
+import ArtistResourceCard from "../components/ArtistResourceCard";
+import { Button } from "../components/ui";
 
 function ResourcesDetail(){
     const {id} = useParams();
@@ -30,7 +30,7 @@ function ResourcesDetail(){
             <div className="display-resources">
                 {resources?.map((resource) => 
                 <div key={resource.id}>
-                    <AritistResourceCard resource={resource}/>
+                    <ArtistResourceCard resource={resource}/>
                 </div>)}
             </div>
         </div>

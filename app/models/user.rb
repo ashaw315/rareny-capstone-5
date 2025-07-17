@@ -8,7 +8,6 @@ class User < ApplicationRecord
 
     validates :username, presence: true, uniqueness: true
     validates :password, length: { minimum: 6 }, allow_nil: true
-    validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
     
     # Make these optional for user registration
     validates :website, presence: true, allow_blank: true

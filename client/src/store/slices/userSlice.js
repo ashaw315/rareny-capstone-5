@@ -93,6 +93,7 @@ const initialState = {
   loading: false,
   error: null,
   boroughs: [],
+  currentBorough: null,
   artistResources: [],
   residencies: [],
 };
@@ -109,6 +110,9 @@ const userSlice = createSlice({
     },
     setBoroughs: (state, action) => {
       state.boroughs = action.payload;
+    },
+    setCurrentBorough: (state, action) => {
+      state.currentBorough = action.payload;
     },
     setArtistResources: (state, action) => {
       state.artistResources = action.payload;
@@ -189,6 +193,7 @@ export const {
   setSelectedUser, 
   clearError, 
   setBoroughs, 
+  setCurrentBorough,
   setArtistResources, 
   setResidencies 
 } = userSlice.actions;

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from 'react-responsive-carousel';
-import { Button } from "@mui/material";
+import { Button } from '../../components/ui';
 import styled from "styled-components";
 
 const Wrapper = styled.section`
@@ -62,24 +60,12 @@ function ListingsDetail({ user, listings, setListings, onDeleteListing }){
            <div className="listing-detail-top-info">
                 <h2 className="listing-detail-top-info-left">$ {listing.price} / Month</h2>
            </div>
-           <div className="carousel-container">
-            <Carousel className="main-slide">
-                <div>
-                    <img src={listing.image1}  />
-                </div>
-                <div>
-                    <img src={listing.image2} />
-                </div>
-                <div>
-                    <img src={listing.image3} />
-                </div>
-                <div>
-                    <img src={listing.image4} />
-                </div>
-                <div>
-                    <img src={listing.image5} />
-                </div>
-            </Carousel>
+           <div className="images-container" style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '24px'}}>
+                {listing.image1 && <img src={listing.image1} alt="Property view 1" style={{width: '100%', borderRadius: '8px'}} />}
+                {listing.image2 && <img src={listing.image2} alt="Property view 2" style={{width: '100%', borderRadius: '8px'}} />}
+                {listing.image3 && <img src={listing.image3} alt="Property view 3" style={{width: '100%', borderRadius: '8px'}} />}
+                {listing.image4 && <img src={listing.image4} alt="Property view 4" style={{width: '100%', borderRadius: '8px'}} />}
+                {listing.image5 && <img src={listing.image5} alt="Property view 5" style={{width: '100%', borderRadius: '8px'}} />}
             </div>
             <Wrapper>
             <ul>
