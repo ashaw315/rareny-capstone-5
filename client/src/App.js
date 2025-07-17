@@ -6,7 +6,7 @@ import { fetchListings } from './store/slices/listingsSlice';
 import { fetchUsers, setBoroughs } from './store/slices/userSlice';
 import { fetchForums, fetchSubforums } from './store/slices/forumSlice';
 import ErrorBoundary from './components/ErrorBoundary';
-import ThemeProvider from './theme/ThemeProvider';
+import { ThemeProvider } from './theme';
 
 // Components
 import NavBar from './components/NavBar/NavBar';

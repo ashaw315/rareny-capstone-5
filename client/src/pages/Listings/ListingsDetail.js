@@ -53,7 +53,7 @@ function ListingsDetail({ user, listings, setListings, onDeleteListing }){
             <Button className="go-back-button-listing-form" sx={{ color: "black", fontSize: 25, border: "2px black solid" }} onClick={() => navigate(-1)}>Go Back</Button>
             </div>
             {user ? <div>
-                {user.id == userData.id ? <Button className="listing-delete-button" sx={{ color: "red", fontSize: 25, border: "2px red solid", mt: 2 }} onClick={handleDelete}>Delete Listing</Button> : null}
+                {user.id === userData.id ? <Button className="listing-delete-button" sx={{ color: "red", fontSize: 25, border: "2px red solid", mt: 2 }} onClick={handleDelete}>Delete Listing</Button> : null}
                 </div> : null }
            <h2 className="listing-title-detail">{listing.title}</h2>
            <cite className="listing-detail-top-posted-by"> Posted by {userData.username}</cite>

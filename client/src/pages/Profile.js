@@ -75,7 +75,7 @@ const user_forum_posts = user?.forum_posts.map((post) =>
                     </div>
                     <div className='accountinputdiv'>
                             {/* <p className='accountp'>Username</p> */}
-                            {user ? <a href={user.website} target="_blank">{user.website}</a> : null }
+                            {user ? <a href={user.website} target="_blank" rel="noreferrer">{user.website}</a> : null }
                     </div>
                     <div className='accountinputdiv'>
                             {/* <p className='accountp'>Username</p> */}

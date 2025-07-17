@@ -3,7 +3,7 @@ import { render as rtlRender } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
-import ThemeProvider from '../theme/ThemeProvider';
+import { ThemeProvider } from '../theme';
 
 // Import your reducers
 import authReducer from '../store/slices/authSlice';

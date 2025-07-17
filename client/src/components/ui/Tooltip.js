@@ -8,7 +8,7 @@ const TooltipContainer = styled.div`
   padding: 12px 16px;
   border: 3px solid #000000;
   border-radius: 0;
-  font-size: 18px;
+  font-size: clamp(3rem, 8vw, 5rem);
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -21,28 +21,6 @@ const TooltipContainer = styled.div`
   transition: opacity 0.2s ease-in-out;
   min-width: 100px;
   text-align: center;
-  
-  /* Add subtle arrow pointing down */
-  &::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 8px solid transparent;
-    border-top-color: #000000;
-  }
-  
-  /* Inner arrow for background */
-  &::before {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-3px);
-    border: 5px solid transparent;
-    border-top-color: #ffffff;
-  }
 `;
 
 const MapTooltip = ({ content, position, visible }) => {

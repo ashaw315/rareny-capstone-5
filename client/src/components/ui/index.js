@@ -10,3 +10,4 @@ export { default as Avatar } from './Avatar';
 export { default as Skeleton } from './Skeleton';
 export { default as EmptyState } from './EmptyState';
 export { default as Tooltip } from './Tooltip';
+export { default as Form } from './Form';
