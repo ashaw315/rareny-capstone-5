@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Button } from '../../components/ui';
+import MessageButton from '../../components/Messaging/MessageButton';
+import OnlineStatus from '../../components/Messaging/OnlineStatus';
 import styled from "styled-components";
 
 const Wrapper = styled.section`
@@ -56,7 +58,19 @@ function ListingsDetail({ user, listings, setListings, onDeleteListing }){
                 {user.id === userData.id ? <Button className="listing-delete-button" sx={{ color: "red", fontSize: 25, border: "2px red solid", mt: 2 }} onClick={handleDelete}>Delete Listing</Button> : null}
                 </div> : null }
            <h2 className="listing-title-detail">{listing.title}</h2>
-           <cite className="listing-detail-top-posted-by"> Posted by {userData.username}</cite>
+           <div className="listing-poster-info">
+               <cite className="listing-detail-top-posted-by"> 
+                   Posted by {userData.username}
+               </cite>
+               {userData.online_status && (
+                   <OnlineStatus 
+                       status={userData.online_status}
+                       lastSeenAt={userData.last_seen_at}
+                       showText={true}
+                       size="small"
+                   />
+               )}
+           </div>
            <div className="listing-detail-top-info">
                 <h2 className="listing-detail-top-info-left">$ {listing.price} / Month</h2>
            </div>
@@ -73,7 +87,18 @@ function ListingsDetail({ user, listings, setListings, onDeleteListing }){
                 <p><strong>Sq. Footage</strong> {listing.sq_footage} sq ft<sup>2</sup></p>
                 <p><strong>Location</strong> {listing.neighborhood}, {listing.nyc_borough}</p>
                 <p className="description-listing-detail">{listing.description}</p>
-                <Button sx={{ color: "black", fontSize: 25, border: "2px black solid", fontWeight: 550 }} onClick={() => window.location = `mailto:${listing.email}`}>Email</Button>
+                <div className="listing-contact-buttons">
+                    <Button sx={{ color: "black", fontSize: 25, border: "2px black solid", fontWeight: 550 }} onClick={() => window.location = `mailto:${listing.email}`}>Email</Button>
+                    {user && user.id !== userData.id && userData.id && (
+                        <MessageButton 
+                            userId={userData.id}
+                            username={userData.username}
+                            variant="secondary"
+                            size="large"
+                            style={{ fontSize: '25px', fontWeight: 550 }}
+                        />
+                    )}
+                </div>
             </ul>
             </Wrapper>
        </div>

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Button, Card, Modal } from './ui';
+import MessageButton from './Messaging/MessageButton';
+import OnlineStatus from './Messaging/OnlineStatus';
 import styled from 'styled-components';
 
 const StyledCard = styled(Card)`
@@ -26,12 +28,6 @@ const ModalContent = styled.div`
   overflow-y: auto;
 `;
 
-const ArtistName = styled.h1`
-  font-size: ${({ theme }) => theme.typography.fontSize['3xl']};
-  color: ${({ theme }) => theme.colors.text.primary};
-  margin: 0;
-  text-align: center;
-`;
 
 const ArtistDiscipline = styled.h3`
   font-size: ${({ theme }) => theme.typography.fontSize.xl};
@@ -59,7 +55,7 @@ const WebsiteLink = styled.a`
   }
 `;
 
-function ArtistCard({ artist }){
+function ArtistCard({ artist, currentUser }){
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -68,6 +64,17 @@ function ArtistCard({ artist }){
         <>
             <StyledCard variant="outlined" padding="lg" interactive onClick={handleOpen}>
                 <Card.Content>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
+                        <OnlineStatus 
+                            status={artist.online_status}
+                            lastSeenAt={artist.last_seen_at}
+                            size="small"
+                        />
+                        <span style={{ fontSize: '0.875rem', color: '#6B7280' }}>
+                            {artist.online_status === 'online' ? 'Online' : 
+                             artist.online_status === 'away' ? 'Away' : 'Offline'}
+                        </span>
+                    </div>
                     <Card.Actions align="center">
                         <Button variant="outline" size="lg" fullWidth>
                             {artist.username}
@@ -83,6 +90,15 @@ function ArtistCard({ artist }){
                 size="lg"
             >
                 <ModalContent>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem' }}>
+                        <OnlineStatus 
+                            status={artist.online_status}
+                            lastSeenAt={artist.last_seen_at}
+                            showText={true}
+                            size="medium"
+                        />
+                    </div>
+                    
                     <ArtistDiscipline>{artist.discipline}</ArtistDiscipline>
                     
                     <ArtistBio>{artist.bio}</ArtistBio>
@@ -95,6 +111,17 @@ function ArtistCard({ artist }){
                         >
                             Visit Website
                         </WebsiteLink>
+                    )}
+                    
+                    {currentUser && currentUser.id !== artist.id && (
+                        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}>
+                            <MessageButton
+                                userId={artist.id}
+                                username={artist.username}
+                                variant="primary"
+                                size="medium"
+                            />
+                        </div>
                     )}
                 </ModalContent>
             </Modal>

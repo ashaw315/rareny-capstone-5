@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_16_191008) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_23_154146) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -51,6 +51,19 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_16_191008) do
     t.datetime "updated_at", null: false
     t.index ["forum_post_id"], name: "index_comments_on_forum_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.bigint "participant_1_id", null: false
+    t.bigint "participant_2_id", null: false
+    t.datetime "last_message_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["last_message_at"], name: "index_conversations_on_last_message_at"
+    t.index ["participant_1_id", "participant_2_id"], name: "index_conversations_on_participant_1_id_and_participant_2_id", unique: true
+    t.index ["participant_1_id"], name: "index_conversations_on_participant_1_id"
+    t.index ["participant_2_id"], name: "index_conversations_on_participant_2_id"
+    t.check_constraint "participant_1_id <> participant_2_id", name: "check_different_participants"
   end
 
   create_table "forum_posts", force: :cascade do |t|
@@ -101,6 +114,22 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_16_191008) do
     t.index ["user_id"], name: "index_listings_on_user_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.bigint "sender_id", null: false
+    t.bigint "recipient_id", null: false
+    t.bigint "conversation_id", null: false
+    t.text "content", null: false
+    t.datetime "read_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["created_at"], name: "index_messages_on_created_at"
+    t.index ["recipient_id", "read_at"], name: "index_messages_on_recipient_id_and_read_at"
+    t.index ["recipient_id"], name: "index_messages_on_recipient_id"
+    t.index ["sender_id", "created_at"], name: "index_messages_on_sender_id_and_created_at"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
+  end
+
   create_table "profile_pictures", force: :cascade do |t|
     t.string "picture"
     t.bigint "user_id", null: false
@@ -134,15 +163,24 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_16_191008) do
     t.text "bio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "online_status", default: "offline", null: false
+    t.datetime "last_seen_at"
+    t.index ["last_seen_at"], name: "index_users_on_last_seen_at"
+    t.index ["online_status"], name: "index_users_on_online_status"
   end
 
   add_foreign_key "addresses", "artist_resources"
   add_foreign_key "artist_resources", "boroughs"
   add_foreign_key "comments", "forum_posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "conversations", "users", column: "participant_1_id"
+  add_foreign_key "conversations", "users", column: "participant_2_id"
   add_foreign_key "forum_posts", "users"
   add_foreign_key "listing_images", "listings"
   add_foreign_key "listings", "users"
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users", column: "recipient_id"
+  add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "profile_pictures", "users"
   add_foreign_key "subforums", "forums"
 end

@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { fetchListings, setSearch, setSortBy, setPriceValue, setSqFootValue } from '../../store/slices/listingsSlice';
 import ListingsCard from "../../components/ListingsCard";
 import { Button, Input } from '../../components/ui';
 import './Listings.css';
@@ -19,29 +21,72 @@ padding-top: 20px;
 text-align: center;
 `;
 
-function Listings({ listings, setListings, user, handleListingsSearch, setSortBy, filterListings, sortBy, setPriceValue, priceValue, setSqFootValue, sqFootValue }){
+function Listings(){
+    const dispatch = useAppDispatch();
+    const { 
+        filteredItems: filterListings, 
+        loading, 
+        error, 
+        search, 
+        sortBy, 
+        priceValue, 
+        sqFootValue 
+    } = useAppSelector((state) => state.listings);
+    const { user } = useAppSelector((state) => state.auth);
 
-const all_listings = filterListings?.map((listing) => {
-    return (
-        <ListingsCard key={listing.id} listing={listing}/>
-    )
-})
+    useEffect(() => {
+        dispatch(fetchListings());
+    }, [dispatch]);
 
-function handleSortChange(event) {
-    setSortBy(event.target.value);
-  }
-  
-function valuetext(value) {
-    return {value};
-  }
+    const all_listings = filterListings?.map((listing) => {
+        return (
+            <ListingsCard key={listing.id} listing={listing}/>
+        )
+    })
 
-function handlePriceRangeChange(e) {
-    setPriceValue(e.target.value)
-}
+    function handleSortChange(event) {
+        dispatch(setSortBy(event.target.value));
+    }
+    
+    function handleListingsSearch(value) {
+        dispatch(setSearch(value));
+    }
 
-function handleSqFootRangeChange(e) {
-    setSqFootValue(e.target.value)
-}
+    function handlePriceRangeChange(e) {
+        const newMaxPrice = Number(e.target.value);
+        dispatch(setPriceValue([0, newMaxPrice]));
+    }
+
+    function handleSqFootRangeChange(e) {
+        const newMaxSqFt = Number(e.target.value);
+        dispatch(setSqFootValue([0, newMaxSqFt]));
+    }
+
+    if (loading) {
+        return (
+            <div className="listings-main-page">
+                <Link className="forum-card" to={'/listings'}>
+                    <h2 className="forum-header-title">Listings.</h2>
+                </Link>
+                <div className="display-listings">
+                    <p>Loading listings...</p>
+                </div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="listings-main-page">
+                <Link className="forum-card" to={'/listings'}>
+                    <h2 className="forum-header-title">Listings.</h2>
+                </Link>
+                <div className="display-listings">
+                    <p>Error loading listings: {error}</p>
+                </div>
+            </div>
+        );
+    }
 
 
 
@@ -57,14 +102,17 @@ function handleSqFootRangeChange(e) {
                     className="search-term"
                     type="text"
                     placeholder="Search..."
+                    value={search}
                     onChange={(e) => handleListingsSearch(e.target.value)}/>
                 </WrapperChild>
                 <WrapperChild>
-                    <select className="listings-sort" onChange={handleSortChange}>
-                        <option value={"SortBy"} >Sort By</option>
+                    <select className="listings-sort" value={sortBy} onChange={handleSortChange}>
+                        <option value={"Sort By"} >Sort By</option>
                         <option value={"Title"} >Title</option>
                         <option value={"Price High"} >Price High</option>
                         <option value={"Price Low"} >Price Low</option>
+                        <option value={"Sq Ft High"} >Sq Ft High</option>
+                        <option value={"Sq Ft Low"} >Sq Ft Low</option>
                     </select>
                 </WrapperChild>
                 <WrapperChild>
@@ -72,11 +120,11 @@ function handleSqFootRangeChange(e) {
                         label="Max Price"
                         type="range"
                         min="0"
-                        max="3000"
-                        value={priceValue}
+                        max="10000"
+                        value={Array.isArray(priceValue) ? priceValue[1] : priceValue}
                         onChange={handlePriceRangeChange}
                     />
-                    <div>Price Range: $0 - ${priceValue}</div>
+                    <div>Price Range: $0 - ${Array.isArray(priceValue) ? priceValue[1] : priceValue}</div>
             </WrapperChild>
 
             <WrapperChild>
@@ -84,11 +132,11 @@ function handleSqFootRangeChange(e) {
                         label="Max Square Footage"
                         type="range"
                         min="0"
-                        max="3000"
-                        value={sqFootValue}
+                        max="10000"
+                        value={Array.isArray(sqFootValue) ? sqFootValue[1] : sqFootValue}
                         onChange={handleSqFootRangeChange}
                     />
-                    <div>Sq Footage: 0 - {sqFootValue} sqft</div>
+                    <div>Sq Footage: 0 - {Array.isArray(sqFootValue) ? sqFootValue[1] : sqFootValue} sqft</div>
             </WrapperChild>
             <WrapperChild2>
             <Link className='listinglink' to='/listingform'>

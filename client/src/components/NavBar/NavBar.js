@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { logoutUser } from '../../store/slices/authSlice';
+import { selectUnreadCount, fetchUnreadCount } from '../../store/slices/messagingSlice';
 import { Button, Avatar } from '../ui';
 import { Container } from '../layout';
 import styled from 'styled-components';
@@ -180,6 +181,19 @@ const DropdownButton = styled.button`
   }
 `;
 
+const UnreadBadge = styled.span`
+  background: #EF4444;
+  color: white;
+  font-size: ${({ theme }) => theme.typography.fontSize.xs};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
+  padding: 0.125rem 0.375rem;
+  border-radius: 1rem;
+  margin-left: 0.5rem;
+  min-width: 1.25rem;
+  text-align: center;
+  display: inline-block;
+`;
+
 const MobileMenu = styled.div`
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     display: none;
@@ -200,6 +214,21 @@ function NavBar() {
 
   // Get user from Redux
   const { user, isAuthenticated } = useAppSelector((state) => state.auth);
+  const unreadCount = useAppSelector(selectUnreadCount);
+
+  // Fetch unread count periodically when authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(fetchUnreadCount());
+      
+      // Refresh unread count every 30 seconds
+      const interval = setInterval(() => {
+        dispatch(fetchUnreadCount());
+      }, 30000);
+      
+      return () => clearInterval(interval);
+    }
+  }, [isAuthenticated, dispatch]);
 
   const handleLogout = async () => {
     try {
@@ -220,6 +249,11 @@ function NavBar() {
     { label: 'Listings', path: '/listings' },
     { label: 'Forum', path: '/forums' },
     { label: 'Artists', path: '/artists' },
+    { 
+      label: 'Messages', 
+      path: '/messages',
+      badge: unreadCount > 0 ? unreadCount : null
+    },
   ];
 
   const guestItems = [
@@ -244,6 +278,7 @@ function NavBar() {
                       className={location.pathname === item.path ? 'active' : ''}
                     >
                       {item.label}
+                      {item.badge && <UnreadBadge>{item.badge}</UnreadBadge>}
                     </NavLink>
                   ))}
                 </NavLinks>
@@ -263,6 +298,9 @@ function NavBar() {
                 </UserButton>
 
                 <DropdownMenu isOpen={dropdownOpen}>
+                  <DropdownItem to="/messages" onClick={() => setDropdownOpen(false)}>
+                    Messages {unreadCount > 0 && <UnreadBadge>{unreadCount}</UnreadBadge>}
+                  </DropdownItem>
                   <DropdownItem to="/account" onClick={() => setDropdownOpen(false)}>
                     Account
                   </DropdownItem>
@@ -284,6 +322,7 @@ function NavBar() {
                       className={location.pathname === item.path ? 'active' : ''}
                     >
                       {item.label}
+                      {item.badge && <UnreadBadge>{item.badge}</UnreadBadge>}
                     </NavLink>
                   ))}
                 </NavLinks>

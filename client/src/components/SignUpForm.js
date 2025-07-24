@@ -84,7 +84,7 @@ async function handleSubmit(e) {
             }),
           });
         } catch (chatError) {
-          console.warn('Chat engine user creation failed:', chatError);
+          // This is expected to fail with placeholder API key - using Rails messaging instead
         }
       } else {
         // Handle signup errors

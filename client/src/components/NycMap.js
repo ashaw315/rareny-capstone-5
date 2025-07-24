@@ -50,7 +50,7 @@ function NycMap({ borough, setCurrentBorough }) {
 	         	viewBox="0 0 900 900">
 				<Link 
                     className="staten" 
-                    to={`/resources/5`}
+                    to={`/resources/15`}
                     onMouseEnter={(e) => handleMouseEnter(e, "Staten Island")}
                     onMouseMove={handleMouseMove}
                     onMouseLeave={handleMouseLeave}
@@ -122,7 +122,7 @@ function NycMap({ borough, setCurrentBorough }) {
 				 </Link>
 				<Link 
                     className="borough-button-links" 
-                    to={`/resources/1`}
+                    to={`/resources/11`}
                     onMouseEnter={(e) => handleMouseEnter(e, "Manhattan")}
                     onMouseMove={handleMouseMove}
                     onMouseLeave={handleMouseLeave}
@@ -178,7 +178,7 @@ function NycMap({ borough, setCurrentBorough }) {
 				</Link>
 				<Link 
                     className="borough-button-links" 
-                    to={`/resources/4`}
+                    to={`/resources/14`}
                     onMouseEnter={(e) => handleMouseEnter(e, "The Bronx")}
                     onMouseMove={handleMouseMove}
                     onMouseLeave={handleMouseLeave}
@@ -260,7 +260,7 @@ function NycMap({ borough, setCurrentBorough }) {
 				</Link>
 				<Link 
                     className="borough-button-links" 
-                    to={`/resources/3`}
+                    to={`/resources/13`}
                     onMouseEnter={(e) => handleMouseEnter(e, "Queens")}
                     onMouseMove={handleMouseMove}
                     onMouseLeave={handleMouseLeave}
@@ -411,7 +411,7 @@ function NycMap({ borough, setCurrentBorough }) {
 				</Link>
 				<Link 
                     className="borough-button-links" 
-                    to={`/resources/2`}
+                    to={`/resources/12`}
                     onMouseEnter={(e) => handleMouseEnter(e, "Brooklyn")}
                     onMouseMove={handleMouseMove}
                     onMouseLeave={handleMouseLeave}

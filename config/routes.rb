@@ -20,6 +20,39 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
 
+  # API routes for messaging and user status
+  namespace :api do
+    resources :conversations, only: [:index, :show, :create] do
+      member do
+        get :messages
+        post :messages, to: 'conversations#create_message'
+        put :mark_as_read
+      end
+    end
+
+    resources :messages, only: [:show] do
+      member do
+        put :mark_as_read
+      end
+      collection do
+        get :unread_count
+      end
+    end
+
+    resources :users, only: [:show] do
+      member do
+        put :status, to: 'users#update_status'
+      end
+      collection do
+        get :online
+        get 'me/conversations_count', to: 'users#conversations_count'
+      end
+    end
+  end
+
+  # Mount Action Cable server
+  mount ActionCable.server => '/cable'
+
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }

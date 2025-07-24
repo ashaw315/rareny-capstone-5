@@ -28,6 +28,7 @@ import CommentForm from './components/CommentForm';
 import About from './pages/About';
 import Artists from './pages/Artists';
 import Contact from './pages/Contact';
+import Messages from './pages/Messages';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -171,6 +172,12 @@ function App() {
           <Route path='/contact' element={
             <ErrorBoundary fallbackMessage="Contact page failed to load.">
               <Contact />
+            </ErrorBoundary>
+          }/>
+          
+          <Route path='/messages' element={
+            <ErrorBoundary fallbackMessage="Messages page failed to load.">
+              <Messages />
             </ErrorBoundary>
           }/>
         </Routes>

@@ -1,0 +1,275 @@
+.messages-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  overflow: hidden; /* Prevent page scrolling */
+  max-height: 92vh;
+}
+
+.messages-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* Allow flex item to shrink */
+  background: #e9ecef;
+}
+
+.mobile-header {
+  display: none;
+  align-items: center;
+  padding: 1rem;
+  background: white;
+  border-bottom: 1px solid #e9ecef;
+  min-height: 64px;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #000000;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.back-button:hover {
+  color: #333333;
+}
+
+.mobile-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #000000;
+}
+
+.unread-count {
+  background: #EF4444;
+  color: white;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+.messages-content {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  min-height: 0; /* Allow flex item to shrink */
+}
+
+.conversation-sidebar {
+  width: 320px;
+  flex-shrink: 0;
+  border-right: 1px solid #E5E7EB;
+  background: white;
+  transition: transform 0.3s ease;
+}
+
+.chat-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  transition: transform 0.3s ease;
+  min-height: 0; /* Allow flex item to shrink */
+  overflow: hidden;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .mobile-header {
+    display: flex;
+  }
+
+  .messages-content {
+    position: relative;
+  }
+
+  .conversation-sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    border-right: none;
+    transform: translateX(0);
+  }
+
+  .conversation-sidebar.hidden {
+    transform: translateX(-100%);
+  }
+
+  .chat-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateX(100%);
+  }
+
+  .chat-area.visible {
+    transform: translateX(0);
+  }
+
+  .chat-area.hidden {
+    transform: translateX(100%);
+  }
+}
+
+/* Tablet Responsiveness */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .conversation-sidebar {
+    width: 280px;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+  .conversation-sidebar {
+    width: 360px;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .messages-page {
+    background: #111827;
+  }
+
+  .mobile-header {
+    background: #1F2937;
+    border-color: #374151;
+  }
+
+  .mobile-title {
+    color: #F9FAFB;
+  }
+
+  .back-button {
+    color: #60A5FA;
+  }
+
+  .back-button:hover {
+    color: #3B82F6;
+  }
+
+  .conversation-sidebar {
+    background: #1F2937;
+    border-color: #374151;
+  }
+
+  .chat-area {
+    background: #1F2937;
+  }
+}
+
+/* Loading state */
+.messages-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: white;
+}
+
+.messages-loading .loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #E5E7EB;
+  border-top: 4px solid #3B82F6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Smooth transitions */
+.conversation-sidebar,
+.chat-area {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Focus states for accessibility */
+.back-button:focus {
+  outline: 2px solid #3B82F6;
+  outline-offset: 2px;
+  border-radius: 0.375rem;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .mobile-header {
+    border-bottom-width: 2px;
+  }
+  
+  .conversation-sidebar {
+    border-right-width: 2px;
+  }
+  
+  .unread-count {
+    border: 1px solid currentColor;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .conversation-sidebar,
+  .chat-area {
+    transition: none;
+  }
+  
+  .back-button {
+    transition: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .messages-page {
+    display: none;
+  }
+}
+
+/* Landscape orientation on mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .mobile-header {
+    padding: 0.75rem 1rem;
+    min-height: 56px;
+  }
+  
+  .mobile-title {
+    font-size: 1.125rem;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 320px) {
+  .mobile-header {
+    padding: 0.75rem;
+  }
+  
+  .back-button {
+    font-size: 1rem;
+  }
+  
+  .mobile-title {
+    font-size: 1.125rem;
+  }
+}

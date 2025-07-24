@@ -4,6 +4,7 @@ import listingsSlice from './slices/listingsSlice';
 import uiSlice from './slices/uiSlice';
 import userSlice from './slices/userSlice';
 import forumSlice from './slices/forumSlice';
+import messagingSlice from './slices/messagingSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     ui: uiSlice,
     users: userSlice,
     forums: forumSlice,
+    messaging: messagingSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

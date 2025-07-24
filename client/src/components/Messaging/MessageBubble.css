@@ -1,0 +1,180 @@
+.message-bubble {
+  display: flex;
+  margin: 0.5rem 0;
+  gap: 0.75rem;
+  max-width: 80%;
+}
+
+.message-bubble.from-me {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+  margin-left: auto;
+}
+
+.message-bubble.from-other {
+  align-self: flex-start;
+  margin-right: auto;
+}
+
+.message-avatar {
+  flex-shrink: 0;
+}
+
+.avatar-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.message-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.message-sender {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #666666;
+  margin-bottom: 0.125rem;
+}
+
+.message-text {
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: pre-wrap;
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  position: relative;
+}
+
+.message-text.sent {
+  background: #000000;
+  color: white;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.message-text.received {
+  background: #f8f9fa;
+  color: #000000;
+  border: 1px solid #e9ecef;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.message-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  margin-top: 0.125rem;
+}
+
+.from-other .message-meta {
+  justify-content: flex-start;
+}
+
+.message-time {
+  font-size: 0.6875rem;
+  color: #666666;
+  font-weight: 500;
+}
+
+.message-status {
+  display: flex;
+  align-items: center;
+}
+
+.read-indicator {
+  color: #000000;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.sent-indicator {
+  color: #666666;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .message-bubble {
+    max-width: 90%;
+    gap: 0.5rem;
+  }
+  
+  .avatar-circle {
+    width: 28px;
+    height: 28px;
+    font-size: 0.75rem;
+  }
+  
+  .message-text {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.8125rem;
+  }
+  
+  .message-time {
+    font-size: 0.625rem;
+  }
+}
+
+/* Animation for new messages */
+@keyframes slideInMessage {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message-bubble {
+  animation: slideInMessage 0.3s ease-out;
+}
+
+/* Hover effects */
+.message-bubble:hover .message-time {
+  opacity: 1;
+}
+
+.message-time {
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+/* Long message handling */
+.message-text {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Link styling within messages */
+.message-text a {
+  color: inherit;
+  text-decoration: underline;
+  opacity: 0.9;
+}
+
+.message-text.sent a {
+  color: #cccccc;
+}
+
+.message-text.received a {
+  color: #000000;
+  font-weight: 600;
+}
